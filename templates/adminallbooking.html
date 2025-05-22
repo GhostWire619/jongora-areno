@@ -1,0 +1,620 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Areno - Admin All Booking Posts</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopping2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <main>
+            <div class="navtop">
+                <h2>Areno Admin</h2>
+                <div class="navtop-right">
+
+                    <a href="{% url 'eventform' %}" style="margin-right: 20px;"><b><i class="fa-solid fa-cloud-arrow-up"></i> Event</b></a>
+                    <a href="{% url 'sportform' %}" style="margin-right: 20px;"><b><i class="fa-solid fa-cloud-arrow-up"></i> Sport</b></a>
+                    <a href="{% url 'adventureform' %}" style="margin-right: 20px;"><b><i class="fa-solid fa-cloud-arrow-up"></i> Adventure</b></a>
+                    <button class="green">{{activecounter | default:"0"}} Active</button>
+                    <a href="{% url 'adminpendingbookingposts' %}"><button class="blue">{{pendingcounter | default:"0"}} Pending</button></a>
+                    <a href="{% url 'admindeclinedbookingposts' %}"><button class="orangered">{{declinedcounter | default:"0"}} Declined</button></a>
+                </div>
+            </div>
+            
+            <section>
+                <div class="admincenter">
+                    <div class="centertop">
+                        <div class="centertop-left">
+                            <h2><span style="color: blue;">{{ counter | default:"0"}}</span> Approved Booking Posts</h2>
+                        </div>
+                        <div class="centertop-right">
+                            <form action="">
+                                <select name="cat" required>
+                                    <option disabled selected>Select</option>
+                                    <option value="All">All</option>
+                                    <option value="Event">Event</option>
+                                    <option value="Sport">Sport</option>
+                                    <option value="Adventure">Adventure</option>
+                                    <option value="Car Rental">Car Rental</option>
+                                    <option value="Areno BNB">Areno BNB</option>
+                                </select>
+                                <input type="search" name="query" placeholder="search..">
+                                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="centerbottom">
+                        <div class="centerleft">
+                            <div class="buttondiv">
+                                {% if newuserforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-users"></i><a href="{% url 'admin' %}"><button><b>All Users</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newshopforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-cart-shopping" ></i><a href="{% url 'adminshopping' %}"><button><b>Online Shops</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newrestaurantforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-utensils"></i><a href="{% url 'adminrestaurants' %}"><button><b>Restaurants</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newhostforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-user"></i><a href="{% url 'adminhosts' %}"><button><b>Hosts</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newuserproducts or newuserfoods %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-box-open"></i><a href="{% url 'adminallitems' %}"><button ><b>Item Posts</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newuserbookingposts %}
+                                <span></span> 
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-list"></i><a href="{% url 'adminallbooking' %}"><button class="buttondivselected"><b>Booking Posts</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newbnbrequests or newcarrequests %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-list"></i><a href="{% url 'adminbookingrequests' %}"><button><b>Booking Requests</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newquestions %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-list"></i><a href="{% url 'adminbookingquestions' %}"><button><b>Booking Questions</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newusermessages %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-message"></i><a href="{% url 'adminmessagepage' %}"><button><b>Messages</b></button></a>
+                            </div>
+                        </div>
+                        <div class="centerright">
+                            <div class="userlist headerlist">
+                                <div class="username"><b>Title:</b></div>
+                                <div class="useremail">Email:</div>
+                                <div class="type"><b>Type:</b></div>
+                                <div class="status"><b>status</b></div>
+                                <div class="reg-date"><b>Date</b></div>
+                            </div>
+                            
+                            <div class="centermain">
+                                <!--user list-->
+                                    {% for event in events reversed %}
+                                    <div class="activityitem" id="event-{{event.id}}" >
+                                        <div class="activityright" id="eventright-{{event.id}}" onclick="Expand ('event-{{event.id}}', 'eventright-{{event.id}}')">
+                                            <div class="username"><b>{{ event.title | default:"" }}</b></div>
+                                            <div class="useremail">{{ event.email | default:"" }}</div>
+                                            <div class="type"><b>{{ event.type | default:"" }}</b></div>
+                                            {% if event.status == 'Approved' %}
+                                            <div class="status"><b style="color: green;">Approved</b></div>
+                                            {% elif event.status == 'Declined' %}
+                                            <div class="status"><b style="color: red;">Declined</b></div>
+                                            {% else %}
+                                            <div class="status"><b style="color: blue;">{{ event.status | default:"" }}</b></div>
+                                            {% endif %}
+                                            <div class="reg-date"><b>{{ event.date | default:"" }}</b></div>
+                                        </div>
+                                        <div class="activitydetails">
+                                            {% if event.image %}
+                                            <div class="activitydetailsimage">
+                                                <a href="{% url 'admineventpage' event.id %}" ><img src="{{ event.image.url }}" alt=""></a>
+                                            </div>
+                                            {% else %}
+                                            {% endif %}
+                                            <div class="activitydetailsright">
+                                                <div class="activitydetail" style="align-items: center;">
+                                                    <p>Organizer:</p>
+                                                    <p>{{ event.organizer | default:"" }}</p>
+                                                   {% comment %}  {% if event.user %}
+                                                    <div class="hostproficon">
+                                                        {% if event.user.profile.is_verified %}
+                                                        <img src="{% static 'icons/icons8-verified-64.png' %}" alt="">
+                                                        {% else %}{% endif %}
+                                                    </div>
+                                                    {% else %}{% endif %} {% endcomment %}
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Category:</p>
+                                                    <p>{{ event.category | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Venue:</p>
+                                                    <p>{{ event.venue | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Location:</p>
+                                                    <p>{{ event.location | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Date:</p>
+                                                    <p>{{ event.date | default:"" }} {% if event.upto %}<b>To</b> {{ event.upto }}{% else %}{% endif %}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Time:</p>
+                                                    <p>{{ event.time | default:"" }} {% if event.timeupto %}<b>To</b> {{ event.timeupto }}{% else %}{% endif %}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Contacts:</p>
+                                                    <p>{{ event.contact_1 | default:"" }}, {{ event.contact_2 | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Prices:</p>
+                                                    <p> Tsh {{ event.regular_price | default:"" }}{%if event.vip_price %}, Tsh {{ event.vip_price | default:"" }}{% else %}{% endif %} {%if event.vvip_price %}, Tsh {{ event.vvip_price | default:"" }}{% else %}{% endif %}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Description:</p>
+                                                    <p>{{ event.description | safe | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail" style="margin: 10px 0px 20px 0px;">
+                                                    <p>Action:</p>
+                                                    <form action="{% url 'eventaction' event.id %}" method='POST'>
+                                                    {% csrf_token %}
+                                                    <select name="action" id="">
+                                                        <option selected value={{ event.status | default:"" }}>Select</option>
+                                                        <option value="Approved" style="color: green;">Approve</option>
+                                                        <option value="Declined" style="color: red;">Decline</option>
+                                                    </select>
+                                                    <button class="activityactionsubmit" type="submit">save</button>
+                                                    </form>
+                                                    <form action="{% url 'deleteeventpost' event.id %}" method='POST'>
+                                                        {% csrf_token %}
+                                                        <button class="activityactiondelete" onclick="return confirmDelete('{{ event.title }}')" type="submit" title="delete"><i class="fa-solid fa-trash"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    {% empty %}
+                                    {% endfor %}
+
+                                    {% for sport in sports reversed %}
+                                    <div class="activityitem" id="sport-{{sport.id}}" >
+                                        <div class="activityright" id="sportright-{{sport.id}}" onclick="Expand ('sport-{{sport.id}}', 'sportright-{{sport.id}}')">
+                                            <div class="username"><b>{{ sport.title | default:"" }}</b></div>
+                                            <div class="useremail">{{ sport.email | default:"" }}</div>
+                                            <div class="type"><b>{{ sport.type | default:"" }}</b></div>
+                                            {% if sport.status == 'Approved' %}
+                                            <div class="status"><b style="color: green;">Approved</b></div>
+                                            {% elif sport.status == 'Declined' %}
+                                            <div class="status"><b style="color: red;">Declined</b></div>
+                                            {% else %}
+                                            <div class="status"><b style="color: blue;">{{ sport.status | default:"" }}</b></div>
+                                            {% endif %}
+                                            <div class="reg-date"><b>{{ sport.date | default:"" }}</b></div>
+                                        </div>
+                                        <div class="activitydetails">
+                                            {% if sport.image %}
+                                            <div class="activitydetailsimage">
+                                                <a href="{% url 'adminsportpage' sport.id %}" ><img src="{{ sport.image.url }}" alt=""></a>
+                                            </div>
+                                            {% else %}
+                                            {% endif %}
+                                            <div class="activitydetailsright">
+                                                <div class="activitydetail">
+                                                    <p>Organizer:</p>
+                                                    <p>{{ sport.organizer | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Category:</p>
+                                                    <p>{{ sport.category | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Venue:</p>
+                                                    <p>{{ sport.venue_or_stadium | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Location:</p>
+                                                    <p>{{ sport.location | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Date:</p>
+                                                    <p>{{ sport.date | default:"" }} {% if sport.upto %}<b>To</b> {{ sport.upto }}{% else %}{% endif %}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Time:</p>
+                                                    <p>{{ sport.time | default:"" }} {% if sport.timeupto %}<b>To</b> {{ sport.timeupto }}{% else %}{% endif %}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Contacts:</p>
+                                                    <p>{{ sport.contact_1 | default:"" }}, {{ sport.contact_2 | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Prices:</p>
+                                                    <p> Tsh {{ sport.regular_price | default:"" }}{%if sport.vip_price %}, Tsh {{ sport.vip_price | default:"" }}{% else %}{% endif %} {%if sport.vvip_price %}, Tsh {{ sport.vvip_price | default:"" }}{% else %}{% endif %}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Description:</p>
+                                                    <p>{{ sport.description | safe | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail" style="margin: 10px 0px 20px 0px;">
+                                                    <p>Action:</p>
+                                                    <form action="{% url 'sportaction' sport.id %}" method='POST'>
+                                                    {% csrf_token %}
+                                                    <select name="action" id="">
+                                                        <option selected value={{ sport.status | default:"" }}>Select</option>
+                                                        <option value="Approved" style="color: green;">Approve</option>
+                                                        <option value="Declined" style="color: red;">Decline</option>
+                                                    </select>
+                                                    <button class="activityactionsubmit" type="submit">save</button>
+                                                    </form>
+                                                    <form action="{% url 'deletesportpost' sport.id %}" method='POST'>
+                                                        {% csrf_token %}
+                                                        <button class="activityactiondelete" onclick="return confirmDelete('{{ sport.title }}')" type="submit" title="delete"><i class="fa-solid fa-trash"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+
+                                    {% for adventure in adventures reversed %}
+                                    <div class="activityitem" id="adventure-{{adventure.id}}" >
+                                        <div class="activityright" id="adventureright-{{adventure.id}}" onclick="Expand ('adventure-{{adventure.id}}', 'adventureright-{{adventure.id}}')">
+                                            <div class="username"><b>{{ adventure.title | default:"" }}</b></div>
+                                            <div class="useremail">{{ adventure.email | default:"" }}</div>
+                                            <div class="type"><b>{{ adventure.type | default:"" }}</b></div>
+                                            {% if adventure.status == 'Approved' %}
+                                            <div class="status"><b style="color: green;">Approved</b></div>
+                                            {% elif adventure.status == 'Declined' %}
+                                            <div class="status"><b style="color: red;">Declined</b></div>
+                                            {% else %}
+                                            <div class="status"><b style="color: blue;">{{ adventure.status | default:"" }}</b></div>
+                                            {% endif %}
+                                            <div class="reg-date"><b>{{ adventure.date | default:"" }}</b></div>
+                                        </div>
+                                        <div class="activitydetails">
+                                            {% if adventure.image %}
+                                            <div class="activitydetailsimage">
+                                                <a href="{% url 'adminadventurepage' adventure.id %}" ><img src="{{ adventure.image.url }}" alt=""></a>
+                                            </div>
+                                            {% else %}
+                                            {% endif %}
+                                            <div class="activitydetailsright">
+                                                <div class="activitydetail">
+                                                    <p>Organizer:</p>
+                                                    <p>{{ adventure.organizer | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Category:</p>
+                                                    <p>{{ adventure.category | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Location:</p>
+                                                    <p>{{ adventure.location | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Date:</p>
+                                                    <p>{{ adventure.date | default:"" }} {% if adventure.upto %}<b>To</b> {{ adventure.upto }}{% else %}{% endif %}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Time:</p>
+                                                    <p>{{ adventure.time | default:"" }} {% if adventure.timeupto %}<b>To</b> {{ adventure.timeupto }}{% else %}{% endif %}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Contacts:</p>
+                                                    <p>{{ adventure.contact_1 | default:"" }}, {{ adventure.contact_2 | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Prices:</p>
+                                                    <p> Tsh {{ adventure.regular_price | default:"" }}{%if adventure.vip_price %}, Tsh {{ adventure.vip_price | default:"" }}{% else %}{% endif %} {%if adventure.vvip_price %}, Tsh {{ adventure.vvip_price | default:"" }}{% else %}{% endif %}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Description:</p>
+                                                    <p>{{ adventure.description | safe | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail" style="margin: 10px 0px 20px 0px;">
+                                                    <p>Action:</p>
+                                                    <form action="{% url 'adventureaction' adventure.id %}" method='POST'>
+                                                    {% csrf_token %}
+                                                    <select name="action" id="">
+                                                        <option selected value={{ adventure.status | default:"" }}>Select</option>
+                                                        <option value="Approved" style="color: green;">Approve</option>
+                                                        <option value="Declined" style="color: red;">Decline</option>
+                                                    </select>
+                                                    <button class="activityactionsubmit" type="submit">save</button>
+                                                    </form>
+                                                    <form action="{% url 'deleteadventurepost' adventure.id %}" method='POST'>
+                                                        {% csrf_token %}
+                                                        <button class="activityactiondelete" onclick="return confirmDelete('{{ adventure.title }}')" type="submit" title="delete"><i class="fa-solid fa-trash"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+
+                                    {% for car_rental in car_rentals reversed %}
+                                    <div class="activityitem" id="car_rental-{{car_rental.id}}" >
+                                        <div class="activityright" id="car_rentalright-{{car_rental.id}}" onclick="Expand ('car_rental-{{car_rental.id}}', 'car_rentalright-{{car_rental.id}}')">
+                                            <div class="username"><b>{{ car_rental.name | default:"" }}</b></div>
+                                            <div class="useremail">{{ car_rental.email | default:"" }}</div>
+                                            <div class="type"><b>{{ car_rental.type | default:"" }}</b></div>
+                                            <div class="status"><b style="color: green;">{{ car_rental.status | default:"" }}</b></div>
+                                            <div class="reg-date"><b>{{ car_rental.submitted_date | default:"" }}</b></div>
+                                        </div>
+                                        <div class="activitydetails">
+                                            {% if car_rental.image %}
+                                            <div class="activitydetailsimage">
+                                                <a href="{% url 'admincar_rentalpage' car_rental.id %}" ><img src="{{ car_rental.image.url }}" alt=""></a>
+                                            </div>
+                                            {% else %}
+                                            {% endif %}
+                                            <div class="activitydetailsright">
+                                                <div class="activitydetail">
+                                                    <p>Organizer:</p>
+                                                    <p>{{ car_rental.organizer | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Category:</p>
+                                                    <p>{{ car_rental.category | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Vehicle:</p>
+                                                    <p>{{ car_rental.vehicle_type_or_brand | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Availability:</p>
+                                                    {% if car_rental.availability == 'Available' %}
+                                                    <p style="color: green;"><i class="fa-solid fa-circle-check" style="color: green;"></i> <b>Available</b></p>
+                                                    {% elif car_rental.availability == 'Not Available' %}
+                                                    <p style="color: red;"><i class="fa-solid fa-circle-exclamation" style="color: red;"></i> <b>Not Available</b></p>
+                                                    {% elif car_rental.availability == 'Will be Available soon' %}
+                                                    <p style="color: blue;"><i class="fa-solid fa-circle-plus" style="color: blue;"></i> <b>Will be Available soon</b></p>
+                                                    {% endif %}
+                                                </div>
+                                                {% if car_rental.engine_size %}
+                                                <div class="activitydetail">
+                                                    <p>Engine Size:</p>
+                                                    <p>{{ car_rental.engine_size | default:"" }}</p>
+                                                </div>{% else %}{% endif %}
+                                                {% if car_rental.mileage %}
+                                                <div class="activitydetail">
+                                                    <p>Mileage:</p>
+                                                    <p>{{ car_rental.mileage | default:"" }}</p>
+                                                </div>{% else %}{% endif %}
+                                                {% if car_rental.year %}
+                                                <div class="activitydetail">
+                                                    <p>Year:</p>
+                                                    <p>{{ car_rental.year | default:"" }}</p>
+                                                </div>{% else %}{% endif %}
+                                                {% if car_rental.wheeldrive %}
+                                                <div class="activitydetail">
+                                                    <p>Wheel Drive:</p>
+                                                    <p>{{ car_rental.wheeldrive | default:"" }}</p>
+                                                </div>{% else %}{% endif %}
+                                                {% if car_rental.transmission %}
+                                                <div class="activitydetail">
+                                                    <p>Transmission:</p>
+                                                    <p>{{ car_rental.transmission | default:"" }}</p>
+                                                </div>{% else %}{% endif %}
+                                                {% if car_rental.fuel_type %}
+                                                <div class="activitydetail">
+                                                    <p>Fuel Type:</p>
+                                                    <p>{{ car_rental.fuel_type | default:"" }}</p>
+                                                </div>{% else %}{% endif %}
+                                                {% if car_rental.no_of_doors %}
+                                                <div class="activitydetail">
+                                                    <p>No of Doors:</p>
+                                                    <p>{{ car_rental.no_of_doors | default:"" }}</p>
+                                                </div>{% else %}{% endif %}
+                                                {% if car_rental.no_of_seats %}
+                                                <div class="activitydetail">
+                                                    <p>No of Seats:</p>
+                                                    <p>{{ car_rental.no_of_seats | default:"" }}</p>
+                                                </div>{% else %}{% endif %}
+                                                {% if car_rental.exterior_color %}
+                                                <div class="activitydetail">
+                                                    <p>Color:</p>
+                                                    <p>{{ car_rental.exterior_color | default:"" }}</p>
+                                                </div>{% else %}{% endif %}
+                                                {% if car_rental.nationality %}
+                                                <div class="activitydetail">
+                                                    <p>Nationality:</p>
+                                                    <p>{{ car_rental.nationality | default:"" }}</p>
+                                                </div>{% else %}{% endif %}
+                                                {% if car_rental.service_1 or car_rental.service_2 or car_rental.service_3 or car_rental.service_4 or car_rental.service_5 or car_rental.service_6 or car_rental.service_7 or car_rental.service_8  %}
+                                                <div class="activitydetail">
+                                                    <p>Services:</p>
+                                                    <p>
+                                                        {% if car_rental.service_1 %}{{ car_rental.service_1 | default:"" }}{% else %}{% endif %}
+                                                        {% if car_rental.service_2 %}, {{ car_rental.service_2 | default:"" }}{% else %}{% endif %}
+                                                        {% if car_rental.service_3 %}, {{ car_rental.service_3 | default:"" }}{% else %}{% endif %}
+                                                        {% if car_rental.service_4 %}, {{ car_rental.service_4 | default:"" }}{% else %}{% endif %}
+                                                        {% if car_rental.service_5 %}, {{ car_rental.service_5 | default:"" }}{% else %}{% endif %}
+                                                        {% if car_rental.service_6 %}, {{ car_rental.service_6 | default:"" }}{% else %}{% endif %}
+                                                        {% if car_rental.service_7 %}, {{ car_rental.service_7 | default:"" }}{% else %}{% endif %}
+                                                        {% if car_rental.service_8 %}, {{ car_rental.service_8 | default:"" }}{% else %}{% endif %}
+                                                    </p>
+                                                </div>{% else %}{% endif %}
+                                                <div class="activitydetail">
+                                                    <p>Location:</p>
+                                                    <p>{{ car_rental.location | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Contacts:</p>
+                                                    <p>{{ car_rental.contact_1 | default:"" }}, {{ car_rental.contact_2 | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Price:</p>
+                                                    <p> Tsh {{ car_rental.price | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Description:</p>
+                                                    <p>{{ car_rental.description | safe | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail" style="margin: 10px 0px 20px 0px;">
+                                                    <p>Action:</p>
+                                                    <form action="{% url 'car_rentalaction' car_rental.id %}" method='POST'>
+                                                    {% csrf_token %}
+                                                    <select name="action" id="">
+                                                        <option selected value={{ car_rental.status | default:"" }}>Select</option>
+                                                        <option value="Approved" style="color: green;">Approve</option>
+                                                        <option value="Declined" style="color: red;">Decline</option>
+                                                    </select>
+                                                    <button class="activityactionsubmit" type="submit">save</button>
+                                                    </form>
+                                                    <form action="{% url 'deletecar_rentalpost' car_rental.id %}" method='POST'>
+                                                        {% csrf_token %}
+                                                        <button class="activityactiondelete" onclick="return confirmDelete('{{ car_rental.name }}')" type="submit" title="delete"><i class="fa-solid fa-trash"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+
+                                    {% for arenobnb in arenobnbs reversed %}
+                                    <div class="activityitem" id="arenobnb-{{arenobnb.id}}" >
+                                        <div class="activityright" id="arenobnbright-{{arenobnb.id}}" onclick="Expand ('arenobnb-{{arenobnb.id}}', 'arenobnbright-{{arenobnb.id}}')">
+                                            <div class="username"><b>{{ arenobnb.name | default:"" }}</b></div>
+                                            <div class="useremail">{{ arenobnb.email | default:"" }}</div>
+                                            <div class="type"><b>{{ arenobnb.type | default:"" }}</b></div>
+                                            <div class="status"><b style="color: green;">{{ arenobnb.status | default:"" }}</b></div>
+                                            <div class="reg-date"><b>{{ arenobnb.submitted_date | default:"" }}</b></div>
+                                        </div>
+                                        <div class="activitydetails">
+                                            {% if arenobnb.image %}
+                                            <div class="activitydetailsimage">
+                                                <a href="{% url 'adminarenobnbpage' arenobnb.id %}" ><img src="{{ arenobnb.image.url }}" alt=""></a>
+                                            </div>
+                                            {% else %}
+                                            {% endif %}
+                                            <div class="activitydetailsright">
+                                                <div class="activitydetail">
+                                                    <p>Organizer:</p>
+                                                    <p>{{ arenobnb.organizer | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Category:</p>
+                                                    <p>{{ arenobnb.category | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Availability:</p>
+                                                    {% if arenobnb.availability == 'Available' %}
+                                                    <p style="color: green;"><i class="fa-solid fa-circle-check" style="color: green;"></i> <b>Available</b></p>
+                                                    {% elif arenobnb.availability == 'Not Available' %}
+                                                    <p style="color: red;"><i class="fa-solid fa-circle-exclamation" style="color: red;"></i> <b>Not Available</b></p>
+                                                    {% elif arenobnb.availability == 'Will be Available soon' %}
+                                                    <p style="color: blue;"><i class="fa-solid fa-circle-plus" style="color: blue;"></i> <b>Will be Available soon</b></p>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Prprty / Feature:</p>
+                                                    <p>{{ arenobnb.property_feature | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Nationality:</p>
+                                                    <p>{{ arenobnb.nationality | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Location:</p>
+                                                    <p>{{ arenobnb.location | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Contacts:</p>
+                                                    <p>{{ arenobnb.contact_1 | default:"" }}, {{ arenobnb.contact_2 | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Price:</p>
+                                                    <p> Tsh {{ arenobnb.price | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Description:</p>
+                                                    <p>{{ arenobnb.description | safe | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail" style="margin: 10px 0px 20px 0px;">
+                                                    <p>Action:</p>
+                                                    <form action="{% url 'arenobnbaction' arenobnb.id %}" method='POST'>
+                                                    {% csrf_token %}
+                                                    <select name="action" id="">
+                                                        <option selected value={{ arenobnb.status | default:"" }}>Select</option>
+                                                        <option value="Approved" style="color: green;">Approve</option>
+                                                        <option value="Declined" style="color: red;">Decline</option>
+                                                    </select>
+                                                    <button class="activityactionsubmit" type="submit">save</button>
+                                                    </form>
+                                                    <form action="{% url 'deletearenobnbpost' arenobnb.id %}" method='POST'>
+                                                        {% csrf_token %}
+                                                        <button class="activityactiondelete" onclick="return confirmDelete('{{ arenobnb.name }}')" type="submit" title="delete"><i class="fa-solid fa-trash"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                   
+                </div>
+            </section>
+        </main>
+        
+
+    </section>
+    
+   <script src="{% static 'js/adminuser.js' %}"></script>
+    <script>
+        
+    </script>
+
+
+</body>
+</html>

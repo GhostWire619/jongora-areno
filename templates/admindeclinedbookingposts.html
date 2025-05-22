@@ -1,0 +1,593 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Areno - Admin Declined Booking Posts</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopping2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <main>
+            <div class="navtop">
+                <h2>Areno Admin</h2>
+                <div class="navtop-right">
+
+                    <a href="{% url 'adminallbooking' %}"><button class="green">{{activecounter | default:"0"}} Active</button></a>
+                    <a href="{% url 'adminpendingbookingposts' %}"><button class="blue">{{pendingcounter | default:"0"}} Pending</button></a>
+                    <button class="orangered">{{declinedcounter | default:"0"}} Declined</button>
+                </div>
+            </div>
+            
+            <section>
+                <div class="admincenter">
+                    <div class="centertop">
+                        <div class="centertop-left">
+                            <h2><span style="color: blue;">{{ declinedcounter | default:"0"}}</span> Declined Posts</h2>
+                        </div>
+                        <div class="centertop-right">
+                            <form action="">
+                                <select name="cat" required>
+                                    <option disabled selected>Select</option>
+                                    <option value="All">All</option>
+                                    <option value="Event">Event</option>
+                                    <option value="Sport">Sport</option>
+                                    <option value="Adventure">Adventure</option>
+                                    <option value="Car Rental">Car Rental</option>
+                                    <option value="Areno BNB">Areno BNB</option>
+                                </select>
+                                <input type="search" name="query" placeholder="search..">
+                                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="centerbottom">
+                        <div class="centerleft">
+                            <div class="buttondiv">
+                                {% if newuserforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-users"></i><a href="{% url 'admin' %}"><button><b>All Users</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newshopforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-cart-shopping" ></i><a href="{% url 'adminshopping' %}"><button><b>Online Shops</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newrestaurantforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-utensils"></i><a href="{% url 'adminrestaurants' %}"><button><b>Restaurants</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newhostforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-user"></i><a href="{% url 'adminhosts' %}"><button><b>Hosts</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newuserproducts or newuserfoods %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-box-open"></i><a href="{% url 'adminallitems' %}"><button><b>Item Posts</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newuserbookingposts %}
+                                <span></span> 
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-list"></i><a href="{% url 'adminallbooking' %}"><button class="buttondivselected"><b>Booking Posts</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newbnbrequests or newcarrequests %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-list"></i><a href="{% url 'adminbookingrequests' %}"><button><b>Booking Requests</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newquestions %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-list"></i><a href="{% url 'adminbookingquestions' %}"><button><b>Booking Questions</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newusermessages %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-message"></i><a href="{% url 'adminmessagepage' %}"><button><b>Messages</b></button></a>
+                            </div>
+                        </div>
+                        <div class="centerright">
+                            <div class="userlist headerlist">
+                                <div class="username"><b>Title:</b></div>
+                                <div class="useremail">Email:</div>
+                                <div class="type"><b>Type:</b></div>
+                                <div class="status"><b>status</b></div>
+                                <div class="reg-date"><b>Date</b></div>
+                            </div>
+                            
+                            <div class="centermain">
+                                <!--user list-->
+                                {% for declinedevent in declinedevents reversed %}
+                                <div class="activityitem" id="event-{{declinedevent.id}}" >
+                                    <div class="activityright" id="eventright-{{declinedevent.id}}" onclick="Expand ('event-{{declinedevent.id}}', 'eventright-{{declinedevent.id}}')">
+                                        <div class="username"><b>{{ declinedevent.title | default:"" }}</b></div>
+                                        <div class="useremail">{{ event.email | default:"" }}</div>
+                                        <div class="type"><b>{{ declinedevent.type | default:"" }}</b></div>
+                                        <div class="status"><b style="color: red;">Declined</b></div>
+                                        <div class="reg-date"><b>{{ declinedevent.date | default:"" }}</b></div>
+                                    </div>
+                                    <div class="activitydetails">
+                                        {% if declinedevent.image %}
+                                        <div class="activitydetailsimage">
+                                            <a href="{% url 'admineventpage' declinedevent.id %}" ><img src="{{ declinedevent.image.url }}" loading="lazy" alt=""></a>
+                                        </div>
+                                        {% else %}
+                                        {% endif %}
+                                        <div class="activitydetailsright">
+                                            <div class="activitydetail">
+                                                <p>Organizer:</p>
+                                                <p>{{ declinedevent.organizer | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Category:</p>
+                                                <p>{{ declinedevent.category | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Venue:</p>
+                                                <p>{{ declinedevent.venue | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Location:</p>
+                                                <p>{{ declinedevent.location | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Date:</p>
+                                                <p>{{ declinedevent.date | default:"" }} {% if declinedevent.upto %}<b>To</b> {{ declinedevent.upto }}{% else %}{% endif %}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Time:</p>
+                                                <p>{{ declinedevent.time | default:"" }} {% if declinedevent.timeupto %}<b>To</b> {{ declinedevent.timeupto }}{% else %}{% endif %}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Contacts:</p>
+                                                <p>{{ declinedevent.contact_1 | default:"" }}, {{ declinedevent.contact_2 | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Prices:</p>
+                                                <p> Tsh {{ declinedevent.regular_price | default:"" }}{%if declinedevent.vip_price %}, Tsh {{ declinedevent.vip_price | default:"" }}{% else %}{% endif %} {%if declinedevent.vvip_price %}, Tsh {{ declinedevent.vvip_price | default:"" }}{% else %}{% endif %}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Description:</p>
+                                                <p>{{ declinedevent.description | safe | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail" style="margin: 10px 0px 20px 0px;">
+                                                <p>Action:</p>
+                                                <form action="{% url 'eventaction' declinedevent.id %}" method='POST'>
+                                                {% csrf_token %}
+                                                <select name="action" id="">
+                                                    <option selected value={{ declinedevent.status | default:"" }}>Select</option>
+                                                    <option value="Approved" style="color: green;">Approve</option>
+                                                    <option value="Declined" style="color: red;">Decline</option>
+                                                </select>
+                                                <button class="activityactionsubmit" type="submit">save</button>
+                                                </form>
+                                                <form action="{% url 'deleteadventurepost' declinedevent.id %}" method='POST'>
+                                                    {% csrf_token %}
+                                                    <button class="activityactiondelete" onclick="return confirmDelete('{{ declinedevent.title }}')" type="submit" title="delete"><i class="fa-solid fa-trash"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {% empty %}
+                                {% endfor %}
+
+                                {% for declinedsport in declinedsports reversed %}
+                                <div class="activityitem" id="sport-{{declinedsport.id}}" >
+                                    <div class="activityright" id="sportright-{{declinedsport.id}}" onclick="Expand ('sport-{{declinedsport.id}}', 'sportright-{{declinedsport.id}}')">
+                                        <div class="username"><b>{{ declinedsport.title | default:"" }}</b></div>
+                                        <div class="useremail">{{ declinedsport.email | default:"" }}</div>
+                                        <div class="type"><b>{{ declinedsport.type | default:"" }}</b></div>
+                                        <div class="status"><b style="color: red;">Declined</b></div>
+                                        <div class="reg-date"><b>{{ declinedsport.date | default:"" }}</b></div>
+                                    </div>
+                                    <div class="activitydetails">
+                                        {% if declinedsport.image %}
+                                        <div class="activitydetailsimage">
+                                            <a href="{% url 'adminsportpage' declinedsport.id %}" ><img src="{{ declinedsport.image.url }}" loading="lazy" alt=""></a>
+                                        </div>
+                                        {% else %}
+                                        {% endif %}
+                                        <div class="activitydetailsright">
+                                            <div class="activitydetail">
+                                                <p>Organizer:</p>
+                                                <p>{{ declinedsport.organizer | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Category:</p>
+                                                <p>{{ declinedsport.category | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Venue:</p>
+                                                <p>{{ declinedsport.venue_or_stadium | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Location:</p>
+                                                <p>{{ declinedsport.location | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Date:</p>
+                                                <p>{{ declinedsport.date | default:"" }} {% if declinedsport.upto %}<b>To</b> {{ declinedsport.upto }}{% else %}{% endif %}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Time:</p>
+                                                <p>{{ declinedsport.time | default:"" }} {% if declinedsport.timeupto %}<b>To</b> {{ declinedsport.timeupto }}{% else %}{% endif %}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Contacts:</p>
+                                                <p>{{ declinedsport.contact_1 | default:"" }}, {{ declinedsport.contact_2 | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Prices:</p>
+                                                <p> Tsh {{ declinedsport.regular_price | default:"" }}{%if declinedsport.vip_price %}, Tsh {{ declinedsport.vip_price | default:"" }}{% else %}{% endif %} {%if declinedsport.vvip_price %}, Tsh {{ declinedsport.vvip_price | default:"" }}{% else %}{% endif %}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Description:</p>
+                                                <p>{{ declinedsport.description | safe | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail" style="margin: 10px 0px 20px 0px;">
+                                                <p>Action:</p>
+                                                <form action="{% url 'sportaction' declinedsport.id %}" method='POST'>
+                                                {% csrf_token %}
+                                                <select name="action" id="">
+                                                    <option selected value={{ declinedsport.status | default:"" }}>Select</option>
+                                                    <option value="Approved" style="color: green;">Approve</option>
+                                                    <option value="Declined" style="color: red;">Decline</option>
+                                                </select>
+                                                <button class="activityactionsubmit" type="submit">save</button>
+                                                </form>
+                                                <form action="{% url 'deleteadventurepost' declinedsport.id %}" method='POST'>
+                                                    {% csrf_token %}
+                                                    <button class="activityactiondelete" onclick="return confirmDelete('{{ declinedsport.title }}')" type="submit" title="delete"><i class="fa-solid fa-trash"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                                {% for declinedadventure in declinedadventures reversed %}
+                                <div class="activityitem" id="adventure-{{declinedadventure.id}}" >
+                                    <div class="activityright" id="adventureright-{{declinedadventure.id}}" onclick="Expand ('adventure-{{declinedadventure.id}}', 'adventureright-{{declinedadventure.id}}')">
+                                        <div class="username"><b>{{ declinedadventure.title | default:"" }}</b></div>
+                                        <div class="useremail">{{ declinedadventure.email | default:"" }}</div>
+                                        <div class="type"><b>{{ declinedadventure.type | default:"" }}</b></div>
+                                        <div class="status"><b style="color: red;">Declined</b></div>
+                                        <div class="reg-date"><b>{{ declinedadventure.date | default:"" }}</b></div>
+                                    </div>
+                                    <div class="activitydetails">
+                                        {% if declinedadventure.image %}
+                                        <div class="activitydetailsimage">
+                                            <a href="{% url 'adminadventurepage' declinedadventure.id %}" ><img src="{{ declinedadventure.image.url }}" loading="lazy" alt=""></a>
+                                        </div>
+                                        {% else %}
+                                        {% endif %}
+                                        <div class="activitydetailsright">
+                                            <div class="activitydetail">
+                                                <p>Organizer:</p>
+                                                <p>{{ declinedadventure.organizer | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Category:</p>
+                                                <p>{{ declinedadventure.category | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Location:</p>
+                                                <p>{{ declinedadventure.location | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Date:</p>
+                                                <p>{{ declinedadventure.date | default:"" }} {% if declinedadventure.upto %}<b>To</b> {{ declinedadventure.upto }}{% else %}{% endif %}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Time:</p>
+                                                <p>{{ declinedadventure.time | default:"" }} {% if declinedadventure.timeupto %}<b>To</b> {{ declinedadventure.timeupto }}{% else %}{% endif %}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Contacts:</p>
+                                                <p>{{ declinedadventure.contact_1 | default:"" }}, {{ declinedadventure.contact_2 | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Prices:</p>
+                                                <p> Tsh {{ declinedadventure.regular_price | default:"" }}{%if declinedadventure.vip_price %}, Tsh {{ declinedadventure.vip_price | default:"" }}{% else %}{% endif %} {%if declinedadventure.vvip_price %}, Tsh {{ declinedadventure.vvip_price | default:"" }}{% else %}{% endif %}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Description:</p>
+                                                <p>{{ declinedadventure.description | safe | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail" style="margin: 10px 0px 20px 0px;">
+                                                <p>Action:</p>
+                                                <form action="{% url 'adventureaction' declinedadventure.id %}" method='POST'>
+                                                {% csrf_token %}
+                                                <select name="action" id="">
+                                                    <option selected value={{ declinedadventure.status | default:"" }}>Select</option>
+                                                    <option value="Approved" style="color: green;">Approve</option>
+                                                    <option value="Declined" style="color: red;">Decline</option>
+                                                </select>
+                                                <button class="activityactionsubmit" type="submit">save</button>
+                                                </form>
+                                                <form action="{% url 'deleteadventurepost' declinedadventure.id %}" method='POST'>
+                                                    {% csrf_token %}
+                                                    <button class="activityactiondelete" onclick="return confirmDelete('{{ declinedadventure.title }}')" type="submit" title="delete"><i class="fa-solid fa-trash"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                                {% for declinedcar_rental in declinedcar_rentals reversed %}
+                                <div class="activityitem" id="car_rental-{{declinedcar_rental.id}}" >
+                                    <div class="activityright" id="car_rentalright-{{declinedcar_rental.id}}" onclick="Expand ('car_rental-{{declinedcar_rental.id}}', 'car_rentalright-{{declinedcar_rental.id}}')">
+                                        <div class="username"><b>{{ declinedcar_rental.name | default:"" }}</b></div>
+                                        <div class="useremail">{{ declinedcar_rental.email | default:"" }}</div>
+                                        <div class="type"><b>{{ declinedcar_rental.type | default:"" }}</b></div>
+                                        <div class="status"><b style="color: red;">Declined</b></div>
+                                        <div class="reg-date"><b>{{ declinedcar_rental.submitted_date | default:"" }}</b></div>
+                                    </div>
+                                    <div class="activitydetails">
+                                        {% if declinedcar_rental.image %}
+                                        <div class="activitydetailsimage">
+                                            <a href="{% url 'admincar_rentalpage' declinedcar_rental.id %}" ><img src="{{ declinedcar_rental.image.url }}" loading="lazy" alt=""></a>
+                                        </div>
+                                        {% else %}
+                                        {% endif %}
+                                        <div class="activitydetailsright">
+                                            <div class="activitydetail">
+                                                <p>Organizer:</p>
+                                                <p>{{ declinedcar_rental.organizer | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Category:</p>
+                                                <p>{{ declinedcar_rental.category | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Vehicle:</p>
+                                                <p>{{ declinedcar_rental.vehicle_type_or_brand | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Availability:</p>
+                                                {% if declinedcar_rental.availability == 'Available' %}
+                                                <p style="color: green;"><i class="fa-solid fa-circle-check" style="color: green;"></i> <b>Available</b></p>
+                                                {% elif declinedcar_rental.availability == 'Not Available' %}
+                                                <p style="color: red;"><i class="fa-solid fa-circle-exclamation" style="color: red;"></i> <b>Not Available</b></p>
+                                                {% elif declinedcar_rental.availability == 'Will be Available soon' %}
+                                                <p style="color: blue;"><i class="fa-solid fa-circle-plus" style="color: blue;"></i> <b>Will be Available soon</b></p>
+                                                {% endif %}
+                                            </div>
+                                            {% if declinedcar_rental.engine_size %}
+                                            <div class="activitydetail">
+                                                <p>Engine Size:</p>
+                                                <p>{{ declinedcar_rental.engine_size | default:"" }}</p>
+                                            </div>{% else %}{% endif %}
+                                            {% if declinedcar_rental.mileage %}
+                                            <div class="activitydetail">
+                                                <p>Mileage:</p>
+                                                <p>{{ declinedcar_rental.mileage | default:"" }}</p>
+                                            </div>{% else %}{% endif %}
+                                            {% if declinedcar_rental.year %}
+                                            <div class="activitydetail">
+                                                <p>Year:</p>
+                                                <p>{{ declinedcar_rental.year | default:"" }}</p>
+                                            </div>{% else %}{% endif %}
+                                            {% if declinedcar_rental.wheeldrive %}
+                                            <div class="activitydetail">
+                                                <p>Wheel Drive:</p>
+                                                <p>{{ declinedcar_rental.wheeldrive | default:"" }}</p>
+                                            </div>{% else %}{% endif %}
+                                            {% if declinedcar_rental.transmission %}
+                                            <div class="activitydetail">
+                                                <p>Transmission:</p>
+                                                <p>{{ declinedcar_rental.transmission | default:"" }}</p>
+                                            </div>{% else %}{% endif %}
+                                            {% if declinedcar_rental.fuel_type %}
+                                            <div class="activitydetail">
+                                                <p>Fuel Type:</p>
+                                                <p>{{ declinedcar_rental.fuel_type | default:"" }}</p>
+                                            </div>{% else %}{% endif %}
+                                            {% if declinedcar_rental.no_of_doors %}
+                                            <div class="activitydetail">
+                                                <p>No of Doors:</p>
+                                                <p>{{ declinedcar_rental.no_of_doors | default:"" }}</p>
+                                            </div>{% else %}{% endif %}
+                                            {% if declinedcar_rental.no_of_seats %}
+                                            <div class="activitydetail">
+                                                <p>No of Seats:</p>
+                                                <p>{{ declinedcar_rental.no_of_seats | default:"" }}</p>
+                                            </div>{% else %}{% endif %}
+                                            {% if declinedcar_rental.exterior_color %}
+                                            <div class="activitydetail">
+                                                <p>Color:</p>
+                                                <p>{{ declinedcar_rental.exterior_color | default:"" }}</p>
+                                            </div>{% else %}{% endif %}
+                                            {% if declinedcar_rental.nationality %}
+                                            <div class="activitydetail">
+                                                <p>Nationality:</p>
+                                                <p>{{ declinedcar_rental.nationality | default:"" }}</p>
+                                            </div>{% else %}{% endif %}
+                                            {% if declinedcar_rental.service_1 or declinedcar_rental.service_2 or declinedcar_rental.service_3 or declinedcar_rental.service_4 or declinedcar_rental.service_5 or declinedcar_rental.service_6 or declinedcar_rental.service_7 or declinedcar_rental.service_8  %}
+                                            <div class="activitydetail">
+                                                <p>Services:</p>
+                                                <p>
+                                                    {% if declinedcar_rental.service_1 %}{{ declinedcar_rental.service_1 | default:"" }}{% else %}{% endif %}
+                                                    {% if declinedcar_rental.service_2 %}, {{ declinedcar_rental.service_2 | default:"" }}{% else %}{% endif %}
+                                                    {% if declinedcar_rental.service_3 %}, {{ declinedcar_rental.service_3 | default:"" }}{% else %}{% endif %}
+                                                    {% if declinedcar_rental.service_4 %}, {{ declinedcar_rental.service_4 | default:"" }}{% else %}{% endif %}
+                                                    {% if declinedcar_rental.service_5 %}, {{ declinedcar_rental.service_5 | default:"" }}{% else %}{% endif %}
+                                                    {% if declinedcar_rental.service_6 %}, {{ declinedcar_rental.service_6 | default:"" }}{% else %}{% endif %}
+                                                    {% if declinedcar_rental.service_7 %}, {{ declinedcar_rental.service_7 | default:"" }}{% else %}{% endif %}
+                                                    {% if declinedcar_rental.service_8 %}, {{ declinedcar_rental.service_8 | default:"" }}{% else %}{% endif %}
+                                                </p>
+                                            </div>{% else %}{% endif %}
+                                            <div class="activitydetail">
+                                                <p>Location:</p>
+                                                <p>{{ declinedcar_rental.location | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Contacts:</p>
+                                                <p>{{ declinedcar_rental.contact_1 | default:"" }}, {{ declinedcar_rental.contact_2 | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Price:</p>
+                                                <p> Tsh {{ declinedcar_rental.price | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Description:</p>
+                                                <p>{{ declinedcar_rental.description | safe | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail" style="margin: 10px 0px 20px 0px;">
+                                                <p>Action:</p>
+                                                <form action="{% url 'car_rentalaction' declinedcar_rental.id %}" method='POST'>
+                                                {% csrf_token %}
+                                                <select name="action" id="">
+                                                    <option selected value={{ declinedcar_rental.status | default:"" }}>Select</option>
+                                                    <option value="Approved" style="color: green;">Approve</option>
+                                                    <option value="Declined" style="color: red;">Decline</option>
+                                                </select>
+                                                <button class="activityactionsubmit" type="submit">save</button>
+                                                </form>
+                                                <form action="{% url 'deletecar_rentalpost' declinedcar_rental.id %}" method='POST'>
+                                                    {% csrf_token %}
+                                                    <button class="activityactiondelete" onclick="return confirmDelete('{{ declinedcar_rental.name }}')" type="submit" title="delete"><i class="fa-solid fa-trash"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                                {% for declinedarenobnb in declinedarenobnbs reversed %}
+                                <div class="activityitem" id="arenobnb-{{declinedarenobnb.id}}" >
+                                    <div class="activityright" id="arenobnbright-{{declinedarenobnb.id}}" onclick="Expand ('arenobnb-{{declinedarenobnb.id}}', 'arenobnbright-{{declinedarenobnb.id}}')">
+                                        <div class="username"><b>{{ declinedarenobnb.name | default:"" }}</b></div>
+                                        <div class="useremail">{{ declinedarenobnb.email | default:"" }}</div>
+                                        <div class="type"><b>{{ declinedarenobnb.type | default:"" }}</b></div>
+                                        <div class="status"><b style="color: red;">{{ declinedarenobnb.status | default:"" }}</b></div>
+                                        <div class="reg-date"><b>{{ declinedarenobnb.submitted_date | default:"" }}</b></div>
+                                    </div>
+                                    <div class="activitydetails">
+                                        {% if declinedarenobnb.image %}
+                                        <div class="activitydetailsimage">
+                                            <a href="{% url 'adminarenobnbpage' declinedarenobnb.id %}" ><img src="{{ declinedarenobnb.image.url }}" loading="lazy" alt=""></a>
+                                        </div>
+                                        {% else %}
+                                        {% endif %}
+                                        <div class="activitydetailsright">
+                                            <div class="activitydetail">
+                                                <p>Organizer:</p>
+                                                <p>{{ declinedarenobnb.organizer | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Category:</p>
+                                                <p>{{ declinedarenobnb.category | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Availability:</p>
+                                                {% if declinedarenobnb.availability == 'Available' %}
+                                                <p style="color: green;"><i class="fa-solid fa-circle-check" style="color: green;"></i> <b>Available</b></p>
+                                                {% elif declinedarenobnb.availability == 'Not Available' %}
+                                                <p style="color: red;"><i class="fa-solid fa-circle-exclamation" style="color: red;"></i> <b>Not Available</b></p>
+                                                {% elif declinedarenobnb.availability == 'Will be Available soon' %}
+                                                <p style="color: blue;"><i class="fa-solid fa-circle-plus" style="color: blue;"></i> <b>Will be Available soon</b></p>
+                                                {% endif %}
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Prprty / Feature:</p>
+                                                <p>{{ declinedarenobnb.property_feature | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Nationality:</p>
+                                                <p>{{ declinedarenobnb.nationality | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Location:</p>
+                                                <p>{{ declinedarenobnb.location | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Contacts:</p>
+                                                <p>{{ declinedarenobnb.contact_1 | default:"" }}, {{ declinedarenobnb.contact_2 | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Price:</p>
+                                                <p> Tsh {{ declinedarenobnb.price | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail">
+                                                <p>Description:</p>
+                                                <p>{{ declinedarenobnb.description | safe | default:"" }}</p>
+                                            </div>
+                                            <div class="activitydetail" style="margin: 10px 0px 20px 0px;">
+                                                <p>Action:</p>
+                                                <form action="{% url 'arenobnbaction' declinedarenobnb.id %}" method='POST'>
+                                                {% csrf_token %}
+                                                <select name="action" id="">
+                                                    <option selected value={{ declinedarenobnb.status | default:"" }}>Select</option>
+                                                    <option value="Approved" style="color: green;">Approve</option>
+                                                    <option value="Declined" style="color: red;">Decline</option>
+                                                </select>
+                                                <button class="activityactionsubmit" type="submit">save</button>
+                                                </form>
+                                                <form action="{% url 'deletearenobnbpost' declinedarenobnb.id %}" method='POST'>
+                                                    {% csrf_token %}
+                                                    <button class="activityactiondelete" onclick="return confirmDelete('{{ declinedarenobnb.name }}')" type="submit" title="delete"><i class="fa-solid fa-trash"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                   
+                </div>
+            </section>
+        </main>
+        
+        
+
+    </section>
+    
+   <script src="{% static 'js/adminuser.js' %}"></script>
+    <script>
+        
+    </script>
+
+
+</body>
+</html>

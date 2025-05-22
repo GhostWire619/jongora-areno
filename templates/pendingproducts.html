@@ -1,0 +1,179 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >{{ profile.businessname }}</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopping2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/booking.css' %}">
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stores.css' %}">
+    <link rel="stylesheet" href="{% static 'css/submitloader.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+    <!--this is the background image display for every image PLEASE DO NOT REMOVE IT!!!-->
+    <style>
+        .product-productpage-image{
+            background-image: url({% static 'icons/areno.logo.png' %});
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat; 
+            overflow: hidden;
+        }
+    </style>
+
+</head>
+<body>
+    <section>
+        <nav>
+            <div class="navbar">
+            <div class="logo">
+                <a href="#"><h4 class="translate" data-en="Pending Approval" data-sw="Zinazosubiri">Pending Approval</h4></a>
+            </div>
+            <div class="right-nav">
+                <a href="{% url 'index' %}"><h4 class="translate" data-en="Home" data-sw="Nyumbani">Home</h4></a>
+                <a href="{% url 'shopping' %}"><h4 class="translate active" data-en="Shopping" data-sw="Ununuzi">Shopping</h4></a>
+                <a href="{% url 'restaurants' %}"><h4 class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</h4></a>
+                <a href="{% url 'booking' %}"><h4 class="translate" data-en="Booking" data-sw="Booking">Booking</h4></a>
+                <a href="{% url 'contactareno' %}"><h4 class="translate" data-en="Contact Us" data-sw="Wasiliana Nasi">Contact Us</h4></a>
+               
+            </div> 
+            </div>
+        </nav>
+
+
+        <main>
+        <!--search bar-->
+        
+        <form action="" id="top">
+            <div class="mobile-nav-head">
+                <h4 class="translate" data-en="Pending Approval" data-sw="Zinazosubiri" style="color: black;">Pending Approval</h4>
+            </div>
+            <div class="searchdiv">
+                <div class="hostreturn" onclick="goBack()">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
+                    <div class="search-bar">
+                        <button class="search-icon" type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <input type="search" class="search-input" name="query" placeholder="Search ...">
+                        
+                    </div>
+            </div>
+        </form>
+       
+         <!--Products-->
+         <div class="productsproductpage" id="productsdiv">
+            <!--Products div-->
+            <div class="productsdivproductpage">
+                <!--start of Products-->
+                {% for product in products reversed %}
+                <div class="product-productpage">
+                    
+                    <div class="product-productpage-image">
+                        {% if product.productimage %}
+                        <img src="{{ product.productimage.url }}" alt="" loading="lazy">
+                        {% else %}
+                        {% endif %}
+                    </div>
+                    <div class="details">
+                        <h4>{{ product.productname | default:"" }}</h4>
+                        <span><h4>Tsh {{ product.productprice | default:"-" }}/=</h4> <small>{{ product.productlocation | default:"" | truncatechars:13 }}</small></span>
+                    </div>
+                    
+                    <div class="viewproductdetails">
+                        <div class="productedittools">
+                            <form action="{% url 'deletefooditem' product.id %}" method="POST" class="deleteitem">
+                                {% csrf_token %}
+                            <button type="submit" onclick="return confirmDelete('{{product.productname}}')"><span ><i class="fa-solid fa-trash"></i></span></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {%  empty %}
+                <div class="emptyprof">
+                    <div class="emptyprof-img">
+                        <img src="{% static 'icons/icons8-empty-box-96.png' %}" alt="">
+                    </div>
+                    <p><b class="translate" data-en="Empty" data-sw="Tupu">Empty</b></p>
+                </div>
+                {% endfor %}
+                <!--end of Products-->
+               
+                
+            </div>
+            <!--loading animation-->
+            {% if products %}
+            <div class="loadmorediv">
+                <button class="loadmore"><span class="translate" data-en="load more" data-sw="Fungua zaidi">load more</span></button>
+            </div>
+            {% else %}
+            {% endif %}
+            
+            <!--end of Products div-->
+        </div>
+
+          
+        
+
+        </main>
+
+
+        
+        <!--loader-->
+        <div class="loadingdiv" id="preloaderbg">
+            <svg class="pl"  width="240" height="240" viewBox="0 0 240 240">
+              <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+          </svg>
+          <h3>ARENO</h3>
+    </div>
+ 
+
+
+
+
+
+
+
+    </section>
+
+   
+    <script src="{% static 'js/shoppingpage.js' %}" ></script>
+    <script src="{% static 'js/language.js' %}"></script>
+    <script src="{% static 'js/profilepage2.js' %}" ></script>
+    <script src="{% static 'js/profilepage.js' %}" ></script>
+    <script src="{% static 'js/products.js' %}" ></script>
+    <script>
+      
+        const fileInput = document.getElementById('fileInput');
+        const fileText = document.getElementById('fileText');
+
+        fileInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                fileText.textContent = file.name;
+            } else {
+                fileText.textContent = 'Choose Image';
+            }
+        });
+
+    </script>
+    
+    
+</body>
+</html>

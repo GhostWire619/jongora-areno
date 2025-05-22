@@ -1,0 +1,548 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="translate" data-en="Areno Offices" data-sw="Ofisi za Areno">Areno Offices</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopping2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/darkmode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/booking.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <nav>
+            <div class="navbar">
+            <div class="logo">
+                <a href="#"><h4 class="translate" data-en="Areno Offices" data-sw="Ofisi za Areno">Areno Offices</h4></a>
+            </div>
+            <div class="right-nav">
+                <a href="index.html"><h4 class="translate" data-en="Home" data-sw="Nyumbani">Home</h4></a>
+                <a href="shopping.html"><h4 class="translate" data-en="Shopping" data-sw="Ununuzi">Shopping</h4></a>
+                <a href="restaurants.html"><h4 class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</h4></a>
+                <a href="booking.html"><h4 class="translate" data-en="Booking" data-sw="Booking">Booking</h4></a>
+                <a href=""><h4 class="translate" data-en="Logistics" data-sw="Usafirishaji">Logistics</h4></a>
+                <a href="index.html#aboutus"><h4 class="translate" data-en="About Us" data-sw="Kutuhusu">About Us</h4></a>
+                <a href=""><h4>Nearby Offices</h4></a>
+                <a href="cart.html"><div class="cart">
+                    <div class="cart-circle">8</div>
+                    <i class="fa-solid fa-cart-arrow-down"></i>
+                </div></a>
+                <div class="notifications mobile-notification">
+                    <div class="cart-circle">8</div>
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+            </div>
+            </div>
+        </nav>
+
+        <main>
+        <!--search bar-->
+        
+        <form action="" id="top">
+            <div class="mobile-nav-head">
+                <h4 class="translate" data-en="Offices" data-sw="Ofisi">Offices</h4>
+            </div>
+            <div class="searchdiv">
+                <div class="nav-menu">
+                    <i class="fa-solid fa-bars" ></i>
+                </div>
+                    <div class="search-bar">
+                        <button class="search-icon" type="submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M9.16667 15.8333C12.8486 15.8333 15.8333 12.8486 15.8333 9.16667C15.8333 5.48477 12.8486 2.5 9.16667 2.5C5.48477 2.5 2.5 5.48477 2.5 9.16667C2.5 12.8486 5.48477 15.8333 9.16667 15.8333Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M17.5 17.5L13.875 13.875" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <input type="search" class="search-input" placeholder="Search Here..">
+                        
+                    </div>
+                    <div class="cart-notificationsdiv">
+                        <div class="mobile-notification" style="display: flex; flex-direction: column;">
+                            <i class="fa-regular fa-bookmark"></i>
+                            <p style="margin: 2px 0px 0px 0px; font-size: 11px;">Saved</p>
+                        </div>
+                    </div>
+            </div>
+        </form>
+        <div class="mobile-headings">
+            <a href=""><button><p class="translate" data-en="Offices" data-sw="Ofisi">Offices</p></button></a>
+            <a href=""><button><p class="translate" data-en="Nearby Offices" data-sw="Ofisi za Karibu">Nearby Offices</p></button></a>
+        </div>
+        <div class="menu ">
+            <div class="menudiv home-menu">
+                <div>
+                    <button class="minimize-menu">
+                        <i class="fa-solid fa-x" ></i>
+                    </button>
+                    <div class="main-menu-content">
+                        <a href="index.html"><div class="menu-logo">
+                            <img src="{% static 'icons/Frame 304 (2).png' %}" alt="">
+                        </div></a>
+                        <a href="shopping.html"><div class="menu-title ">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-cart-arrow-down"></i>
+                            </button>
+                            <button><p class="translate" data-en="Shopping" data-sw="Ununuzi">Shopping</p></button>
+                        </div></a>
+                        <a href="restaurants.html"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-utensils"></i>
+                            </button>
+                            <button><p class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</p></button>
+                        </div></a>
+                        <a href="booking.html"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-book-bookmark"></i>
+                            </button>
+                            <button><p class="translate" data-en="Booking" data-sw="Booking">Booking</p></button>
+                        </div></a>
+                        <a href=""><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </button>
+                            <button><p class="translate" data-en="Logistics" data-sw="Usafirishaji">Logistics</p></button>
+                        </div></a>
+                        <a href="rate.html"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-star"></i>
+                            </button>
+                            <button><p class="translate" data-en="Rate Us" data-sw="Kiwango cha sisi">Rate Us</p></button>
+                        </div></a>
+                        <a href="contactareno.html"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </button>
+                            <button><p class="translate" data-en="Contact Areno" data-sw="Wasiliana na Areno">Contact Areno</p></button>
+                        </div></a>
+                    </div>
+                    
+                    <div class="menu-about-areno">
+                        <a href="aboutus.html"><button ><p class="translate" data-en="About Us" data-sw="Kutuhusu">About Us</p></button></a>
+                        <a href="privacypolicy.html"><button><p class="translate" data-en="Privacy Policy" data-sw="Sera za faragha">Privacy Policy</p></button></a>
+                        <a href="refundpolicies.html"><button><p class="translate" data-en="Refund Policy" data-sw="Sera za Marejesho">Refund Policy</p></button></a>
+                    </div>
+                    <div class="languagediv">
+                        <p ><b class="translate" data-en="Language" data-sw="Lugha">Language</b></p>
+                        <button class="eng" id="englishBtn">Eng</button>
+                        <button class="swahili" id="swahiliBtn">Swahili</button>
+                    </div>
+                    <div class="theme">
+                        <p><b class="translate" data-en="Change Theme" data-sw="Badilisha mandhari">Change Theme</b></p>
+                        <div class="toggle-switch" >
+                            <label class="switch-label">
+                              <input type="checkbox" class="checkbox" id="darkmode">
+                              <span class="slider" ></span>
+                            </label>
+                          </div> 
+                    </div>
+                    <div class="menu-follow-us">
+                        <h5 class="translate" data-en="Follow Us" data-sw="Tufuatilie">Follow Us</h5>
+                        <div class="menu-socials">
+                            <a href=""><button class="social">
+                                <i class="fa-brands fa-facebook"></i>
+                            </button></a>
+                            <a href=""><button class="social">
+                                <i class="fa-brands fa-instagram"></i>
+                            </button></a>
+                            <a href=""><button class="social">
+                                <i class="fa-brands fa-x-twitter"></i>
+                            </button></a>
+                            <a href=""><button class="social">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </button></a>
+                            <a href=""><button class="social">
+                                <i class="fa-brands fa-threads"></i>
+                            </button></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="callus">
+                    <a href="tel:+255717801745"><div class="call">
+                        <i class="fa-solid fa-phone" style="color: white; font-size: 30px;"></i>
+                    </div></a>
+                </div>
+                <div class="below-menu">
+                    <div class="menu-trademark">
+                        <p>© 2023. Areno Company Limited. app version 1.0.0</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="darkside"></div>
+        </div>
+        <!--Notification div-->
+        <div class="notificationdiv">
+            <div class="notificationdarkside"></div>
+            <div class="notificationmenu">
+                <div class="top-noty">
+                    <button class="noty-close">
+                        <i class="fa-solid fa-arrow-left" style="font-size: 20px;"></i>
+                    </button>
+                    <h2 class="translate" data-en="Notifications" data-sw="Taarifa">Notifications</h2>
+                </div>
+                <div class="notificationlist">
+                    <!--welcome notification customer-->
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box3">
+                                <img src="{% static 'icons\icons8-best-seller-96.png' %}" alt="">
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate"  data-en="Welcome to ARENO!" data-sw="Karibu ARENO!">Welcome to ARENO!</span><span class="date-noty">0ct 20, 2023</span>
+                              <form action="">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                <span class="translate"  data-en="Hi! Joseph, You are Successfully Registered! Get ready to shop with us and explore what our sellers have to offer. ENJOY!" data-sw="Habari! Joseph, Umejisajili kwa Mafanikio! Jiandae kununua nasi na kuchunguza bidhaa zinazotolewa na wauzaji wetu. KARIBU!" >Hi! Joseph, You are Successfully Registered! Get ready to shop with us and explore what our sellers have to offer. ENJOY!</span>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <!--cart add-->
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box">
+                                <span class="cart-counter-alert">12</span>
+                                <i class="fa-solid fa-cart-arrow-down"></i>
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate"  data-en="Added to cart!" data-sw="Imeongezwa bidhaa pendwa!">Added to cart!</span><span class="date-noty">0ct 20, 2023</span>
+                              <form action="">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                ASUS Vivobook Go 15 (E1504F)
+
+                            </div>
+                            <div class="product-price">$899.00</div>
+                            <a href="{% url 'cart' %}"><button class="btn-view-cart" type="button"><span  class="translate" data-en="View Cart" data-sw="Fungua">View Cart</span></button></a>
+                          </div>
+                        </div>
+                    </div>
+                    <!--item post accepted add-->
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box2">
+                                <span class="cart-counter-alert2">12</span>
+                                <i class="fa-solid fa-box-open"></i>
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate" data-en="Post Item Accepted!" data-sw="Bidhaa Imekubaliwa!">Post Item Accepted!</span><span class="date-noty">0ct 20, 2023</span>
+                              <form action="">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                ASUS Vivobook Go 15 (E1504F)
+
+                            </div>
+                            <div class="product-price">$899.00</div>
+                            <button class="btn-view-cart2" type="button"><span  class="translate" data-en="View Profile" data-sw="Fungua Wasifu">View Profile</span></button>
+                          </div>
+                        </div>
+                    </div>
+                    <!--item post denied-->
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box2">
+                                <!--<span class="cart-counter-alert2">12</span>-->
+                                <i class="fa-solid fa-ban" style="color: red;"></i>
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate" data-en="Post Item Declined!" data-sw="Bidhaa Haijapitishwa!" style="color: red;">Post Item Declined!</span><span class="date-noty">0ct 20, 2023</span>
+                              <form action="">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                ASUS Vivobook Go 15 (E1504F)
+
+                            </div>
+                            <div class="product-price">$899.00</div>
+                          </div>
+                        </div>
+                    </div>
+                    <!--admin notification-->
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box3">
+                                <img src="{% static 'icons\icons8-male-user-100.png' %}" alt="">
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate"  data-en="Notification!" data-sw="Taarifa!">Notification!</span><span class="date-noty">0ct 20, 2023</span>
+                              <form action="">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                Hello people, weolcome to areno, here are some good products to start with!
+
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <!--pending purchase-->
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box3">
+                                <img src="{% static 'icons\icons8-info-100.png' %}" alt="">
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate"  data-en="Pending Purchase!" data-sw="Malipo yanayosubiri kukamilika!" style="color: green;">Pending Purchase!</span><span class="date-noty">0ct 20, 2023</span>
+                              <form action="">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                Apple Vision Pro 2024
+
+                            </div>
+                            <div class="product-price">$899.00</div>
+                            <a href=""><button class="btn-view-cart" type="button"><span  class="translate" data-en="Purchase" data-sw="Nunua">Purchase</span></button></a>
+                          </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+        
+        
+         <!--Mian content-->
+         <div class="officesmain">
+            <h2 class="translate" data-en="Our Offices" data-sw="Ofisi zetu">Our Offices</h2>
+            <div class="offices">
+                <div class="office">
+                    <div class="mapcontainer">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7519.293975384135!2d39.290924730533!3d-6.814122879904393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2stz!4v1702059988867!5m2!1sen!2stz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="locationname">
+                        <p><span class="translate" data-en="Address:" data-sw="Anwani:">Address: </span> <b>P.o.Box 1021 Posta Mpya, Dar es Salaam</b></p>
+                        <p><span class="translate" data-en="Contacts:" data-sw="Mawasiliano:">Contacts: </span>: <b>+255 223 432 100 / +255 223 432 100</b></p>
+                        <p><span class="translate" data-en="Working Hours:" data-sw="Masaa ya Kazi:">Working Hours: </span> <b>08:00 Am - 16:00 Pm</b></p>
+                    </div>
+                </div>
+                <div class="office">
+                    <div class="mapcontainer">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7519.293975384135!2d39.290924730533!3d-6.814122879904393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2stz!4v1702059988867!5m2!1sen!2stz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="locationname">
+                        <p><span class="translate" data-en="Address:" data-sw="Anwani:">Address: </span> <b>P.o.Box 1021 Posta Mpya, Dar es Salaam</b></p>
+                        <p><span class="translate" data-en="Contacts:" data-sw="Mawasiliano:">Contacts: </span>: <b>+255 223 432 100 / +255 223 432 100</b></p>
+                        <p><span class="translate" data-en="Working Hours:" data-sw="Masaa ya Kazi:">Working Hours: </span> <b>08:00 Am - 16:00 Pm</b></p>
+                    </div>
+                </div>
+                <div class="office">
+                    <div class="mapcontainer">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7519.293975384135!2d39.290924730533!3d-6.814122879904393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2stz!4v1702059988867!5m2!1sen!2stz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="locationname">
+                        <p><span class="translate" data-en="Address:" data-sw="Anwani:">Address: </span> <b>P.o.Box 1021 Posta Mpya, Dar es Salaam</b></p>
+                        <p><span class="translate" data-en="Contacts:" data-sw="Mawasiliano:">Contacts: </span>: <b>+255 223 432 100 / +255 223 432 100</b></p>
+                        <p><span class="translate" data-en="Working Hours:" data-sw="Masaa ya Kazi:">Working Hours: </span> <b>08:00 Am - 16:00 Pm</b></p>
+                    </div>
+                </div>
+            </div>
+         </div>
+        
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col">
+                        <h4>ARENO</h4>
+                        <ul>
+                            <li><a href="aboutus.html" class="translate" data-en="About Us" data-sw="Kutuhusu">About us</a></li>
+                            <li><a href="aboutus.html" class="translate" data-en="Our Services" data-sw="Huduma Zetu">Our Services</a></li>
+                            <li><a href="privacypolicy.html" class="translate" data-en="Privacy policy" data-sw="Sera za Faragha">Privacy policy</a></li>
+                            <li><a href="refundpolicies.html" class="translate" data-en="Refund Policies" data-sw="Sera za Marejesho">Refund Policies</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4 class="translate" data-en="Useful Links" data-sw="Linki Muhimu">Useful Links</h4>
+                        <ul>
+                            <li><a href="shopping.html" class="translate" data-en="Shopping" data-sw="Manunuzi">Shopping</a></li>
+                            <li><a href="restaurants.html" class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</a></li>
+                            <li><a href="signup.html" class="translate" data-en="Register" data-sw="Jisajili">Register</a></li>
+                            <li><a href="login.html" class="translate" data-en="Log In" data-sw="Ingia">Log In</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4 class="translate" data-en="SUPPORT" data-sw="MSAADA">SUPPORT</h4>
+                        <ul>
+                            <li><a href="contactareno.html"><span class="translate" data-en="Contact Us" data-sw="Wasiliana nasi">Contact Us</span></a></li>
+                            <li><a href="tel: ">+255 782 222 222</a></li>
+                            <li><a href="tel: ">+255 782 222 222</a></li>
+                            <li><a href="#"><i class="fa-solid fa-location-dot"></i> Dar es Salaam, Tanzania </a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col ">
+                        <h4 class="translate" data-en="Follow us" data-sw="Tufuatilie">Follow us</h4>
+                        <ul style="margin-bottom: 35px;">
+                            <li><a href="#">Areno Tanzania is an e commerce web application for all Tanzanians</a></li>
+                        </ul>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-x-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="credits">
+                    <div class="line"></div>
+                    <p>&copy; Copyright <strong><span>Areno Ecommerce</span></strong>. All Rights Reserved 2024</p>
+                    <a href="https://creationprimal.com/"><p class="developer">Developed by: <span>CreationPrimal</span></p></a>
+                </div>
+            </div>
+        </footer>
+
+        </main>
+        
+        <!--mobile below navigations-->
+        <div class="new-mobile-nav">
+            <div class="rectangle-bar">
+                <a href="offices.html"><div class="mobile-nav-div">
+                    <button class="mobile-nav-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </button>
+                    <p class="translate" data-en="Offices" data-sw="Ofisi">Offices</p>
+                </div></a>
+            </div>
+            <div class="middlepiece">
+                <div class="mobile-nav-circle">
+                    <a href="index.html"><button class="mobile-nav-icon selected">
+                        <img src="{% static 'icons/Home_fill (1).png' %}" alt="">
+                    </button></a>
+                </div>
+                <img class="middlepieceimg" src="{% static 'icons/middlepiece.png' %}" alt="">
+            </div>
+            <div class="sub-rectangle"></div>
+            <div class="rectangle-bar">
+                <a href=""><div class="mobile-nav-div profile-menu">
+                    <button class="mobile-nav-icon">
+                        <i class="fa-solid fa-location-arrow"></i>
+                    </button>
+                    <p style="white-space: nowrap;" class="translate" data-en="Nearby Offices" data-sw="Ofisi za Karibu">Nearby Offices</p>
+                </div></a>
+            </div>
+        </div>
+          <!--new mobile below navigations-->
+          <div class="mobilenavigation">
+            <div class="navigationsbuttons">
+                <div class="rectanglenavbar">
+                    <a href="shopping.html"><div class="mobile-nav-div">
+                        <button class="mobile-nav-icon selectedicon">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </button>
+                        <p class="translate" data-en="Offices" data-sw="Ofisi">Offices</p>
+                    </div></a>
+                </div>
+                <div class="rectanglenavbar3">
+                    <div class="mobile-nav-circle">
+                        <a href="index.html"><button class="mobile-nav-icon ">
+                            <img src="{% static 'icons/Home_fill (1).png' %}" alt="">
+                        </button></a>
+                    </div>
+                </div>
+                <div class="rectanglenavbar2">
+                    <a href="booking.html"><div class="mobile-nav-div">
+                        <button class="mobile-nav-icon">
+                            <i class="fa-solid fa-location-arrow"></i>
+                        </button>
+                        <p style="white-space: nowrap;" class="translate" data-en="Nearby Offices" data-sw="Ofisi za Karibu">Nearby Offices</p>
+                    </div></a>
+                </div>
+            </div>
+            <div class="navbarpng' %}">
+                <img src="{% static 'icons/mobilenav.png' %}" alt="">
+            </div>
+        </div>
+
+        
+
+
+         <!--loader-->
+         <div class="loadingdiv" id="preloaderbg">
+            <svg class="pl"  width="240" height="240" viewBox="0 0 240 240">
+              <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+          </svg>
+          <h3>ARENO</h3>
+    </div>
+
+
+
+
+
+
+
+
+    </section>
+
+   
+    <script src="{% static 'js/loader.js' %}"></script>
+    <script src="{% static 'js/shoppingpage.js' %}" ></script>
+    <script src="{% static 'js/language.js' %}" ></script>
+    <script>
+  
+   
+    </script>
+    
+    
+</body>
+</html>

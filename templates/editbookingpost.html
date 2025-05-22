@@ -1,0 +1,675 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title | default:""}}</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopping2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/splide.css' %}">
+    <link rel="stylesheet" href="{% static 'css/darkmode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stores.css' %}">
+    <link rel="stylesheet" href="{% static 'css/productpage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/submitloader.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <nav>
+            <div class="navbar">
+                <div class="return2" onclick="goBack()">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
+            <div class="right-nav">
+                <a href="{% url 'index' %}"><h4 class="translate" data-en="Home" data-sw="Nyumbani">Home</h4></a>
+                <a href="{% url 'booking' %}"><h4 class="translate active" data-en="Booking" data-sw="Booking">Booking</h4></a>
+                <a href="{% url 'tickets' %}"><h4 class="translate" data-en="Tickets" data-sw="Tiketi">Tickets</h4></a>
+                <a href="{% url 'contactareno' %}"><h4 class="translate" data-en="Contact Us" data-sw="Wasiliana Nasi">Contact Us</h4></a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'hostprofile' %}"><button class="menu-profile-img" style="margin-right: 20px;">
+                    {% if profile.profileimage %}
+                    <img src="{{ profile.profileimage.url }}" alt="">
+                    {% else %}
+                    <img src="{% static 'icons/icons8-male-user-100.png' %}" alt="">
+                    {% endif %}
+                </button></a>
+                {% else %}
+                <a href="{% url 'submitactivity' %}"><h4 class="translate" data-en="Register" data-sw="Sajili">Register</h4></a>
+                {% endif %}
+            </div>
+            </div>
+        </nav>
+ 
+        <main>
+        <!--search bar-->
+        
+        <div class="productpagehead">
+            <div class="product-detail-head">
+               
+                <div class="return" onclick="goBack()">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
+                <div class="product-nav-head">
+                    <h4 class="translate" data-en="Edit" data-sw="Rekebisha">Edit</h4>
+                </div>
+            </div>
+            
+            
+        </div>
+        <div class="menu ">
+            <div class="menudiv home-menu">
+                <div>
+                    <button class="minimize-menu">
+                        <i class="fa-solid fa-x" ></i>
+                    </button>
+                    <div class="main-menu-content">
+                        <a href="{% url 'index' %}"><div class="menu-logo">
+                            <img src="{% static 'icons/Frame 304 (2).png' %}" alt="">
+                        </div></a>
+                        <a href="{% url 'shopping' %}"><div class="menu-title ">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-cart-arrow-down"></i>
+                            </button>
+                            <button><p class="translate" data-en="Shopping" data-sw="Ununuzi">Shopping</p></button>
+                        </div></a>
+                        <a href="{% url 'restaurants' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-utensils"></i>
+                            </button>
+                            <button><p class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</p></button>
+                        </div></a>
+                        <a href="{% url 'booking' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-book-bookmark"></i>
+                            </button>
+                            <button><p class="translate" data-en="Booking" data-sw="Booking">Booking</p></button>
+                        </div></a>
+                        <a href=""><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </button>
+                            <button><p class="translate" data-en="Logistics" data-sw="Usafirishaji">Logistics</p></button>
+                        </div></a>
+                        <a href="{% url 'rate' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-star"></i>
+                            </button>
+                            <button><p class="translate" data-en="Rate Us" data-sw="Kiwango cha sisi">Rate Us</p></button>
+                        </div></a>
+                        <a href="{% url 'contactareno' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </button>
+                            <button><p class="translate" data-en="Contact Areno" data-sw="Wasiliana na Areno">Contact Areno</p></button>
+                        </div></a>
+                        {% if user.is_authenticated %}
+                        {% if profile %}
+                        {% if profile.businesstype == 'Shopping' %}
+                        <a href="{% url 'shopprofile' %}"><div class="menu-title">
+                            <button class="menu-title-icon menu-profile-img">
+                                {% if profile.profileimage %}
+                                <img src="{{ profile.profileimage.url }}" alt="">
+                                {% else %}
+                                <img src="{% static 'icons/icons8-male-user-100.png' %}" alt="">
+                                {% endif %}
+                            </button>
+                            <button><p class="translate" data-en="Profile" data-sw="Wasifu">Profile</p></button>
+                        </div></a>
+                        {% else %}
+                        <a href="{% url 'restaurantprofile' %}"><div class="menu-title">
+                            <button class="menu-title-icon menu-profile-img">
+                                {% if profile.profileimage %}
+                                <img src="{{ profile.profileimage.url }}" alt="">
+                                {% else %}
+                                <img src="{% static 'icons/icons8-male-user-100.png' %}" alt="">
+                                {% endif %}
+                            </button>
+                            <button><p class="translate" data-en="Profile" data-sw="Wasifu">Profile</p></button>
+                        </div></a>
+                        {% endif %}
+                        {% else %}
+                        {% endif %}
+                        {% else %}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="menu-about-areno">
+                        <a href="{% url 'aboutus' %}"><button ><p class="translate" data-en="About Us" data-sw="Kutuhusu">About Us</p></button></a>
+                        <a href="{% url 'privacypolicy' %}"><button><p class="translate" data-en="Privacy Policy" data-sw="Sera za faragha">Privacy Policy</p></button></a>
+                        <a href="{% url 'refundpolicies' %}"><button><p class="translate" data-en="Refund Policy" data-sw="Sera za Marejesho">Refund Policy</p></button></a>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}"><button><p><b class="translate signup-menu-button" data-en="Log Out" data-sw="Ondoka">Log Out</b></p></button></a>
+                        {% else %}
+                        <a href="{% url 'signup' %}"><button><p><b class="translate signup-menu-button" data-en="Sign In" data-sw="Ingia">Sign In</b></p></button></a>
+                        {% endif %}
+                    </div>
+                    <div class="languagediv">
+                        <p ><b class="translate" data-en="Language" data-sw="Lugha">Language</b></p>
+                        <button class="eng" id="englishBtn">Eng</button>
+                        <button class="swahili" id="swahiliBtn">Swahili</button>
+                    </div>
+                </div>
+                <div class="callus">
+                    <a href="tel:{{ arenodetails.phonenumber_1 | default:"" }}"><div class="call">
+                        <i class="fa-solid fa-phone" style="color: white; font-size: 30px;"></i>
+                    </div></a>
+                </div>
+                <div class="below-menu">
+                    <div class="menu-trademark">
+                        <p>© 2023. Areno Company Limited. app version 1.0.0</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="darkside"></div>
+        </div>
+       
+
+        
+        <!--Product edit-->
+        {% if profile.category == 'Events' %}
+            <form action="{% url 'editeventpost' post.id %}" method="POST" onsubmit="return submitForm()"> 
+        {% elif profile.category == 'Sports' %}
+            <form action="{% url 'editsportpost' post.id %}" method="POST" onsubmit="return submitForm()"> 
+        {% elif profile.category == 'Adventure' %}
+            <form action="{% url 'editadventurepost' post.id %}" method="POST" onsubmit="return submitForm()"> 
+        {% elif profile.category == 'Car Rentals' %}
+            <form action="{% url 'editcar_rentalpost' post.id %}" method="POST" onsubmit="return submitForm()"> 
+        {% elif profile.category == 'Areno BNB' %}
+            <form action="{% url 'editarenobnbpost' post.id %}" method="POST" onsubmit="return submitForm()"> 
+        {% else %}
+            <form action="" method="POST" onsubmit="return submitForm()"> 
+        {% endif %}
+            {% csrf_token %}
+        <div class="settingspage">
+            <h4 class="translate" data-en="Post Details" data-sw="Taarifa za Shughuli">Post Details </h4>
+            <div class="settingsinputs">
+                <div class="inputs customersettingsinputs">
+                    
+                    <!--displaying name field for onlY car rental and areno bnb-->
+                    {% if profile.category == 'Car Rentals' %}
+                        <div class="inputdiv">
+                            <label for="name" class="translate" data-en="Name:" data-sw="Jina:">Name:</label>
+                            <input type="text"  name="name" value="{{ post.name | default:"" }}" >
+                        </div>
+                    {% elif profile.category == 'Areno BNB' %}
+                        <div class="inputdiv">
+                            <label for="name" class="translate" data-en="Name:" data-sw="Jina:">Name:</label>
+                            <input type="text"  name="name" value="{{ post.name | default:"" }}" >
+                        </div>
+                    {% else %}
+                        <div class="inputdiv">
+                            <label for="title" class="translate" data-en="Title:" data-sw="Jina:">Title:</label>
+                            <input type="text"  name="title" value="{{ post.title | default:"" }}" >
+                        </div>
+                    {% endif %}
+                    <!--displaying post category basing on the host profile category-->
+                    {% if profile.category == 'Events' %}
+                        <div class="inputdiv">
+                            <label for="category" class="translate" data-en="Event Category*" data-sw="Kategoria ya Shughuli*">Event Category*</label>
+                            <select name="category" id="" required>
+                                <option value="{{ post.category | default:"Choose" }}" selected >{{ post.category | default:"Choose" }}</option>
+                                <option value="Seminars" class="translate" data-en="Seminars" data-sw="Mihadhara">Seminars</option>
+                                <option value="WorkShops" class="translate" data-en="Workshops" data-sw="Mafunzo">WorkShops</option>
+                                <option value="Festivals and Concerts" class="translate" data-en="Festivals and Concerts" data-sw="Matamasha na Nyimbo">Festivals and Concerts</option>
+                                <option value="Praise and Worship" class="translate" data-en="Praise and Worship" data-sw="Sifa na Ibada">Praise and Worship</option>
+                                <option value="Parties and Ceremonies" class="translate" data-en="Parties and Ceremonies" data-sw="Mapambo na Sherehe">Parties and Ceremonies</option>
+                                <option value="Other" class="translate" data-en="Other" data-sw="Nyingine">Other</option>
+                            </select>
+                        </div>
+                    {% elif profile.category == 'Sports' %}
+                        <div class="inputdiv">
+                            <label for="category" class="translate" data-en="Sport Category*" data-sw="Kategoria ya Mchezo*">Sport Category*</label>
+                            <select name="category" id="" required>
+                                <option value="{{ post.category | default:"Choose" }}" selected >{{ post.category | default:"Choose" }}</option>
+                                <option value="Football & Soccer" class="translate" data-en="Football & Soccer" data-sw="Mpira wa miguu">Football & Soccer</option>
+                                <option value="Basket Ball" class="translate" data-en="Basket Ball" data-sw="Mpira wa kikapu">Basket Ball</option>
+                                <option value="VolleyBall" class="translate" data-en="VolleyBall" data-sw="Mpira wa Wavu">VolleyBall</option>
+                                <option value="Tennis" class="translate" data-en="Tennis" data-sw="Tenisi">Tennis</option>
+                                <option value="Swimming" class="translate" data-en="Swimming" data-sw="Kuogelea">Swimming</option>
+                                <option value="Boxing" class="translate" data-en="Boxing" data-sw="Mchezo wa ngumi">Boxing</option>
+                                <option value="Other" class="translate" data-en="Other" data-sw="Nyingine">Other</option>
+                            </select>
+                        </div> 
+                    {% elif profile.category == 'Adventure' %}
+                        <div class="inputdiv">
+                            <label for="category" class="translate" data-en="Adventure Category*" data-sw="Kategoria ya Safari*">Adventure Category*</label>
+                            <select name="category" id="" required>
+                                <option value="{{ post.category | default:"Choose" }}" selected >{{ post.category | default:"Choose" }}</option>
+                                <option value="City Tour" class="translate" data-en="City Tour" data-sw="Matembezi ya mji">City Tour</option>
+                                <option value="National Parks & Game reserves" class="translate" data-en="National Parks & Game reserves" data-sw="Hifadhi za Taifa na Wanyama">National Parks & Game reserves</option>
+                                <option value="Hiking & Climbing" class="translate" data-en="Hiking & Climbing" data-sw="Kupanda Milima">Hiking & Climbing</option>
+                                <option value="Historical" class="translate" data-en="Historical" data-sw="Kihistoria">Historical</option>
+                                <option value="Beaches & Coastal" class="translate" data-en="Beaches & Coastal" data-sw="Fukwe na pwani">Beaches & Coastal</option>
+                                <option value="Other" class="translate" data-en="Other" data-sw="Nyingine">Other</option>
+                            </select>
+                        </div> 
+                    {% elif profile.category == 'Car Rentals' %}
+                        <div class="inputdiv">
+                            <label for="category" class="translate" data-en="Category*" data-sw="Kategoria*">Category*</label>
+                            <select name="category" id="" required>
+                                <option value="{{ post.category | default:"Choose" }}" selected>{{ post.category | default:"Choose" }}</option>
+                                <option value="Standard Car" class="translate" data-en="Standard Car" data-sw="Gari la kawaida" >Standard Car</option>
+                                <option value="SUV & 4WD" >SUV & 4WD</option>
+                                <option value="Pick-Up Truck" >Pick-Up Truck</option>
+                                <option value="Luxury Car" >Luxury Car</option>
+                                <option value="Mini-Van" >Mini-Van</option>
+                                <option value="Safari Car" >Safari Car</option>
+                                <option value="Mini-Bus" >Mini-Bus</option>
+                                <option value="Other" class="translate" data-en="Other" data-sw="Nyingine">Other</option>
+                            </select>
+                        </div> 
+                        <div class="inputdiv">
+                            <label for="brand" class="translate" data-en="Vehicle Type:" data-sw="Aina/Brandi:">Vehicle Type:</label>
+                            <input type="text"  name="brand" value="{{ post.vehicle_type_or_brand | default:"" }}" required>
+                        </div>
+                        <div class="inputdiv">
+                            <label for="availability" class="translate" data-en="Availability:" data-sw="Bei:">Availability:</label>
+                            <select name="availability" id="" >
+                                <option value="{{ post.availability | default:"Choose" }}" selected>{{ post.availability | default:"Choose" }}</option>
+                                <option value="Available" class="translate" data-en="Available" data-sw="Ipo" style="color: green;">Available</option>
+                                <option value="Not Available" class="translate" data-en="Not Available" data-sw="Haipo" style="color: red;">Not Available</option>
+                                <option value="Will be Available soon" class="translate" data-en="Will be Available soon" data-sw="Itakuepo hivi punde" style="color: blue;">Will be Available soon</option>
+                            </select>
+                        </div>
+                    {% elif profile.category == 'Areno BNB' %}
+                        <div class="inputdiv">
+                            <label for="availability" class="translate" data-en="Availability:" data-sw="Bei:">Availability:</label>
+                            <select name="availability" id="" >
+                                <option value="{{ post.availability | default:"Choose" }}" selected>{{ post.availability | default:"Choose" }}</option>
+                                <option value="Available" class="translate" data-en="Available" data-sw="Ipo" style="color: green;">Available</option>
+                                <option value="Not Available" class="translate" data-en="Not Available" data-sw="Haipo" style="color: red;">Not Available</option>
+                                <option value="Will be Available soon" class="translate" data-en="Will be Available soon" data-sw="Itakuepo hivi punde" style="color: blue;">Will be Available soon</option>
+                            </select>
+                        </div>
+                        <div class="inputdiv">
+                            <label for="category" class="translate" data-en="Category*" data-sw="Kategoria*">Category*</label>
+                            <select name="category" id="" required>
+                                <option value="{{ post.category | default:"Choose" }}" selected >{{ post.category | default:"Choose" }}</option>
+                                <option value="Home" class="translate" data-en="Home" data-sw="Nyumba" >Home</option>
+                                <option value="Appartment" >Appartment</option>
+                                <option value="Hotel" >Hotel</option>
+                                <option value="Lodge" >Lodge</option>
+                                <option value="Villa" >Villa</option>
+                                <option value="Other" class="translate" data-en="Other" data-sw="Nyingine">Other</option>
+                            </select>
+                        </div>
+                        <div class="inputdiv">
+                            <label for="feature" class="translate" data-en="Property Type/Feature*" data-sw="Aina ya sehemu*">Property Type/Feature*</label>
+                            <select name="feature" id="">
+                                <option value="{{ post.property_feature.id }}" selected>{{ post.property_feature }}</option>
+                                {% for feature in features %}
+                                <option value="{{ feature.id }}">{{ feature.feature }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    {% else %}
+                    {% endif %}
+                    <!--displaying post venue / stadium basing on the host profile category-->
+                    {% if profile.category == 'Events' %}
+                        <div class="inputdiv">
+                            <label for="venue" class="translate" data-en="Venue:" data-sw="Sehemu:">Venue:</label>
+                            <input type="text"  name="venue" value="{{ post.venue | default:"" }}" required>
+                        </div>
+                    {% elif profile.category == 'Sports' %}
+                        <div class="inputdiv">
+                            <label for="venue" class="translate" data-en="Stadium/Arena/Place:" data-sw="Sehemu:">Stadium/Arena/Place:</label>
+                            <input type="text"  name="venue" value="{{ post.venue_or_stadium | default:"" }}" required>
+                        </div>
+                    {% else %}
+                    {% endif %}
+
+                        <div class="inputdiv">
+                            <label for="location" class="translate" data-en="Location:" data-sw="Mahali:">Location:</label>
+                            <input type="text"  name="location" value="{{ post.location | default:"" }}" >
+                        </div>
+
+                    {% if profile.category == 'Car Rentals' %}
+                        <div class="inputdiv">
+                            <label for="engine_size" class="translate" data-en="Engine Size:" data-sw="Saizi ya injini:">Engine Size:</label>
+                            <input type="text"  name="engine_size" value="{{ post.engine_size | default:"" }}" >
+                        </div>
+                        <div class="inputdiv">
+                            <label for="mileage" class="translate" data-en="Mileage:" data-sw="Imesafiri umbali gani:">Mileage:</label>
+                            <input type="text"  name="mileage" value="{{ post.mileage | default:"" }}" >
+                        </div>
+                        <div class="inputdiv">
+                            <label for="year" class="translate" data-en="Vehicle of which Year:" data-sw="Gari la mwaka gani:">Vehicle of which Year:</label>
+                            <input type="text"  name="year" value="{{ post.year | default:"" }}" >
+                        </div>
+                        <div class="inputdiv">
+                            <label for="wheeldrive" class="translate" data-en="Wheel Drive:" data-sw="Gari la mwaka gani:">Wheel Drive:</label>
+                            <select name="wheeldrive" id="" >
+                                <option value="{{ post.wheeldrive | default:"Choose" }}" selected>{{ post.wheeldrive | default:"Choose" }}</option>
+                                <option value="2-Wheel Drive" class="translate" data-en="2-Wheel Drive" data-sw="magurudumu mawili" >2-Wheel Drive</option>
+                                <option value="4-Wheel Drive" class="translate" data-en="4-Wheel Drive" data-sw="magurudumu manne">4-Wheel Drive</option>
+                                <option value="All-Wheel Drive" class="translate" data-en="All-Wheel Drive" data-sw="magurudumu yote">All-Wheel Drive</option>
+                            </select>
+                        </div>
+                        <div class="inputdiv">
+                            <label for="transmission" class="translate" data-en="Transmission:" data-sw="Gia:">Transmission:</label>
+                            <input type="text"  name="transmission" value="{{ post.transmission | default:"" }}" >
+                        </div>
+                        <div class="inputdiv">
+                            <label for="fuel_type" class="translate" data-en="Fuel Type:" data-sw="Aina ya mafuta:">Fuel Type:</label>
+                            <select name="fuel_type" id="" >
+                                <option value="{{ post.fuel_type | default:"Choose" }}" selected>{{ post.fuel_type | default:"Choose" }}</option>
+                                <option value="Petrol" class="translate" data-en="Petrol" data-sw="Petroli">Petrol</option>
+                                <option value="Diesel" class="translate" data-en="Diesel" data-sw="Dizeli">Diesel</option>
+                            </select>
+                        </div>
+                        <div class="inputdiv">
+                            <label for="no_of_doors" class="translate" data-en="Number of Doors:" data-sw="Idadi ya milango:">Number of Doors:</label>
+                            <input type="number"  name="no_of_doors" value="{{ post.no_of_doors | default:"" }}" >
+                        </div>
+                        <div class="inputdiv">
+                            <label for="no_of_seats" class="translate" data-en="Number of Seats:" data-sw="Idadi ya siti:">Number of Seats:</label>
+                            <input type="number"  name="no_of_seats" value="{{ post.no_of_seats | default:"" }}" >
+                        </div>
+                        <div class="inputdiv">
+                            <label for="exterior_color" class="translate" data-en="Exterior Color:" data-sw="Rangi ya gari:">Exterior Color:</label>
+                            <input type="text"  name="exterior_color" value="{{ post.exterior_color | default:"" }}" >
+                        </div>
+                    {% elif profile.category == 'Areno BNB' %}
+                    <!--displaying the below fields for other categories excluding car rental and areno bnb-->
+                    {% else %}
+                        <div class="inputdiv">
+                            <label for="date" class="translate" data-en="Date:" data-sw="Tarehe:">Date:</label>
+                            <input type="date"  name="date" value="{{ post.date | default:"" }}" required>
+                        </div>
+                        <div class="inputdiv">
+                            <label for="upto" class="translate" data-en="Up To: (Optional)" data-sw="Tarehe mpaka: (Sio lazima)">Up To: (Optional)</label>
+                            <input type="date"  name="upto" value="{{ post.upto | default:"" }}" >
+                        </div>
+                        <div class="inputdiv">
+                            <label for="time" class="translate" data-en="Time:" data-sw="Muda:">Time:</label>
+                            <input type="time"  name="time" value="{{ post.time | default:"" }}" required>
+                        </div>
+                        <div class="inputdiv">
+                            <label for="timeupto" class="translate" data-en="Up To: (Optional)" data-sw="Muda mpaka: (Sio lazima)">Up To: (Optional)</label>
+                            <input type="time"  name="timeupto" value="{{ post.timeupto | default:"" }}" >
+                        </div>
+                    {% endif %}
+
+                        <div class="inputdiv">
+                            <label for="contact1" class="translate" data-en="Contact 1:" data-sw="Namba ya simu 1:">Contact 1:</label>
+                            <input type="number"  name="contact1"  value="{{ post.contact_1 | default:"" }}" required>
+                        </div>
+                        <div class="inputdiv">
+                            <label for="contact2" class="translate" data-en="Contact 2: (Optional)" data-sw="Namba ya simu 2: (Sio lazima)">Contact 2: (Optional)</label>
+                            <input type="number"  name="contact2" value="{{ post.contact_2 | default:"" }}" >
+                        </div>
+                        <div class="inputdiv">
+                            <label for="email" class="translate" data-en="Email:" data-sw="Barua Pepe:">Email:</label>
+                            <input type="email"  name="email"  value="{{ post.email | default:"" }}" required>
+                        </div>
+
+                    <!--displaying the below fields for only car rental-->
+                    {% if profile.category == 'Car Rentals' %}
+                        <div class="inputdiv">
+                            <label for="price" class="translate" data-en="Price:" data-sw="Bei:">Price:</label>
+                            <input type="text"  name="price" placeholder="0000 / Day" value="{{ post.price | default:"" }}" required>
+                        </div>
+                        
+                        <!--this code is to display the services if they are not None in database so that user can select them to remove them-->
+                        <div class="inputdiv">
+                            <label for="service_1" class="translate" data-en="Select to REMOVE:" data-sw="Chagua Kuondoa:">Select to REMOVE:</label>
+                            {% if post.service_1 %}
+                            <div class="rentalradio">
+                                <input type="checkbox"  name="service_edit_1" value="edit">
+                                <label class="translate" data-en="{{ post.service_1 | default:"" }}" data-sw="Kupokea Mtu na kusindikiza">{{ post.service_1 | default:"" }}</b></p>
+                            </div>{% else %}{% endif %}
+                            {% if post.service_2 %}
+                            <div class="rentalradio">
+                                <input type="checkbox"  name="service_edit_2" value="edit">
+                                <label class="translate" data-en="{{ post.service_2 | default:"" }}" data-sw="Shughuli">{{ post.service_2 | default:"" }}</b></p>
+                            </div>{% else %}{% endif %}
+                            {% if post.service_3 %}
+                            <div class="rentalradio">
+                                <input type="checkbox"  name="service_edit_3" value="edit">
+                                <label class="translate" data-en="{{ post.service_3 | default:"" }}" data-sw="Utalii na safari">{{ post.service_3 | default:"" }}</b></p>
+                            </div>{% else %}{% endif %}
+                            {% if post.service_4 %}
+                            <div class="rentalradio">
+                                <input type="checkbox"  name="service_edit_4" value="edit">
+                                <label class="translate" data-en="{{ post.service_4 | default:"" }}" data-sw="Kusindikiza VIP">{{ post.service_4 | default:"" }}</b></p>
+                            </div>{% else %}{% endif %}
+                            {% if post.service_5 %}
+                            <div class="rentalradio">
+                                <input type="checkbox"  name="service_edit_5" value="edit">
+                                <label class="translate" data-en="{{ post.service_5 | default:"" }}" data-sw="Kibiashara">{{ post.service_5 | default:"" }}</b></p>
+                            </div>{% else %}{% endif %}
+                            {% if post.service_6 %}
+                            <div class="rentalradio">
+                                <input type="checkbox"  name="service_edit_6" value="edit">
+                                <label class="translate" data-en="{{ post.service_6 | default:"" }}" data-sw="Huduma za dereva">{{ post.service_6 | default:"" }}</b></p>
+                            </div>{% else %}{% endif %}
+                            {% if post.service_7 %}
+                            <div class="rentalradio">
+                                <input type="checkbox"  name="service_edit_7" value="edit">
+                                <label class="translate" data-en="{{ post.service_7 | default:"" }}" data-sw="Harusi & sherehe">{{ post.service_7 | default:"" }}</b></p>
+                            </div>{% else %}{% endif %}
+                            {% if post.service_8 %}
+                            <div class="rentalradio">
+                                <input type="checkbox"  name="service_edit_8" value="edit">
+                                <label class="translate" data-en="{{ post.service_8 | default:"" }}" data-sw="Nyingine">{{ post.service_8 | default:"" }}</b></p>
+                            </div>{% else %}{% endif %}
+                        </div>
+                        <!--this code is to display the services if they are None in database-->
+                        <div class="inputdiv">
+                            <label for="service_1" class="translate" data-en="Select to ADD:" data-sw="Chagua kuongeza:">Select to ADD:</label>
+                            
+                            
+                                {% if post.service_1 %}{% else %}
+                                <div class="rentalradio">
+                                    <input type="checkbox"  name="service_1" value="Airport & Hotel Escort">
+                                    <label for="service_1" class="translate" data-en="Airport & Hotel Escort" data-sw="Kupokea Mtu na kusindikiza">Airport & Hotel Escort</label>
+                                </div>{% endif %}
+                                {% if post.service_2 %}{% else %}
+                                <div class="rentalradio">
+                                    <input type="checkbox"  name="service_2" value="Events">
+                                    <label for="service_2" class="translate" data-en="Events" data-sw="Shughuli">Events</label>
+                                </div>{% endif %}
+                                {% if post.service_3 %}{% else %}
+                                <div class="rentalradio">
+                                    <input type="checkbox"  name="service_3" value="Tourism (Safari)">
+                                    <label for="service_3" class="translate" data-en="Tourism (Safari)" data-sw="Utalii na safari">Tourism (Safari)</label>
+                                </div>{% endif %}
+                                {% if post.service_4 %}{% else %}
+                                <div class="rentalradio">
+                                    <input type="checkbox"  name="service_4" value="VIP escort">
+                                    <label for="service_4" class="translate" data-en="VIP escort" data-sw="Kusindikiza VIP">VIP escort</label>
+                                </div>{% endif %}
+                                {% if post.service_5 %}{% else %}
+                                <div class="rentalradio">
+                                    <input type="checkbox"  name="service_5" value="Corporate">
+                                    <label for="service_5" class="translate" data-en="Corporate" data-sw="Kibiashara">Corporate</label>
+                                </div>{% endif %}
+                                {% if post.service_6 %}{% else %}
+                                <div class="rentalradio">
+                                    <input type="checkbox"  name="service_6" value="Chauffeur services">
+                                    <label for="service_6" class="translate" data-en="Chauffeur services" data-sw="Huduma za dereva">Chauffeur services</label>
+                                </div>{% endif %}
+                                {% if post.service_7 %}{% else %}
+                                <div class="rentalradio">
+                                    <input type="checkbox"  name="service_7" value="Wedding & Ceremonies">
+                                    <label for="service_7" class="translate" data-en="Wedding & Ceremonies" data-sw="Harusi & sherehe">Wedding & Ceremonies</label>
+                                </div>{% endif %}
+                                {% if post.service_8 %}{% else %}
+                                <div class="rentalradio">
+                                    <input type="checkbox"  name="service_8" value="Other">
+                                    <label for="service_8" class="translate" data-en="Other" data-sw="Nyingine">Other</label>
+                                </div>{% endif %}
+                        </div>
+                    <!--displaying the below fields for only ARENO BNB-->
+                    {% elif profile.category == 'Areno BNB' %}
+                        <div class="inputdiv">
+                            <label for="price" class="translate" data-en="Price:" data-sw="Bei:">Price:</label>
+                            <input type="text"  name="price" placeholder="0000 / Night" value="{{ post.price | default:"" }}" required>
+                        </div>
+                        <div class="arenobnbdesc">
+                            <label for="description" class="translate" data-en="Description:" data-sw="Maelezo:">Description:</label>
+                            <textarea name="description" id="" cols="30" rows="4" maxlength="4000" required>{{ post.description | default:"" | safe }}</textarea>
+                        </div>
+                    {% else %}
+                    <!--displaying the below fields for other categories excluding car rental-->
+                        <div class="inputdiv">
+                            <label for="regularprice" class="translate" data-en="Regular Price:" data-sw="Bei ya kawaida:">Regular Price:</label>
+                            <input type="number"  name="regularprice" placeholder="0000" value="{{ post.regular_price | default:"" }}" required>
+                        </div>
+                        <div class="inputdiv">
+                            <label for="vipprice" class="translate" data-en="VIP Price: (Optional)" data-sw="Bei ya kati: (Sio lazima)">VIP Price: (Optional)</label>
+                            <input type="number"  name="vipprice" placeholder="0000" value="{{ post.vip_price | default:"" }}" >
+                        </div>
+                        <div class="inputdiv">
+                            <label for="vvipprice" class="translate" data-en="VVIP Price: (Optional)" data-sw="Bei ya Juu: (Sio lazima)">VVIP Price: (Optional)</label>
+                            <input type="number"  name="vvipprice" placeholder="0000" value="{{ post.vvip_price | default:"" }}">
+                        </div>
+                    {% endif %}
+
+                    
+                </div>
+                <button type="submit" class="settings-button"><p style="margin: 0px;" class="translate" data-en="Save Changes" data-sw="Hifadhi">Save Changes</p></button>
+            </div>
+        </div>
+        </form>
+
+        
+
+
+            <!-- submit loader-->
+        <div id="loader">
+            <svg class="pl"  width="240" height="240" viewBox="0 0 240 240">
+              <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+          </svg>
+          <span><b class="translate" data-en="Saving Changes." data-sw="Inatunza mabadiliko.">Saving Changes.</b> <br> <span><p class="translate" data-en="Please wait..." data-sw="Tafadhari subiri..">Please wait...</p></span></span>
+          </div>
+
+
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col">
+                        <h4>ARENO</h4>
+                        <ul>
+                            <li><a href="{% url 'aboutus' %}" class="translate" data-en="About Us" data-sw="Kutuhusu">About us</a></li>
+                            <li><a href="{% url 'aboutus' %}" class="translate" data-en="Our Services" data-sw="Huduma Zetu">Our Services</a></li>
+                            <li><a href="{% url 'privacypolicy' %}" class="translate" data-en="Privacy policy" data-sw="Sera za Faragha">Privacy policy</a></li>
+                            <li><a href="{% url 'refundpolicies' %}" class="translate" data-en="Refund Policies" data-sw="Sera za Marejesho">Refund Policies</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4 class="translate" data-en="Useful Links" data-sw="Linki Muhimu">Useful Links</h4>
+                        <ul>
+                            <li><a href="{% url 'shopping' %}" class="translate" data-en="Shopping" data-sw="Manunuzi">Shopping</a></li>
+                            <li><a href="{% url 'restaurants' %}" class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</a></li>
+                            <li><a href="{% url 'booking' %}" class="translate" data-en="Booking" data-sw="Booking">Booking</a></li>
+                            {% if user.is_authenticated %}
+                            <li><a href="{% url 'logout' %}" class="translate" data-en="Log Out" data-sw="Ondoka">Log Out</a></li>
+                            {% else %}
+                            <li><a href="{% url 'signup' %}" class="translate" data-en="Sign In" data-sw="Jisajili">Sign In</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4 class="translate" data-en="SUPPORT" data-sw="MSAADA">SUPPORT</h4>
+                        <ul>
+                            <li><a href="{% url 'contactareno' %}"><span class="translate" data-en="Contact Us" data-sw="Wasiliana nasi">Contact Us</span></a></li>
+                            {% if arenodetails.phonenumber_1 %}
+                            <li><a href="tel: {{ arenodetails.phonenumber_1 | default:"" }}">{{ arenodetails.phonenumber_1 | default:"" }}</a></li>
+                            {% else %}
+                            {% endif %}
+                            {% if arenodetails.phonenumber_2 %}
+                            <li><a href="tel: {{ arenodetails.phonenumber_2 | default:"" }}">{{ arenodetails.phonenumber_2 | default:"" }}</a></li>
+                            {% else %}
+                            {% endif %}
+                            {% if arenodetails.location %}
+                            <li><a href="#"><i class="fa-solid fa-location-dot"></i> {{ arenodetails.location | default:"" }}</a></li>
+                            {% else %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="footer-col ">
+                        <h4 class="translate" data-en="Follow us" data-sw="Tufuatilie">Follow us</h4>
+                        <ul style="margin-bottom: 35px;">
+                            {% if arenodetails.Areno_footer_content %}
+                            <li><a href="{% url 'index' %}">{{ arenodetails.Areno_footer_content | default:"" }}</a></li>
+                            {% else %}
+                            {% endif %}
+                        </ul>
+                        <div class="social-links">
+                            {% if arenodetails.facebook_link %}
+                            <a href="{{ arenodetails.facebook_link | default:"" }}"><i class="fab fa-facebook-f"></i></a>
+                            {% else %}
+                            {% endif %}
+                            {% if arenodetails.twitter_x_link %}
+                            <a href="{{ arenodetails.twitter_x_link | default:"" }}"><i class="fab fa-x-twitter"></i></a>
+                            {% else %}
+                            {% endif %}
+                            {% if arenodetails.instagram_link %}
+                            <a href="{{ arenodetails.instagram_link | default:"" }}"><i class="fab fa-instagram"></i></a>
+                            {% else %}
+                            {% endif %}
+                            {% if arenodetails.whatsapp_link %}
+                            <a href="{{ arenodetails.whatsapp_link | default:"" }}"><i class="fab fa-whatsapp"></i></a>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="credits">
+                    <div class="line"></div>
+                    <p>&copy; Copyright <strong><span>Areno Ecommerce</span></strong>. All Rights Reserved 2024</p>
+                </div>
+            </div>
+        </footer>
+
+
+        </main>
+
+
+
+
+
+
+
+
+
+    </section>
+
+   
+    <script src="{% static 'js/shoppingpage.js' %}" ></script>
+    <script src="{% static 'js/language.js' %}" ></script>
+    <script src="{% static 'js/profilepage.js' %}" ></script>
+    <script src="{% static 'js/profilepage2.js' %}" ></script>
+    <script>
+        function submitForm() {
+            var loader = document.getElementById("loader");
+            loader.style.display = "flex"; 
+            return true; // Prevent the form from submitting automatically
+        }
+       
+  
+    </script>
+    
+    
+    
+</body>
+</html>

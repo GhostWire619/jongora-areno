@@ -1,0 +1,47 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="translate"  data-en="Unauthorized!" data-sw="Hauruhusiwi!">Unauthorized!</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/booking.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="nopagediv">
+        <p><b></b></p>
+
+    </div>
+    <div class="info-card"> 
+        <div class="card"> 
+            <div class="header"> 
+            <div class="image">
+                    <img src="{% static 'icons/icons8-error-100.png' %}" alt="">
+            </div> 
+                <div class="content">
+                <span class="title translate"  data-en="Error!" data-sw="Hujafanikiwa!">Error!</span> 
+                <p class="message translate" data-en="Sorry! Your need a customer account to access this!" data-sw="Samahani, unahitaji uwe umesajiliwa kama mteja ili uweze kuendelea!">
+                    Sorry! Your need a customer account to access this!
+                </p> 
+                </div> 
+                <div class="actions">
+                    <button type="button" onclick="goBack()" class="history" style="background-color: red;"><span class="translate" data-en="Go Back!" data-sw="Rudi Nyuma">Go Back!</span></button>
+                    </div> 
+                </div> 
+            </div>
+        </div>
+    </div>
+    
+    
+    <script src="{% static 'js/shoppingpage.js' %}" ></script>
+    <script src="{% static 'js/language.js' %}" ></script>
+     
+</body>
+</html> 

@@ -1,0 +1,59 @@
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django files
+*.log
+*.pot
+*.pyc
+db.sqlite3
+db.sqlite3-journal
+
+# Django migrations
+*/migrations/*
+!*/migrations/__init__.py
+
+# Environment variables
+.env
+
+# Virtual environment
+venv/
+venv
+env/
+
+# Compiled static files
+/static/
+/staticfiles/
+/media/
+
+# Node modules (if using frontend tools)
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# IDE/editor configurations
+.vscode/
+.idea/
+*.swp
+*~
+
+# Test coverage reports
+.coverage
+htmlcov/
+
+# Deployment files
+*.pid
+*.tar.gz
+*.zip
+
+# MacOS files
+.DS_Store
+
+# Local environment overrides
+local_settings.py
+settings_local.py
+
+# Pycharm specific
+*.iml

@@ -1,0 +1,374 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Areno - {{ sellerform.businessname }}</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopping2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <main>
+            <div class="navtop">
+                <h2>Areno Admin</h2>
+                <div class="navtop-right">
+                    <a href="{% url 'adminpendingshops' %}"><button class="orangered">New Shops</button></a>
+                    <a href="{% url 'adminpendingrestaurants' %}"><button class="blue">New Restaurants</button></a>
+                </div>
+            </div>
+            
+            <section>
+                <div class="admincenter">
+                    <div class="centertop">
+                        <div class="centertop-left">
+                            <h2>{{ sellerform.businessname }} </h2>
+                        </div>
+                        <div class="centertop-right">
+                            
+                        </div>
+                    </div>
+                    <div class="centerbottom">
+                        <div class="centerleft">
+                            <div class="buttondiv">
+                                {% if newuserforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-users"></i><a href="{% url 'admin' %}"><button class="buttondivselected"><b>All Users</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newshopforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-cart-shopping" ></i><a href="{% url 'adminshopping' %}"><button><b>Online Shops</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newrestaurantforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-utensils"></i><a href="{% url 'adminrestaurants' %}"><button><b>Restaurants</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newhostforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-user"></i><a href="{% url 'adminhosts' %}"><button><b>Hosts</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newuserproducts or newuserfoods %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-box-open"></i><a href="{% url 'adminallitems' %}"><button><b>Item Posts</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newuserbookingposts %}
+                                <span></span> 
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-list"></i><a href="{% url 'adminallbooking' %}"><button><b>Booking Posts</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newbnbrequests or newcarrequests %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-list"></i><a href="{% url 'adminbookingrequests' %}"><button><b>Booking Requests</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newquestions %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-list"></i><a href="{% url 'adminbookingquestions' %}"><button><b>Booking Questions</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newusermessages %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-message"></i><a href="{% url 'adminmessagepage' %}"><button><b>Messages</b></button></a>
+                            </div>
+                        </div>
+                        <div class="centerright">
+                            <div class="centermain">
+                                <div class="userdetail" >
+                                    <div class="userpersonalinfo">
+                                        <p>Full Name:</p>
+                                        <p>Business Name:</p>
+                                        <p>Status:</p>
+                                        <p>Phone Number:</p>
+                                        <p>Mobile:</p>
+                                        <p>Email:</p>
+                                        <p>Website:</p>
+                                        <p>Address:</p>
+                                        <p>Location:</p>
+                                        <p>Business Type:</p>
+                                        <p>Business Registration:</p>
+                                        <p>About The Business:</p>
+                                    </div>
+                                    <div class="userpersonalinfodata">
+                                        <p><b>{{ sellerform.firstname }} {{ sellerform.lastname }}</b></p>
+                                        <p><b style="color: orangered;">{{ sellerform.businessname }}</b></p>
+                                        {% if sellerform.status == 'Approved' %}
+                                        <p><b style="color: green;">Registered <i class="bi bi-patch-check-fill" style="color: blue;"></i></b></p>
+                                        {% elif sellerform.status == 'Declined' %}
+                                        <p><b style="color: red;">Declined <i class="fa-solid fa-ban"></i></b></p>
+                                        {% else %}
+                                        <p><b style="color: blue;">Pending Approval <i class="fa-regular fa-clock" style="color: green;"></i></b></p>
+                                        {% endif %}
+                                        <p><b>{{ sellerform.phonenumber }}</b></p>
+                                        <p><b>{{ sellerform.mobile | default:"-"}}</b></p>
+                                        <p><b>{{ sellerform.email | default:"-"}}</b></p>
+                                        <p><b>{{ sellerform.website | default:"-"}}</b></p>
+                                        <p><b>{{ sellerform.address | default:"-"}}</b></p>
+                                        <p><b>{{ sellerform.location | default:"-"}}</b></p>
+                                        {% if sellerform.businesstype == 'Shopping' %}
+                                        <p><b style="color: green;">{{ sellerform.businesstype }} - {{ sellerform.if_shoppingcategory | default:"-"}}</b></p>
+                                        {% else %}
+                                        <p><b style="color: green;">{{ sellerform.businesstype }} - {{ sellerform.if_restaurantcategory | default:"-"}}</b></p>
+                                        {% endif %}
+                                        <p><b>{{ sellerform.is_businessregistered | default:"-"}}</b></p>
+                                        <p>{{ sellerform.aboutbusiness | default:"-"}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="usersendmsg">
+                                    {% if message %}
+                                    <div class="usersendmsgreply">
+                                        <p><b>Previous Message:</b></p>
+                                        <p><b>{{ message.message | default:"" }}</b></p>
+                                    </div>{% else %}{% endif %}
+                                    <form action="{% url 'sendUserMessage' %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="phonenumber" value="{{ sellerform.phonenumber | default:"" }}">
+                                        <input type="hidden" name="email" value="{{ sellerform.email | default:"" }}">
+                                        <input type="hidden" name="fullname" value="{{ sellerform.firstname | default:"" }} {{ sellerform.lastname | default:"" }}">
+                                        <input type="hidden" name="user" value="{{ sellerform.email | default:"" }}">
+                                        <div class="usersendmsgreply">
+                                            <p><b>New Message:</b></p>
+                                            <div class="usersendmsgdiv">
+                                                <textarea name="message" id="" cols="110" rows="4" maxlength="4000" required></textarea>
+                                                <button type="submit" title="send">Send</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                
+
+                                <div class="registerbuttons">
+                                    {% if sellerform.status == 'Declined' %}
+                                    <button class="green" style="margin-left: 10px;" id="showFormBtn">Register User</button>
+                                    <form action="{% url 'delete_form' sellerform.email %}" method="POST">
+                                        {% csrf_token %}
+                                    <button class="orangered" type="submit" onclick="return confirmDelete('{{sellerform.businessname }}')">Delete Form</button>
+                                    </form>
+                                    {% elif sellerform.status == 'Approved'%}
+                                    {% else %}
+                                    <button class="green" style="margin-left: 10px;" id="showFormBtn">Register User</button>
+                                    {% endif %}
+                                    {% if sellerform.status %}
+                                    {% else %}
+                                    <form action="{% url 'adminuserdecline' sellerform.id  %}" method="POST">
+                                        {% csrf_token %}
+                                    <button class="orangered" type="submit" value="Declined">Decline User</button>
+                                    </form>
+                                    {% endif %}
+                                </div>
+                                <div class="registerformdiv" id="formContainer">
+                                    <div  class="form-container">
+                                    <span class="close-btn" onclick="closeForm()">&times;</span>
+                                    <h3>Registration Form</h3>
+                                    <form action="{% url 'registerseller' sellerform.id %}" method='POST'>
+                                        {% csrf_token %}
+                                      <div class="form-row">
+                                        <div class="row">
+                                            <label for="fullname">Full Name:</label>
+                                            <input type="text" id="name" name="fullname" value="{{ sellerform.firstname }} {{ sellerform.lastname }}" required>
+                                        </div>
+                                        <div class="row">
+                                            <label for="businessname">Business Name:</label>
+                                            <input type="text" id="name" name="businessname" value="{{ sellerform.businessname }}"  required>
+                                        </div>
+                                      </div>
+                                      <div class="form-row">
+                                        <div class="row">
+                                            <label for="phonenumber">Phone Number 1:</label>
+                                            <input type="text" id="name" name="phonenumber" maxlength="12" minlength="10" value="{{ sellerform.phonenumber }}" required>
+                                        </div>
+                                        <div class="row">
+                                            <label for="mobile">Phone Number 2:</label>
+                                            <input type="text" id="name" name="mobile" maxlength="12" minlength="10" value="{{ sellerform.mobile | default:"" }}">
+                                        </div>
+                                      </div>
+                                      <div class="form-row">
+                                        <div class="row">
+                                            <label for="location">Location:</label>
+                                            <input type="text" id="name" name="location" value="{{ sellerform.location | default:"" }}" required>
+                                        </div>
+                                        <div class="mini-row-div">
+                                            <div class="min-row">
+                                                <label for="businesstype">Type:</label>
+                                                <input type="text" id="name" name="businesstype" value="{{ sellerform.businesstype  }}"  required readonly>
+                                            </div>
+                                            <div class="min-row">
+                                                <label for="if_shoppingcategory">Category:</label>
+                                                {% if sellerform.businesstype == 'Shopping' %}
+                                                <input type="text" id="name" name="if_shoppingcategory" value="{{ sellerform.if_shoppingcategory | default:""  }}"  >
+                                                {% else %}
+                                                <input type="text" id="name" name="if_restaurantcategory" value="{{ sellerform.if_restaurantcategory | default:""  }}"  >
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                      </div>
+                                      <div class="form-row">
+                                        <div class="row">
+                                            <label for="address">Address:</label>
+                                            <input type="text" id="name" name="address" value="{{ sellerform.address | default:""  }}">
+                                        </div>
+                                        <div class="row">
+                                            <label for="website">Website:</label>
+                                            <input type="text" id="name" name="website" value="{{ sellerform.website | default:""  }}">
+                                        </div>
+                                      </div>
+                                      <div class="form-row">
+                                        <div class="row">
+                                            <label for="aboutbusiness">About the Business:</label>
+                                            <input type="text" id="name" name="aboutbusiness" value="{{ sellerform.aboutbusiness | default:""  }}" required>
+                                        </div>
+                                        <div class="row">
+                                            <label for="is_businessregistered">Business registration:</label>
+                                            <input type="text" id="name" name="is_businessregistered" value="{{ sellerform.is_businessregistered | default:""  }}" readonly required>
+                                        </div>
+                                      </div>
+                                      <div class="form-row">
+                                        <div class="row">
+                                            <label for="email">Email:</label>
+                                            <input type="text" id="name" name="email" value="{{ sellerform.email | default:""  }}" required>
+                                        </div>
+                                        <div class="row">
+                                            <label for="otp">OTP:</label>
+                                            <input type="text" id="name" name="otp" value="0000" required>
+                                        </div>
+                                      </div>
+                                     
+                                      <button type="submit">Register User</button>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'success' %}
+            <div class="info-card"> 
+                <div class="card"> 
+                    <div class="header"> 
+                      <div class="image">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#000000" d="M20 7L9.00004 18L3.99994 13"></path> </g></svg>
+                       </div> 
+                        <div class="content">
+                           <span class="title translate"  data-en="successful!" data-sw="Umefanikiwa!">successful!</span> 
+                           <p class="message" >
+                            {{ message }}
+                           </p> 
+                        </div> 
+                           <div class="actions">
+                            <a href=""><button type="button" class="history"><span class="translate" data-en="Proceed" data-sw="Endelea">Proceed</span></button></a>
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+            
+
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'info' %}
+            <div class="info-card"> 
+                <div class="card"> 
+                    <div class="header"> 
+                    <div class="image">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#000000" d="M20 7L9.00004 18L3.99994 13"></path> </g></svg>
+                    </div> 
+                        <div class="content">
+                        <span class="title" >Info!</span> 
+                        <p class="message" >
+                            {{ message }}
+                        </p> 
+                        </div> 
+                        <div class="actions">
+                            <a href=""><button type="button" class="history"><span class="translate" data-en="Proceed" data-sw="Endelea">Proceed</span></button></a>
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+
+
+
+
+            </section>
+       
+        
+
+        
+        
+
+
+       
+        </main>
+        
+        
+        
+
+
+
+
+
+
+
+
+
+
+        <!--loader-->
+         <!--loader-->
+         <div class="loadingdiv" id="preloaderbg">
+            <svg class="pl"  width="240" height="240" viewBox="0 0 240 240">
+            <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+            <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+            <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+            <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+        </svg>
+        </div>
+
+
+    </section>
+    
+
+   <script src="{% static 'js/loader.js' %}"></script>
+   <script src="{% static 'js/adminuser.js' %}"></script>
+</body>
+</html>

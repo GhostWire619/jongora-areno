@@ -1,0 +1,262 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >Admin - {{ sport.title | default:"" }}</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopping2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/splide.css' %}">
+    <link rel="stylesheet" href="{% static 'css/booking.css' %}">
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+    <link rel="stylesheet" href="{% static 'css/productpage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/submitloader.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <nav>
+            <div class="navbar">
+            <div class="logo">
+                <a href="#"><h4 class="translate" data-en="Areno Sports" data-sw="Areno Michezo">Areno Sports</h4></a>
+            </div>
+            <div class="right-nav">
+                <h4 onclick="goBack()" style="cursor: pointer;">Back</h4>
+                <h4 class="active">Admin panel</h4>
+                <a href="{% url 'admin' %}"><h4 >Dashboard</h4></a>
+                <a href="{% url 'adminallbooking' %}"><h4 >Booking Posts</h4></a>
+                
+               
+            </div>
+            </div>
+            
+        </nav>
+
+        <main>
+            <!--search bar-->
+            <div class="productpagehead">
+                <div class="product-detail-head">
+                    
+                    <div class="return" onclick="goBack()">
+                        <i class="fa-solid fa-angle-left"></i>
+                    </div>
+                    <div class="product-nav-head">
+                        <h4 class="translate" data-en="Activity Details" data-sw="Taarifa za Shughuli">Activity Details</h4>
+                    </div>
+                </div>
+                <div class="productcart-notification">
+                    <button class="homebutton" onclick="copyAndShare()" type="button">
+                        <i class="fa-solid fa-share-nodes fa-fade"></i>
+                    </button>
+                </div>
+                
+            </div>
+            <!--event details-->
+            <!--event full screen view div-->
+            <div id="fullscreen-image-container">
+                <img id="fullscreen-image">
+            </div>
+            <!--sport details-->
+            <div class="productdetail">
+                <div class="productdetailimage2">
+                    <div class="splide-wrapper">
+                        <div class="splide" id="itemimagesslider">
+                            <div class="splide__track"> 
+                                <div class="splide__list">
+                                    {% if sport.image %}
+                                    <div class="splide__slide">
+                                        <div class="itemslider">
+                                            <img src="{{ sport.image.url }}" alt="Areno-{{ sport.title }}"  class="thumbnail">
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if sport.image2 %}
+                                    <div class="splide__slide">
+                                        <div class="itemslider">
+                                            <img src="{{ sport.image2.url }}" alt="Areno-{{ sport.title }}"  class="thumbnail">
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if sport.image3 %}
+                                    <div class="splide__slide">
+                                        <div class="itemslider">
+                                            <img src="{{ sport.image3.url }}" alt="Areno-{{ sport.title }}"  class="thumbnail">
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if sport.image4 %}
+                                    <div class="splide__slide">
+                                        <div class="itemslider">
+                                            <img src="{{ sport.image4.url }}" alt="Areno-{{ sport.title }}"  class="thumbnail">
+                                        </div>
+                                    </div>
+                                    {% else %} 
+                                    {% endif %}
+                                    {% if sport.image5 %}
+                                    <div class="splide__slide">
+                                        <div class="itemslider">
+                                            <img src="{{ sport.image5.url }}" alt="Areno-{{ sport.title }}"  class="thumbnail">
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if sport.video %}
+                                    <div class="splide__slide">
+                                        <div class="itemslider">
+                                            <video id="videoPlayer" src="{{ sport.video.url }}" alt="Areno-{{ sport.title }}"  controls></video>
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="productdetail-details">
+                    <div>
+                        <div class="details-productname">
+                            <p class="translate" data-en="Activity Name:" data-sw="Jina la shughuli:">Activity Name:</p>
+                            <h3 id="productname1">{{ sport.title | default:"" }}</h3>
+                        </div>
+                        <div class="category-region">
+                            <p><span class="translate" data-en="Sport Category:" data-sw="Kategoria:">Sport Category: </span> <b>{{ sport.category | default:"" }}</b></p>
+                            <p><span class="translate" data-en="Location:" data-sw="Sehemu:">Location: </span> <b>{{ sport.location | default:"" }}</b></p>
+                        </div><div class="line"></div>
+                        <div class="category-region">
+                            <p><span class="translate" data-en="Arena/Stadium/Place: " data-sw="Ukumbi/Eneo: ">Arena/Stadium/Place: </span> <b>{{ sport.venue_or_stadium | default:"" }}</b></p>
+                        </div>
+                        <div class="line"></div>
+                        <div class="category-region">
+                            <p><span class="translate" data-en="Date: " data-sw="Tarehe: ">Date: </span> <b>{{ sport.date | default:"" }}</b> {% if sport.upto %}<span class="translate" data-en="To" data-sw="Mpaka">To</span> <b>{{ sport.upto | default:"" }}</b>{% else %}{% endif %}</p>
+                            <p><span class="translate" data-en="Time: " data-sw="Muda: ">Time: </span> <b>{{ sport.time | default:"" }}</b> {% if sport.timeupto %}<span class="translate" data-en="To" data-sw="Mpaka">To</span> <b>{{ sport.timeupto | default:"" }}</b>{% else %}{% endif %}</p>
+                        </div>
+                        <div class="line"></div>
+                        <div class="category-region">
+                            <p><span class="translate" data-en="Contacts: " data-sw="Mawasiliano: ">Contacts: </span> <b>{{ sport.contact_1 | default:"" }}</b></p>
+                            {% if sport.contact_2 %}
+                            <p><span class="translate" data-en="Contacts: " data-sw="Mawasiliano: ">Contacts: </span> <b>{{ sport.contact_2 | default:"" }}</b></p>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        <div class="line"></div>
+                        <div class="category-region">
+                            {% if sport.organizer %}
+                            <p><span class="translate" data-en="Organizer: " data-sw="Mratibu: ">Organizer: </span> <b>{{ sport.organizer | default:"" }}</b></p>
+                            {% else %}
+                            {% endif %}
+                            {% if sport.email %}
+                            <p><span class="translate" data-en="Email: " data-sw="Barua pepe: ">Email: </span> <b>{{ sport.email | default:"" }}</b></p>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        {% if sport.organizer or sport.email %}
+                        <div class="line"></div>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                    <div class="amount-count" style="margin-top: 20px;">
+                        <div class="amount-count-div1 booksaveprof" >
+                            {% if postprofile %}
+                            <div class="bookprof">
+                                <a href="{% url 'host' postprofile.id %}"><p><span class="translate" data-en="by: " data-sw="">by: </span><b>{{ postprofile.company_name | default:"" | truncatechars:17 }}</b></p></a>
+                                {% if postprofile.is_verified %}
+                                    <div class="bookprofverified">
+                                        <img src="{% static 'icons/icons8-verified-64.png' %}" alt="">
+                                    </div>
+                                {% else %}
+                                {% endif %}
+                                {% if postprofile.profileimage %}
+                                    <div class="bookprofimg">
+                                        <a href="{% url 'host' postprofile.id %}"><img src="{{ postprofile.profileimage.url }}" alt=""></a>
+                                    </div>
+                                {% else %}
+                                {% endif %}
+                            </div>
+                            {% else %} {% endif %}
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            {% if sport.description %}
+            <div class="descriptiondiv">
+                <p class="desc-head" style="color: green;"><b class="translate" data-en="Description" data-sw="Maelezo">Description</b></p>
+                <div class="descriptiondetails">
+                    <p>{{ sport.description | safe | default:"" }}</p>
+                </div>
+            </div>
+        {% else %}
+        {% endif %}
+
+        
+
+
+            <!-- submit loader-->
+        <div id="loader">
+            <svg class="pl"  width="240" height="240" viewBox="0 0 240 240">
+                <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+                <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+                <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+                <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+            </svg>
+            <span><b class="translate" data-en="Submitting." data-sw="Unatuma.">Submitting.</b> <br> <span><p class="translate" data-en="Please wait..." data-sw="Tafadhari subiri..">Please wait...</p></span></span>
+        </div>
+
+        <!--loader-->
+        <div class="loadingdiv" id="preloaderbg">
+            <svg class="pl"  width="240" height="240" viewBox="0 0 240 240">
+              <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+          </svg>
+        </div>
+        
+        
+        </main>
+        
+        
+        
+           
+        
+
+
+        
+
+
+
+
+
+
+
+
+
+
+    </section>
+
+   
+    <script src="{% static 'js/loader.js' %}" ></script>
+    <script src="{% static 'js/shoppingpage.js' %}" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="{% static 'js/bookingpost.js' %}" ></script>
+    <script src="{% static 'js/language.js' %}" ></script>
+    <script>
+        
+    </script>
+    
+    
+    
+</body>
+</html>

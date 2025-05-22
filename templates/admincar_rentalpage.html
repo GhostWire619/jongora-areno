@@ -1,0 +1,343 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >Admin - {{ car_rental.name | default:"" }}</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopping2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/splide.css' %}">
+    <link rel="stylesheet" href="{% static 'css/booking.css' %}">
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+    <link rel="stylesheet" href="{% static 'css/productpage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/submitloader.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body >
+    <section>
+        <nav>
+            <div class="navbar">
+            <div class="logo">
+                <a href="#"><h4 class="translate" data-en="Areno Car Rentals" data-sw="Areno">Areno Car Rentals</h4></a>
+            </div>
+            <div class="right-nav">
+                <h4 onclick="goBack()" style="cursor: pointer;">Back</h4>
+                <h4 class="active">Admin panel</h4>
+                <a href="{% url 'admin' %}"><h4 >Dashboard</h4></a>
+                <a href="{% url 'adminallbooking' %}"><h4 >Booking Posts</h4></a>
+                
+                
+            </div>
+            </div>
+            
+        </nav>
+
+        <main>
+
+            <!--search bar-->
+            <div class="productpagehead">
+                <div class="product-detail-head">
+                    
+                    <div class="return" onclick="goBack()">
+                        <i class="fa-solid fa-angle-left"></i>
+                    </div>
+                    <div class="product-nav-head">
+                        <h4 class="translate" data-en="Rental Details" data-sw="Taarifa">Rental Details</h4>
+                    </div>
+                </div>
+                <div class="productcart-notification">
+                    <button class="homebutton" onclick="copyAndShare()" type="button">
+                        <i class="fa-solid fa-share-nodes fa-fade"></i>
+                    </button>
+                </div>
+                
+            </div>
+            
+            <!--event details-->
+            <!--event full screen view div-->
+            <div id="fullscreen-image-container">
+                <img id="fullscreen-image">
+            </div>
+            <!--event details-->
+            <div class="productdetail">
+                <div class="productdetailimage2">
+                    <div class="splide-wrapper">
+                        <div class="splide" id="itemimagesslider">
+                            <div class="splide__track"> 
+                                <div class="splide__list">
+                                    {% if car_rental.image %}
+                                    <div class="splide__slide">
+                                        <div class="itemslider">
+                                            <img src="{{ car_rental.image.url }}" alt="Areno-{{ car_rental.name }}"  class="thumbnail">
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if car_rental.image2 %}
+                                    <div class="splide__slide">
+                                        <div class="itemslider">
+                                            <img src="{{ car_rental.image2.url }}" alt="Areno-{{ car_rental.name }}"  class="thumbnail">
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if car_rental.image3 %}
+                                    <div class="splide__slide">
+                                        <div class="itemslider">
+                                            <img src="{{ car_rental.image3.url }}" alt="Areno-{{ car_rental.name }}"  class="thumbnail">
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if car_rental.image4 %}
+                                    <div class="splide__slide">
+                                        <div class="itemslider">
+                                            <img src="{{ car_rental.image4.url }}" alt="Areno-{{ car_rental.name }}"  class="thumbnail">
+                                        </div>
+                                    </div>
+                                    {% else %} 
+                                    {% endif %}
+                                    {% if car_rental.image5 %}
+                                    <div class="splide__slide">
+                                        <div class="itemslider">
+                                            <img src="{{ car_rental.image5.url }}" alt="Areno-{{ car_rental.name }}"  class="thumbnail">
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if car_rental.video %}
+                                    <div class="splide__slide">
+                                        <div class="itemslider">
+                                            <video id="videoPlayer" src="{{ car_rental.video.url }}" alt="Areno-{{ car_rental.name }}"  controls></video>
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="productdetail-details">
+                    <div>
+                        <div class="details-productname">
+                            <p class="translate" data-en="Name:" data-sw="Jina la shughuli:">Name:</p>
+                            <h3 id="productname1">{{ car_rental.name | default:"" }}</h3>
+                        </div>
+                        <div class="category-region">
+                            <p><span class="translate" data-en="Category:" data-sw="Kategoria:">Category: </span> <b>{{ car_rental.category | default:"" }}</b></p>
+                            <p><span class="translate" data-en="Location:" data-sw="Sehemu:">Location: </span> <b>{{ car_rental.location | default:"" | truncatechars:20 }}</b></p>
+                        </div><div class="line"></div>
+                        <div class="category-region">
+                            <p><span class="translate" data-en="Price: " data-sw="Gharama: ">Price: </span> <b>{{ car_rental.price | default:"" }}</b></p>
+                            <p><span class="translate" data-en="Type/Brand: " data-sw="Brandi: ">Type/Brand: </span> <b>{{ car_rental.vehicle_type_or_brand | default:"" }}</b> {% if car_rental.exterior_color %}{{ car_rental.exterior_color | default:"" }}{% else %}{% endif %} </p>
+                        </div>
+                        <div class="line"></div>
+
+                        {% if car_rental.service_1 or car_rental.service_2 or car_rental.service_3 or car_rental.service_4 or car_rental.service_5 or car_rental.service_6 or car_rental.service_7 or car_rental.service_8  %}
+                        <div class="category-region">
+                            <p><span class="translate" data-en="Services: " data-sw="Huduma: ">Services: </span> <b>
+                                {% if car_rental.service_1 %}{{ car_rental.service_1 | default:"" }}{% else %}{% endif %}
+                                {% if car_rental.service_2 %}, {{ car_rental.service_2 | default:"" }}{% else %}{% endif %}
+                                {% if car_rental.service_3 %}, {{ car_rental.service_3 | default:"" }}{% else %}{% endif %}
+                                {% if car_rental.service_4 %}, {{ car_rental.service_4 | default:"" }}{% else %}{% endif %}
+                                {% if car_rental.service_5 %}, {{ car_rental.service_5 | default:"" }}{% else %}{% endif %}
+                                {% if car_rental.service_6 %}, {{ car_rental.service_6 | default:"" }}{% else %}{% endif %}
+                                {% if car_rental.service_7 %}, {{ car_rental.service_7 | default:"" }}{% else %}{% endif %}
+                                {% if car_rental.service_8 %}, {{ car_rental.service_8 | default:"" }}{% else %}{% endif %}
+                            </b></p>
+                        </div>
+                        <div class="line"></div>
+                        {% else %}{% endif %} 
+
+                        {% if car_rental.engine_size or car_rental.mileage %}
+                        <div class="category-region">
+                            {% if car_rental.engine_size %}
+                                <p><span class="translate" data-en="Engine Size: " data-sw="Saizi ya injini: ">Engine Size: </span> <b>{{ car_rental.engine_size | default:"" }}</b></p>
+                            {% else %}{% endif %}
+                            {% if car_rental.mileage %}
+                                <p><span class="translate" data-en="Mileage: " data-sw="Umbali uliosafiri: ">Mileage: </span> <b>{{ car_rental.mileage | default:"" }}</b></p>
+                            {% else %}{% endif %}
+                        </div>
+                        <div class="line"></div>
+                        {% else %}
+                        {% endif %}
+
+                        {% if car_rental.year or car_rental.wheeldrive %}
+                        <div class="category-region">
+                            {% if car_rental.year %}
+                                <p><span class="translate" data-en="Year: " data-sw="Mwaka wa gari: ">Year: </span> <b>{{ car_rental.year | default:"" }}</b></p>
+                            {% else %}{% endif %}
+                            {% if car_rental.wheeldrive %}
+                                <p><span class="translate" data-en="Wheel Drive: " data-sw="Magurudumu: ">Wheel Drive: </span> <b>{{ car_rental.wheeldrive | default:"" }}</b></p>
+                            {% else %}{% endif %}
+                        </div>
+                        <div class="line"></div>
+                        {% else %}
+                        {% endif %}
+                        
+                        {% if car_rental.transmission or car_rental.fuel_type %}
+                        <div class="category-region">
+                            {% if car_rental.transmission %}
+                                <p><span class="translate" data-en="Transmission: " data-sw="Mfumo wa gia: ">Transmission: </span> <b>{{ car_rental.transmission | default:"" }}</b></p>
+                            {% else %}{% endif %}
+                            {% if car_rental.fuel_type %}
+                                <p><span class="translate" data-en="Fuel Type: " data-sw="Aina ya Mafuta: ">Fuel Type: </span> <b>{{ car_rental.fuel_type | default:"" }}</b></p>
+                            {% else %}{% endif %}
+                        </div>
+                        <div class="line"></div>
+                        {% else %}
+                        {% endif %}
+                        
+                        {% if car_rental.no_of_doors or car_rental.no_of_seats %}
+                        <div class="category-region">
+                            {% if car_rental.no_of_doors %}
+                                <p><span class="translate" data-en="Number of Doors: " data-sw="Idadi ya milango: ">Number of Doors: </span> <b>{{ car_rental.no_of_doors | default:"" }}</b></p>
+                            {% else %}{% endif %}
+                            {% if car_rental.no_of_seats %}
+                                <p><span class="translate" data-en="Number of seats: " data-sw="Idadi ya siti: ">Number of seats: </span> <b>{{ car_rental.no_of_seats | default:"" }}</b></p>
+                            {% else %}{% endif %}
+                        </div>
+                        <div class="line"></div>
+                        {% else %}
+                        {% endif %}
+                        <div class="category-region">
+                            <p><span class="translate" data-en="Contacts: " data-sw="Mawasiliano: ">Contacts: </span> <b>{{ car_rental.contact_1 | default:"" }}</b></p>
+                            {% if car_rental.contact_2 %}
+                            <p><span class="translate" data-en="Contacts: " data-sw="Mawasiliano: ">Contacts: </span> <b>{{ car_rental.contact_2 | default:"" }}</b></p>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        <div class="line"></div>
+                        
+                        {% if car_rental.organizer or car_Rental.email %}
+                        <div class="category-region">
+                            {% if car_rental.organizer %}
+                                <p><span class="translate" data-en="Organizer: " data-sw="Mratibu: ">Organizer: </span> <b>{{ car_rental.organizer | default:"" }}</b></p>
+                            {% else %}
+                            {% endif %}
+                            {% if car_rental.email %}
+                                <p><span class="translate" data-en="Email: " data-sw="Barua pepe: ">Email: </span> <b>{{ car_rental.email | default:"" }}</b></p>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        <div class="line"></div>
+                        {% else %}
+                        {% endif %}
+
+                        <div class="category-region">
+                            {% if car_rental.availability == 'Available' %}
+                                <p><i class="fa-solid fa-circle-check" style="color: green;"></i> <span class="translate" data-en="Available:" data-sw="Ipo:" style="color: green; font-weight: bold;">Available:</span> <small class="rentalpage-date">{{ car_rental.submitted_date | default:"-" }}</small></p>
+                            {% elif car_rental.availability == 'Not Available' %}
+                                <p><i class="fa-solid fa-circle-exclamation" style="color: red;"></i> <span class="translate" data-en="Not Available:" data-sw="Imekodishwa:" style="color: red; font-weight: bold;">Not Available:</span></p>
+                            {% elif car_rental.availability == 'Will be Available soon' %}
+                                <p><i class="fa-solid fa-circle-plus" style="color: blue;"></i> <span class="translate" data-en="Will be Available soon:" data-sw="Itakuwepo hivi punde:" style="color: blue; font-weight: bold;">Will be Available soon:</span></p>
+                            {% endif %}
+                        </div>
+                        <div class="line"></div> 
+                    </div>
+
+                    <div class="amount-count" style="margin-top: 20px;">
+                        <div class="amount-count-div1 booksaveprof" >
+                            {% if postprofile %}
+                            <div class="bookprof">
+                                <a href="{% url 'host' postprofile.id %}"><p><span class="translate" data-en="by: " data-sw="">by: </span><b>{{ postprofile.company_name | default:"" | truncatechars:17 }}</b></p></a>
+                                {% if postprofile.is_verified %}
+                                    <div class="bookprofverified">
+                                        <img src="{% static 'icons/icons8-verified-64.png' %}" alt="">
+                                    </div>
+                                {% else %}
+                                {% endif %}
+                                {% if postprofile.profileimage %}
+                                    <div class="bookprofimg">
+                                        <a href="{% url 'host' postprofile.id %}"><img src="{{ postprofile.profileimage.url }}" alt=""></a>
+                                    </div>
+                                {% else %}
+                                {% endif %}
+                            </div>
+                            {% else %} {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% if car_rental.description %}
+            <div class="descriptiondiv">
+                <p class="desc-head" style="color: green;"><b class="translate" data-en="Description" data-sw="Maelezo">Description</b></p>
+                <div class="descriptiondetails">
+                    <p>{{ car_rental.description | safe | default:"" }}</p>
+                </div>
+            </div>
+        {% else %}
+        {% endif %}
+
+       
+        <!-- submit loader-->
+        <div id="loader">
+            <svg class="pl"  width="240" height="240" viewBox="0 0 240 240">
+                <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+                <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+                <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+                <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+            </svg>
+            <span><b class="translate" data-en="Submitting." data-sw="Unatuma.">Submitting.</b> <br> <span><p class="translate" data-en="Please wait..." data-sw="Tafadhari subiri..">Please wait...</p></span></span>
+        </div>
+
+        <!--loader-->
+        <div class="loadingdiv" id="preloaderbg">
+            <svg class="pl"  width="240" height="240" viewBox="0 0 240 240">
+              <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+          </svg>
+        </div>
+
+
+
+
+
+        
+        
+        </main>
+        
+        
+           
+        
+
+
+        
+
+
+
+
+
+
+
+
+
+
+    </section>
+
+   
+    <script src="{% static 'js/loader.js' %}"></script>
+    <script src="{% static 'js/shoppingpage.js' %}" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="{% static 'js/bookingpost.js' %}" ></script>
+    <script src="{% static 'js/language.js' %}" ></script>
+    <script>
+        
+    </script>
+    
+    
+    
+</body>
+</html>

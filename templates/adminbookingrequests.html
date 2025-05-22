@@ -1,0 +1,491 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Areno - Admin All Booking Requests</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopping2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <main>
+            <div class="navtop">
+                <h2>Areno Admin</h2>
+                <div class="navtop-right">
+
+                    <button class="green">{{counter | default:"0"}} Pending</button>
+                    <a href="{% url 'admincompletedrequests' %}"><button class="orangered">{{ completedcounter | default:"0"}} Completed</button></a>
+                </div>
+            </div>
+            
+            <section>
+                <div class="admincenter">
+                    <div class="centertop">
+                        <div class="centertop-left">
+                            <h2><span style="color: blue;">{{ counter | default:"0"}}</span> Pending Requests</h2>
+                        </div>
+                        <div class="centertop-right">
+                            <form action="">
+                                <select name="cat" required>
+                                    <option disabled selected>Select</option>
+                                    <option value="All">All</option>
+                                    <option value="Car Rental">Car Rental</option>
+                                    <option value="Areno BNB">Areno BNB</option>
+                                </select>
+                                <input type="search" name="query" placeholder="search..">
+                                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="centerbottom">
+                        <div class="centerleft">
+                            <div class="buttondiv">
+                                {% if newuserforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-users"></i><a href="{% url 'admin' %}"><button><b>All Users</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newshopforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-cart-shopping" ></i><a href="{% url 'adminshopping' %}"><button><b>Online Shops</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newrestaurantforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-utensils"></i><a href="{% url 'adminrestaurants' %}"><button><b>Restaurants</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newhostforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-user"></i><a href="{% url 'adminhosts' %}"><button><b>Hosts</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newuserproducts or newuserfoods %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-box-open"></i><a href="{% url 'adminallitems' %}"><button><b>Item Posts</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newuserbookingposts %}
+                                <span></span> 
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-list"></i><a href="{% url 'adminallbooking' %}"><button><b>Booking Posts</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newbnbrequests or newcarrequests %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-list"></i><a href="{% url 'adminbookingrequests' %}"><button class="buttondivselected"><b>Booking Requests</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newquestions %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-list"></i><a href="{% url 'adminbookingquestions' %}"><button><b>Booking Questions</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newusermessages %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-message"></i><a href="{% url 'adminmessagepage' %}"><button><b>Messages</b></button></a>
+                            </div>
+                        </div>
+                        <div class="centerright">
+                            <div class="userlist headerlist">
+                                <div class="username"><b>Full Name:</b></div>
+                                <div class="useremail">Email:</div>
+                                <div class="type"><b>Phone Number:</b></div>
+                                <div class="status"><b>Category:</b></div>
+                                <div class="reg-date"><b>Date Submitted:</b></div>
+                            </div>
+                            
+                            <div class="centermain">
+                                <!--user list-->
+                                {% if query %}
+                                    {% for carrequest in carrequests reversed %}
+                                    <div class="activityitem" id="carrequest-{{carrequest.id}}" >
+                                        <div class="activityright" id="carrequestright-{{carrequest.id}}" onclick="Expand ('carrequest-{{carrequest.id}}', 'carrequestright-{{carrequest.id}}')">
+                                            <div class="username"><b>{{ carrequest.fullname | default:"" }}</b></div>
+                                            <div class="useremail">{{ carrequest.email | default:"" }}</div>
+                                            <div class="type"><b>{{ carrequest.phonenumber | default:"" }}</b></div>
+                                            <div class="status"><b>Car Rental</b></div>
+                                            <div class="reg-date"><b>{{ carrequest.submitted_date | default:"" }}</b></div>
+                                        </div>
+                                        <div class="activitydetails">
+                                            {% if carrequest.image %}
+                                            <div class="activitydetailsimage">
+                                                <img src="{{ carrequest.image.url }}" loading="lazy" alt="">
+                                            </div>
+                                            {% else %}
+                                            {% endif %}
+                                            <div class="activitydetailsright">
+                                                <div class="activitydetail">
+                                                    <p>Full Name:</p>
+                                                    <p>{{ carrequest.fullname | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Post Name:</p>
+                                                    <p>{{ carrequest.post_name | default:"" }} </p>
+                                                    <a href="{% url 'car_rentalpage' carrequest.post_id %}" ><button class="viewdetailspage" title="view post"><i class="fa-solid fa-arrow-up-right-from-square"></i></button></a>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Category:</p>
+                                                    <p>Car Rental</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Date:</p>
+                                                    <p>{{ carrequest.date | default:"" }} </p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Description:</p>
+                                                    <p>{{ carrequest.description | safe | default:"" }}</p>
+                                                </div>
+                                                {% if carrequest.message %}
+                                                <div class="activitydetail" style="margin-top: 5px;">
+                                                    <p>Previous Msg:</p>
+                                                    <p style="color: green;">{{ carrequest.message | default:"" }}</p>
+                                                </div>
+                                                {% else %}{% endif %}
+                                                <div class="activitydetail" style="margin: 10px 0px 20px 0px;">
+                                                    <p>Message:</p>
+                                                    <form class="requestsubmitmsgform" action="{% url 'car_rentalrequestmessage' carrequest.id %}" method='POST'>
+                                                    {% csrf_token %}
+                                                    <textarea class="carrequestmsg" name="message" id="" cols="125" rows="4" maxlength="4000" required></textarea>
+                                                    <button class="activityactionsubmit" type="submit">send</button>
+                                                    </form>
+                                                </div>
+                                                <div class="activitydetail" style="margin: 10px 0px 20px 0px;">
+                                                    <p>Action:</p>
+                                                    <form action="{% url 'car_rentalrequestaction' carrequest.id %}" method='POST'>
+                                                    {% csrf_token %}
+                                                    <select name="action" id="">
+                                                        <option selected value={{ carrequest.status | default:"" }}>Select</option>
+                                                        <option value="Completed" style="color: green;">Complete</option>
+                                                        <option value="Pending" style="color: red;">Pending</option>
+                                                        
+                                                    </select>
+                                                    <button class="activityactionsubmit" type="submit">save</button>
+                                                    </form>
+                                                    <form action="{% url 'deletecar_rentalrequest' carrequest.id %}" method='POST'>
+                                                        {% csrf_token %}
+                                                        <button class="activityactiondelete" onclick="return confirmDelete('{{ carrequest.post_name }} Booking')" type="submit" title="delete"><i class="fa-solid fa-trash"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    {% empty %}
+                                    {% endfor %}
+
+                                    {% for bnbrequest in bnbrequests reversed %}
+                                    <div class="activityitem" id="bnbrequest-{{bnbrequest.id}}" >
+                                        <div class="activityright" id="bnbrequestright-{{bnbrequest.id}}" onclick="Expand ('bnbrequest-{{bnbrequest.id}}', 'bnbrequestright-{{bnbrequest.id}}')">
+                                            <div class="username"><b>{{ bnbrequest.fullname | default:"" }}</b></div>
+                                            <div class="useremail">{{ bnbrequest.email | default:"" }}</div>
+                                            <div class="type"><b>{{ bnbrequest.phonenumber | default:"" }}</b></div>
+                                            <div class="status"><b>Areno BNB</b></div>
+                                            <div class="reg-date"><b>{{ bnbrequest.submitted_date | default:"" }}</b></div>
+                                        </div>
+                                        <div class="activitydetails">
+                                            {% if bnbrequest.image %}
+                                            <div class="activitydetailsimage">
+                                                <img src="{{ bnbrequest.image.url }}" loading="lazy" alt="">
+                                            </div>
+                                            {% else %}
+                                            {% endif %}
+                                            <div class="activitydetailsright">
+                                                <div class="activitydetail">
+                                                    <p>Full Name:</p>
+                                                    <p>{{ bnbrequest.fullname | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Post Name:</p>
+                                                    <p>{{ bnbrequest.post_name | default:"" }} </p>
+                                                    <a href="{% url 'arenobnbpage' bnbrequest.post_id %}" ><button class="viewdetailspage" title="view post"><i class="fa-solid fa-arrow-up-right-from-square"></i></button></a>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Category:</p>
+                                                    <p>Areno BNB</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Check In <br> Date:</p>
+                                                    <p>{{ bnbrequest.check_in_date | default:"" }} </p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Check Out Date:</p>
+                                                    <p>{{ bnbrequest.check_out_date | default:"" }} </p>
+                                                </div>
+                                                {% if bnbrequest.message %}
+                                                <div class="activitydetail" style="margin-top: 5px;">
+                                                    <p>Previous Msg:</p>
+                                                    <p style="color: green;">{{ bnbrequest.message | default:"" }}</p>
+                                                </div>
+                                                {% else %}{% endif %}
+                                                <div class="activitydetail" style="margin: 10px 0px 20px 0px;">
+                                                    <p>Message:</p>
+                                                    <form class="requestsubmitmsgform" action="{% url 'arenobnbrequestmessage' bnbrequest.id %}" method='POST'>
+                                                    {% csrf_token %}
+                                                    <textarea class="carrequestmsg" name="message" id="" cols="125" rows="4" maxlength="4000" required></textarea>
+                                                    <button class="activityactionsubmit" type="submit">send</button>
+                                                    </form>
+                                                </div>
+                                                <div class="activitydetail" style="margin: 10px 0px 20px 0px;">
+                                                    <p>Action:</p>
+                                                    <form action="{% url 'arenobnbrequestaction' bnbrequest.id %}" method='POST'>
+                                                    {% csrf_token %}
+                                                    <select name="action" id="">
+                                                        <option selected value={{ bnbrequest.status | default:"" }}>Select</option>
+                                                        <option value="Completed" style="color: green;">Complete</option>
+                                                        <option value="Pending" style="color: red;">Pending</option>
+                                                        
+                                                    </select>
+                                                    <button class="activityactionsubmit" type="submit">save</button>
+                                                    </form>
+                                                    <form action="{% url 'deletearenobnbrequest' bnbrequest.id %}" method='POST'>
+                                                        {% csrf_token %}
+                                                        <button class="activityactiondelete" onclick="return confirmDelete('{{ bnbrequest.post_name }} Booking')" type="submit" title="delete"><i class="fa-solid fa-trash"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    {% empty %}
+                                    {% endfor %}
+                                {% else %}
+                                    {% for carrequest in carrequests reversed %}
+                                    <div class="activityitem" id="carrequest-{{carrequest.id}}" >
+                                        <div class="activityright" id="carrequestright-{{carrequest.id}}" onclick="Expand ('carrequest-{{carrequest.id}}', 'carrequestright-{{carrequest.id}}')">
+                                            <div class="username"><b>{{ carrequest.fullname | default:"" }}</b></div>
+                                            <div class="useremail">{{ carrequest.email | default:"" }}</div>
+                                            <div class="type"><b>{{ carrequest.phonenumber | default:"" }}</b></div>
+                                            <div class="status"><b>Car Rental</b></div>
+                                            <div class="reg-date"><b>{{ carrequest.submitted_date | default:"" }}</b></div>
+                                        </div>
+                                        <div class="activitydetails">
+                                            {% if carrequest.image %}
+                                            <div class="activitydetailsimage">
+                                                <img src="{{ carrequest.image.url }}" loading="lazy" alt="">
+                                            </div>
+                                            {% else %}
+                                            {% endif %}
+                                            <div class="activitydetailsright">
+                                                <div class="activitydetail">
+                                                    <p>Full Name:</p>
+                                                    <p>{{ carrequest.fullname | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Post Name:</p>
+                                                    <p>{{ carrequest.post_name | default:"" }} </p>
+                                                    <a href="{% url 'car_rentalpage' carrequest.post_id %}" ><button class="viewdetailspage" title="view post"><i class="fa-solid fa-arrow-up-right-from-square"></i></button></a>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Category:</p>
+                                                    <p>Car Rental</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Date:</p>
+                                                    <p>{{ carrequest.date | default:"" }} </p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Description:</p>
+                                                    <p>{{ carrequest.description | safe | default:"" }}</p>
+                                                </div>
+                                                {% if carrequest.message %}
+                                                <div class="activitydetail" style="margin-top: 5px;">
+                                                    <p>Previous Msg:</p>
+                                                    <p style="color: green;">{{ carrequest.message | default:"" }}</p>
+                                                </div>
+                                                {% else %}{% endif %}
+                                                <div class="activitydetail" style="margin: 10px 0px 20px 0px;">
+                                                    <p>Message:</p>
+                                                    <form class="requestsubmitmsgform" action="{% url 'car_rentalrequestmessage' carrequest.id %}" method='POST'>
+                                                    {% csrf_token %}
+                                                    <textarea class="carrequestmsg" name="message" id="" cols="125" rows="4" maxlength="4000" required></textarea>
+                                                    <button class="activityactionsubmit" type="submit">send</button>
+                                                    </form>
+                                                </div>
+                                                <div class="activitydetail" style="margin: 10px 0px 20px 0px;">
+                                                    <p>Action:</p>
+                                                    <form action="{% url 'car_rentalrequestaction' carrequest.id %}" method='POST'>
+                                                    {% csrf_token %}
+                                                    <select name="action" id="">
+                                                        <option selected value={{ carrequest.status | default:"" }}>Select</option>
+                                                        <option value="Completed" style="color: green;">Complete</option>
+                                                        <option value="Pending" style="color: red;">Pending</option>
+                                                        
+                                                    </select>
+                                                    <button class="activityactionsubmit" type="submit">save</button>
+                                                    </form>
+                                                    <form action="{% url 'deletecar_rentalrequest' carrequest.id %}" method='POST'>
+                                                        {% csrf_token %}
+                                                        <button class="activityactiondelete" onclick="return confirmDelete('{{ carrequest.post_name }} Booking')" type="submit" title="delete"><i class="fa-solid fa-trash"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    {% empty %}
+                                    {% endfor %}
+
+                                    {% for bnbrequest in bnbrequests reversed %}
+                                    <div class="activityitem" id="bnbrequest-{{bnbrequest.id}}" >
+                                        <div class="activityright" id="bnbrequestright-{{bnbrequest.id}}" onclick="Expand ('bnbrequest-{{bnbrequest.id}}', 'bnbrequestright-{{bnbrequest.id}}')">
+                                            <div class="username"><b>{{ bnbrequest.fullname | default:"" }}</b></div>
+                                            <div class="useremail">{{ bnbrequest.email | default:"" }}</div>
+                                            <div class="type"><b>{{ bnbrequest.phonenumber | default:"" }}</b></div>
+                                            <div class="status"><b>Areno BNB</b></div>
+                                            <div class="reg-date"><b>{{ bnbrequest.submitted_date | default:"" }}</b></div>
+                                        </div>
+                                        <div class="activitydetails">
+                                            {% if bnbrequest.image %}
+                                            <div class="activitydetailsimage">
+                                                <img src="{{ bnbrequest.image.url }}" loading="lazy" alt="">
+                                            </div>
+                                            {% else %}
+                                            {% endif %}
+                                            <div class="activitydetailsright">
+                                                <div class="activitydetail">
+                                                    <p>Full Name:</p>
+                                                    <p>{{ bnbrequest.fullname | default:"" }}</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Post Name:</p>
+                                                    <p>{{ bnbrequest.post_name | default:"" }} </p>
+                                                    <a href="{% url 'arenobnbpage' bnbrequest.post_id %}" ><button class="viewdetailspage" title="view post"><i class="fa-solid fa-arrow-up-right-from-square"></i></button></a>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Category:</p>
+                                                    <p>Areno BNB</p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Check In <br> Date:</p>
+                                                    <p>{{ bnbrequest.check_in_date | default:"" }} </p>
+                                                </div>
+                                                <div class="activitydetail">
+                                                    <p>Check Out Date:</p>
+                                                    <p>{{ bnbrequest.check_out_date | default:"" }} </p>
+                                                </div>
+                                                {% if bnbrequest.message %}
+                                                <div class="activitydetail" style="margin-top: 5px;">
+                                                    <p>Previous Msg:</p>
+                                                    <p style="color: green;">{{ bnbrequest.message | default:"" }}</p>
+                                                </div>
+                                                {% else %}{% endif %}
+                                                <div class="activitydetail" style="margin: 10px 0px 20px 0px;">
+                                                    <p>Message:</p>
+                                                    <form class="requestsubmitmsgform" action="{% url 'arenobnbrequestmessage' bnbrequest.id %}" method='POST'>
+                                                    {% csrf_token %}
+                                                    <textarea class="carrequestmsg" name="message" id="" cols="125" rows="4" maxlength="4000" required></textarea>
+                                                    <button class="activityactionsubmit" type="submit">send</button>
+                                                    </form>
+                                                </div>
+                                                <div class="activitydetail" style="margin: 10px 0px 20px 0px;">
+                                                    <p>Action:</p>
+                                                    <form action="{% url 'arenobnbrequestaction' bnbrequest.id %}" method='POST'>
+                                                    {% csrf_token %}
+                                                    <select name="action" id="">
+                                                        <option selected value={{ bnbrequest.status | default:"" }}>Select</option>
+                                                        <option value="Completed" style="color: green;">Complete</option>
+                                                        <option value="Pending" style="color: red;">Pending</option>
+                                                        
+                                                    </select>
+                                                    <button class="activityactionsubmit" type="submit">save</button>
+                                                    </form>
+                                                    <form action="{% url 'deletearenobnbrequest' bnbrequest.id %}" method='POST'>
+                                                        {% csrf_token %}
+                                                        <button class="activityactiondelete" onclick="return confirmDelete('{{ bnbrequest.post_name }} Booking')" type="submit" title="delete"><i class="fa-solid fa-trash"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    {% empty %}
+                                    {% endfor %}
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+                    </div>
+                   
+                </div>
+            </section>
+
+
+            {% if messages %}
+            {% for message in messages %}
+            <div class="info-card"> 
+                <div class="card"> 
+                    <div class="header"> 
+                      <div class="image">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#000000" d="M20 7L9.00004 18L3.99994 13"></path> </g></svg>
+                       </div> 
+                        <div class="content">
+                           <span class="title">successful!</span> 
+                           <p class="message" >
+                            {{ message }}
+                           </p> 
+                        </div> 
+                           <div class="actions">
+                            <a href=""><button type="button" class="history"><span >Proceed</span></button></a>
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            {% endif %}
+
+
+
+
+
+
+        </main>
+        
+        <!--loader-->
+        <div class="loadingdiv" id="preloaderbg">
+            <svg class="pl"  width="240" height="240" viewBox="0 0 240 240">
+            <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+            <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+            <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+            <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+        </svg>
+        </div>
+
+    </section>
+    
+   <script src="{% static 'js/loader.js' %}"></script>
+   <script src="{% static 'js/adminuser.js' %}"></script>
+    <script>
+        
+    </script>
+
+
+</body>
+</html>

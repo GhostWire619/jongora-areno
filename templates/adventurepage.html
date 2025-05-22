@@ -1,0 +1,503 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >Areno - {{ adventure.title | default:"" }}</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopping2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/splide.css' %}">
+    <link rel="stylesheet" href="{% static 'css/booking.css' %}">
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+    <link rel="stylesheet" href="{% static 'css/productpage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/submitloader.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body >
+    <section>
+        <nav>
+            <div class="navbar">
+            <div class="logo">
+                <a href="#"><h4 class="translate" data-en="Areno Adventures" data-sw="Areno Safari">Areno Adventures</h4></a>
+            </div>
+            <div class="right-nav">
+                <a href="{% url 'booking' %}"><h4 class="translate" data-en="Booking" data-sw="Booking">Booking</h4></a>
+                <a href="{% url 'adventures' %}"><h4 class="translate active" data-en="Adventures" data-sw="Safari">Adventures</h4></a>
+                <a href="{% url 'adventurecategories' %}"><h4 class="translate" data-en="Categories" data-sw="Kategoria">Categories</h4></a>
+                <a href="{% url 'alladventures' %}"><h4 class="translate" data-en="All Adventures" data-sw="Safari zote">All Adventures</h4></a>
+                <a href="{% url 'tickets' %}"><h4 class="translate" data-en="Tickets" data-sw="Tiketi">Tickets</h4></a>
+                <a href="{% url 'contactareno' %}"><h4 class="translate" data-en="Contact Us" data-sw="Wasiliana Nasi">Contact Us</h4></a>
+                
+                {% if user.is_authenticated %}
+                {% else %}
+                <a href="{% url 'signup' %}"><h4 class="translate signup-top-button" data-en="Sign In" data-sw="Ingia">Sign In</h4></a>
+                {% endif %}
+            </div>
+            </div>
+            
+        </nav>
+
+        <main>
+
+            <!--search bar-->
+            <div class="productpagehead">
+                <div class="product-detail-head">
+                    
+                    <div class="return" onclick="goBack()">
+                        <i class="fa-solid fa-angle-left"></i>
+                    </div>
+                    <div class="product-nav-head">
+                        <h4 class="translate" data-en="Activity Details" data-sw="Taarifa za Shughuli">Activity Details</h4>
+                    </div>
+                </div>
+                <div class="productcart-notification">
+                    <button class="homebutton" onclick="copyAndShare()" type="button">
+                        <i class="fa-solid fa-share-nodes fa-fade"></i>
+                    </button>
+                </div>
+                
+            </div>
+            <div class="menu ">
+                <div class="menudiv home-menu">
+                    <div>
+                        <button class="minimize-menu">
+                            <i class="fa-solid fa-x" ></i>
+                        </button>
+                        <div class="main-menu-content">
+                            <a href="{% url 'index' %}"><div class="menu-logo">
+                                <img src="{% static 'icons/Frame 304 (2).png' %}" alt="">
+                            </div></a>
+                            <a href="{% url 'shopping' %}"><div class="menu-title">
+                                <button class="menu-title-icon">
+                                    <i class="fa-solid fa-cart-arrow-down"></i>
+                                </button>
+                                <button><p class="translate" data-en="Shopping" data-sw="Ununuzi">Shopping</p></button>
+                            </div></a>
+                            <a href="{% url 'restaurants' %}"><div class="menu-title">
+                                <button class="menu-title-icon">
+                                    <i class="fa-solid fa-utensils"></i>
+                                </button>
+                                <button><p class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</p></button>
+                            </div></a>
+                            <a href="{% url 'booking' %}"><div class="menu-title title-selected">
+                                <button class="menu-title-icon">
+                                    <i class="fa-solid fa-book-bookmark"></i>
+                                </button>
+                                <button><p class="translate" data-en="Booking" data-sw="Booking">Booking</p></button>
+                            </div></a>
+                            <a href=""><div class="menu-title">
+                                <button class="menu-title-icon">
+                                    <i class="fa-solid fa-truck-fast"></i>
+                                </button>
+                                <button><p class="translate" data-en="Logistics" data-sw="Usafirishaji">Logistics</p></button>
+                            </div></a>
+                            <a href="{% url 'rate' %}"><div class="menu-title">
+                                <button class="menu-title-icon">
+                                    <i class="fa-solid fa-star"></i>
+                                </button>
+                                <button><p class="translate" data-en="Rate Us" data-sw="Kiwango cha sisi">Rate Us</p></button>
+                            </div></a>
+                            <a href="{% url 'contactareno' %}"><div class="menu-title">
+                                <button class="menu-title-icon">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </button>
+                                <button><p class="translate" data-en="Contact Areno" data-sw="Wasiliana na Areno">Contact Areno</p></button>
+                            </div></a>
+                        </div>
+                        
+                        <div class="menu-about-areno">
+                            <a href="{% url 'aboutus' %}"><button ><p class="translate" data-en="About Us" data-sw="Kutuhusu">About Us</p></button></a>
+                            <a href="{% url 'privacypolicy' %}"><button><p class="translate" data-en="Privacy Policy" data-sw="Sera za faragha">Privacy Policy</p></button></a>
+                            <a href="{% url 'refundpolicies' %}"><button><p class="translate" data-en="Refund Policy" data-sw="Sera za Marejesho">Refund Policy</p></button></a>
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'logout' %}"><button><p><b class="translate signup-menu-button" data-en="Log Out" data-sw="Ondoka">Log Out</b></p></button></a>
+                            {% else %}
+                            <a href="{% url 'signup' %}"><button><p><b class="translate signup-menu-button" data-en="Sign In" data-sw="Ingia">Sign In</b></p></button></a>
+                            {% endif %}
+                        </div>
+                        <div class="languagediv">
+                            <p ><b class="translate" data-en="Language" data-sw="Lugha">Language</b></p>
+                            <button class="eng" id="englishBtn">Eng</button>
+                            <button class="swahili" id="swahiliBtn">Swahili</button>
+                        </div>
+                        <!--<div class="theme">
+                            <p><b class="translate" data-en="Change Theme" data-sw="Badilisha mandhari">Change Theme</b></p>
+                            <div class="toggle-switch" >
+                                <label class="switch-label">
+                                <input type="checkbox" class="checkbox" id="darkmode">
+                                <span class="slider" ></span>
+                                </label>
+                            </div> 
+                        </div>-->
+                    </div>
+                    <div class="callus">
+                        <a href="tel:{{ arenodetails.phonenumber_1 | default:"" }}"><div class="call">
+                            <i class="fa-solid fa-phone" style="color: white; font-size: 30px;"></i>
+                        </div></a>
+                    </div>
+                    <div class="below-menu">
+                        <div class="menu-trademark">
+                            <p>© 2023. Areno Company Limited. app version 1.0.0</p>
+                        </div>
+                    </div>
+                
+                </div>
+                <div class="darkside"></div>
+            </div>
+            
+            <!--adventure details-->
+            <!--adventure full screen view div-->
+            <div id="fullscreen-image-container">
+                <img id="fullscreen-image">
+            </div>
+            <!--adventure details-->
+            <div class="productdetail">
+                <div class="productdetailimage2">
+                    <div class="splide-wrapper">
+                        <div class="splide" id="itemimagesslider">
+                            <div class="splide__track"> 
+                                <div class="splide__list">
+                                    {% if adventure.image %}
+                                    <div class="splide__slide">
+                                        <div class="itemslider">
+                                            <img src="{{ adventure.image.url }}" alt="Areno-{{ adventure.title }}"  class="thumbnail">
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if adventure.image2 %}
+                                    <div class="splide__slide">
+                                        <div class="itemslider">
+                                            <img src="{{ adventure.image2.url }}" alt="Areno-{{ adventure.title }}"  class="thumbnail">
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if adventure.image3 %}
+                                    <div class="splide__slide">
+                                        <div class="itemslider">
+                                            <img src="{{ adventure.image3.url }}" alt="Areno-{{ adventure.title }}"  class="thumbnail">
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if adventure.image4 %}
+                                    <div class="splide__slide">
+                                        <div class="itemslider">
+                                            <img src="{{ adventure.image4.url }}" alt="Areno-{{ adventure.title }}"  class="thumbnail">
+                                        </div>
+                                    </div>
+                                    {% else %} 
+                                    {% endif %}
+                                    {% if adventure.image5 %}
+                                    <div class="splide__slide">
+                                        <div class="itemslider">
+                                            <img src="{{ adventure.image5.url }}" alt="Areno-{{ adventure.title }}"  class="thumbnail">
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if adventure.video %}
+                                    <div class="splide__slide">
+                                        <div class="itemslider">
+                                            <video id="videoPlayer" src="{{ adventure.video.url }}" alt="Areno-{{ adventure.title }}"  controls></video>
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="productdetail-details">
+                    <div>
+                        <div class="details-productname">
+                            <p class="translate" data-en="Activity Name:" data-sw="Jina la shughuli:">Activity Name:</p>
+                            <h3 id="productname1">{{ adventure.title | default:"" }}</h3>
+                        </div>
+                        <div class="category-region">
+                            <p><span class="translate" data-en="Category:" data-sw="Kategoria:">Category: </span> <b>{{ adventure.category | default:"" }}</b></p>
+                            <p><span class="translate" data-en="Location:" data-sw="Sehemu:">Location: </span> <b>{{ adventure.location | default:"" }}</b></p>
+                        </div><div class="line"></div>
+                        {% if adventure.venue %}
+                        <div class="category-region">
+                            <p><span class="translate" data-en="Place: " data-sw="Sehemu: ">Place: </span> <b>{{ adventure.venue | default:"" }}</b></p>
+                        </div>
+                        <div class="line"></div>
+                        {% else %}
+                        {% endif %}
+                        <div class="category-region">
+                            <p><span class="translate" data-en="Date: " data-sw="Tarehe: ">Date: </span> <b>{{ adventure.date | default:"" }}</b> {% if adventure.upto %}<span class="translate" data-en="To" data-sw="Mpaka">To</span> <b>{{ adventure.upto | default:"" }}</b>{% else %}{% endif %}</p>
+                            <p><span class="translate" data-en="Time: " data-sw="Muda: ">Time: </span> <b>{{ adventure.time | default:"" }}</b> {% if adventure.timeupto %}<span class="translate" data-en="To" data-sw="Mpaka">To</span> <b>{{ adventure.timeupto | default:"" }}</b>{% else %}{% endif %}</p>
+                        </div>
+                        <div class="line"></div>
+                        <div class="category-region">
+                            <p><span class="translate" data-en="Contacts: " data-sw="Mawasiliano: ">Contacts: </span> <b>{{ adventure.contact_1 | default:"" }}</b></p>
+                            {% if adventure.contact_2 %}
+                            <p><span class="translate" data-en="Contacts: " data-sw="Mawasiliano: ">Contacts: </span> <b>{{ adventure.contact_2 | default:"" }}</b></p>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        <div class="line"></div>
+                        <div class="category-region">
+                            {% if adventure.organizer %}
+                            <p><span class="translate" data-en="Organizer: " data-sw="Mratibu: ">Organizer: </span> <b>{{ adventure.organizer | default:"" }}</b></p>
+                            {% else %}
+                            {% endif %}
+                            {% if adventure.email %}
+                            <p><span class="translate" data-en="Email: " data-sw="Barua pepe: ">Email: </span> <b>{{ adventure.email | default:"" }}</b></p>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        {% if adventure.organizer or adventure.email %}
+                        <div class="line"></div>
+                        {% else %}
+                        {% endif %}
+                    </div>
+
+                    
+                    <div class="amount-count" style="margin-top: 20px;">
+                        <div class="amount-count-div1 booksaveprof" >
+                            <div class="booksave">
+                                <a href="{% url 'adventurepayment' adventure.id %}"><button class="bookbtn" title="book" >
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i> <p class="translate" data-en="Buy Tickets" data-sw="Nunua Tiketi">Buy Tickets</p>
+                                </button></a>
+                                <form action="{% url 'savebookingpost' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="post_id" value="{{ adventure.unique_id }}">
+                                    <button class="booksavebtn" type="submit" title="save" >
+                                        <i class="fa-solid fa-bookmark"></i> <p class="translate" data-en="Save" data-sw="Tunza">Save</p>
+                                    </button></a>
+                                </form>
+                            </div>
+                            {% if postprofile %}
+                            <div class="bookprof">
+                                <a href="{% url 'host' postprofile.id %}" ><p><span class="translate" data-en="by: " data-sw="">by: </span><b>{{ postprofile.company_name | default:"" | truncatechars:17 }}</b></p></a>
+                                {% if postprofile.is_verified %}
+                                    <div class="bookprofverified">
+                                        <img src="{% static 'icons/icons8-verified-64.png' %}" alt="">
+                                    </div>
+                                {% else %}
+                                {% endif %}
+                                {% if postprofile.profileimage %}
+                                    <div class="bookprofimg">
+                                        <a href="{% url 'host' postprofile.id %}" ><img src="{{ postprofile.profileimage.url }}" alt=""></a>
+                                    </div>
+                                {% else %}
+                                {% endif %}
+                            </div>
+                            {% else %} {% endif %}
+                        </div>
+                    </div>
+
+
+                </div> 
+            </div>
+            {% if adventure.description %}
+            <div class="descriptiondiv">
+                <p class="desc-head" style="color: green;"><b class="translate" data-en="Description" data-sw="Maelezo">Description</b></p>
+                <div class="descriptiondetails">
+                    <p>{{ adventure.description | safe | default:"" }}</p>
+                </div>
+            </div>
+        {% else %}
+        {% endif %}
+            
+
+        <button class="bookingqstn" title="Ask Us" onclick="showQstnForm()">
+            <img src="{% static 'icons/icons8-ask-96.png' %}" alt="">
+        </button>
+
+        <div class="questionformcont">
+            <div class="formcontainer"> 
+                <div class="modal">
+                    <div class="modal__header">
+                        <span class="modal__title" >
+                            <div class="asqiconimg"><img src="{% static 'icons/icons8-ask-100.png' %}" alt=""></div>
+                            <span class="translate" data-en="Ask Us About:" data-sw="Tuulize Kuhusu">Ask Us About: </span> 
+                            <span style="color: green;"> {{ adventure.title | default:"" | truncatechars:20 }}</span>
+                        </span>
+                        <button class="button button--icon" onclick="hideQstnForm()">&times;</button>
+                    </div>
+                    <form action="{% url 'arenobookingquestion' adventure.id %}" method="POST" onsubmit="return submitForm()">
+                        {% csrf_token %}
+                        <div class="modal__body">
+                            <input type="hidden" name="post" value="{{ adventure.title | default:"" }}">
+                            <input type="hidden" name="host" value="{{ adventure.user.email }}">
+                            <input type="hidden" name="post_id" value="{{ adventure.id }}">
+                            <input type="hidden" name="post_category" value="Adventure">
+                            <div class="input">
+                                <label class="input__label translate" data-en="Full Name*" data-sw="Jina Kamili*">Full Name*</label>
+                                <input class="input__field" type="text" name="fullname" value="{{ userprofile.fullname | default:"" }}" required> 
+                            </div>
+                            <div class="input">
+                                <label class="input__label translate" name="phonenumber" data-en="Phone Number*" data-sw="Namba ya simu*">Phone Number*</label>
+                                <input class="input__field" type="text" name="phonenumber" placeholder="255***"  maxlength="12" minlength="10" value="{{ userprofile.phonenumber | default:"" }}" required> 
+                            </div>
+                            <div class="input">
+                                <label class="input__label translate" name="email" data-en="Email*" data-sw="Barua Pepe*">Email*</label>
+                                <input class="input__field" type="email" name="email" placeholder="@email.com" value="{{ userprofile.email | default:"" }}"  required> 
+                            </div>
+                            <div class="input">
+                                <label class="input__label translate" name="question" data-en="Question*" data-sw="Swali*">Question*</label>
+                                <textarea name="question" id="" cols="30" rows="4" maxlength="500" placeholder="..." required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal__footer">
+                            <button class="button button--primary" type="submit"><span class="translate" data-en="Submit" data-sw="TTuma">Submit</span></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <div class="info-card"> 
+            <div class="card"> 
+                <div class="header"> 
+                    <div class="image">
+                        <img src="{% static 'icons/icons8-success-500.png' %}" alt="">
+                    </div> 
+                    <div class="content">
+                        <span class="title translate"  data-en="Submitted Successfully!" data-sw="Umefanikiwa kutuma!">Submitted Successfully!</span> 
+                        <p class="message translate" data-en="Successfully Submitted, You will be notified soon." data-sw="Imewasilishwa, Utapata Taarifa Hivi Karibuni.">
+                        {{ message }}
+                        </p> 
+                    </div> 
+                        <div class="actions">
+                        <a href=""><button type="button" class="history"><span class="translate" data-en="Proceed" data-sw="Endelea">Proceed</span></button></a>
+                        </div> 
+                    </div> 
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'info' %}
+            <div class="info-card"> 
+                <div class="card"> 
+                    <div class="header"> 
+                      <div class="image">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#000000" d="M20 7L9.00004 18L3.99994 13"></path> </g></svg>
+                       </div> 
+                        <div class="content">
+                           <span class="title translate"  data-en="successful!" data-sw="Umefanikiwa!">successful!</span> 
+                           <p class="message translate" data-en="Post successfully added to favourites." data-sw="Umefanikiwa kuongeza kwenye hapisho pendwa.">
+                            {{ message }}
+                           </p> 
+                        </div> 
+                           <div class="actions">
+                            <a href=""><button type="button" class="history"><span class="translate" data-en="Proceed" data-sw="Endelea">Proceed</span></button></a>
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'warning' %}
+        <div class="info-card"> 
+            <div class="card"> 
+                <div class="header"> 
+                    <div class="image">
+                        <img src="{% static 'icons/icons8-error-100.png' %}" alt="">
+                    </div> 
+                    <div class="content">
+                        <span class="title translate"  data-en="Submit Failed!" data-sw="Imeshindikana kutuma!">Submit Failed!</span> 
+                        <p class="message translate" data-en="Write your phone numbers correctly, eg: 255***" data-sw="Andika namba za simu kwa usahihi! mfano: 255***.">
+                        {{ message }}
+                        </p> 
+                    </div> 
+                        <div class="actions">
+                        <a href=""><button type="button" class="history" style="background-color: red;"><span class="translate" data-en="Try Again" data-sw="Jaribu tena">Try Again</span></button></a>
+                        </div> 
+                    </div> 
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+
+            <!-- submit loader-->
+        <div id="loader">
+            <svg class="pl"  width="240" height="240" viewBox="0 0 240 240">
+                <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+                <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+                <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+                <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+            </svg>
+            <span><b class="translate" data-en="Submitting." data-sw="Unatuma.">Submitting.</b> <br> <span><p class="translate" data-en="Please wait..." data-sw="Tafadhari subiri..">Please wait...</p></span></span>
+        </div>
+
+        <!--loader-->
+        <div class="loadingdiv" id="preloaderbg">
+            <svg class="pl"  width="240" height="240" viewBox="0 0 240 240">
+              <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+          </svg>
+        </div>
+
+
+
+
+
+
+        
+        
+        </main>
+        
+        
+           
+        
+
+
+        
+
+
+
+
+
+
+
+
+
+
+    </section>
+
+   
+    <script src="{% static 'js/loader.js' %}" ></script>
+    <script src="{% static 'js/shoppingpage.js' %}" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="{% static 'js/bookingpost.js' %}" ></script>
+    <script src="{% static 'js/language.js' %}" ></script>
+    <script>
+        
+    </script>
+    
+    
+    
+</body>
+</html>

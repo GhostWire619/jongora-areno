@@ -1,0 +1,287 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="translate" data-en="Areno BNB - Hosts" data-sw="Waratibu">Areno BNB - Hosts</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopping2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/splide.css' %}">
+    <link rel="stylesheet" href="{% static 'css/booking.css' %}">
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stores.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <nav>
+            <div class="navbar">
+            <div class="logo">
+                <a href="#"><h4 class="translate" data-en="Areno BNB - Hosts" data-sw="Waratibu">Areno BNB - Hosts</h4></a>
+            </div>
+            <div class="right-nav">
+                <a href="{% url 'booking' %}"><h4 class="translate" data-en="Booking" data-sw="Booking">Booking</h4></a>
+                <a href="{% url 'arenobnb' %}"><h4>Areno BNB</h4></a>
+                <a href="{% url 'arenobnbcategories' %}"><h4 class="translate active" data-en="Categories" data-sw="Kategoria">Categories</h4></a>
+                <a href="{% url 'allarenobnb' %}"><h4 class="translate" data-en="All Posts" data-sw="Zote">All Posts</h4></a>
+                <a href="{% url 'arenobnbhosts' %}"><h4 class="translate" data-en="Hosts" data-sw="Waratibu">Hosts</h4></a>
+                <a href="{% url 'bookingfavourites' %}"><h4 class="translate" data-en="Favourites" data-sw="Pendwa">Favourites</h4></a>
+                <a href="{% url 'contactareno' %}"><h4 class="translate" data-en="Contact Us" data-sw="Wasiliana Nasi">Contact Us</h4></a>
+                
+                {% if user.is_authenticated %}
+                {% else %}
+                <a href="{% url 'signup' %}"><h4 class="translate signup-top-button" data-en="Sign In" data-sw="Ingia">Sign In</h4></a>
+                {% endif %}
+            </div>
+            </div>
+            
+        </nav>
+
+        <main>
+        <!--search bar-->
+        
+        <form action="" id="top">
+            <div class="mobile-nav-head">
+                <h4 class="translate" data-en="Hosts" data-sw="Waratibu">Hosts</h4>
+            </div>
+            <div class="searchdiv">
+                <div class="nav-menu">
+                    <i class="fa-solid fa-bars" ></i>
+                </div>
+                    <div class="search-bar">
+                        <button class="search-icon" type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <input type="search" class="search-input" name="query" placeholder="Search..">
+                    </div>
+                    <div class="cart-notificationsdiv">
+                         <a href="{% url 'bookingfavourites' %}"><div class="homebutton" style="display: flex; flex-direction: column; justify-content: center;">
+                            <i class="fa-regular fa-bookmark"></i>
+                        </div></a>
+                    </div>
+            </div>
+        </form>
+        <!--menu-->
+        <div class="menu ">
+            <div class="menudiv home-menu">
+                <div>
+                    <button class="minimize-menu">
+                        <i class="fa-solid fa-x" ></i>
+                    </button>
+                    <div class="main-menu-content">
+                        <a href="{% url 'index' %}"><div class="menu-logo">
+                            <img src="{% static 'icons/Frame 304 (2).png' %}" alt="">
+                        </div></a>
+                        <a href="{% url 'shopping' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-cart-arrow-down"></i>
+                            </button>
+                            <button><p class="translate" data-en="Shopping" data-sw="Ununuzi">Shopping</p></button>
+                        </div></a>
+                        <a href="{% url 'restaurants' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-utensils"></i>
+                            </button>
+                            <button><p class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</p></button>
+                        </div></a>
+                        <a href="{% url 'booking' %}"><div class="menu-title  title-selected">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-book-bookmark"></i>
+                            </button>
+                            <button><p class="translate" data-en="Booking" data-sw="Booking">Booking</p></button>
+                        </div></a>
+                        <a href=""><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </button>
+                            <button><p class="translate" data-en="Logistics" data-sw="Usafirishaji">Logistics</p></button>
+                        </div></a>
+                        <a href="{% url 'rate' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-star"></i>
+                            </button>
+                            <button><p class="translate" data-en="Rate Us" data-sw="Kiwango cha sisi">Rate Us</p></button>
+                        </div></a>
+                        <a href="{% url 'contactareno' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </button>
+                            <button><p class="translate" data-en="Contact Areno" data-sw="Wasiliana na Areno">Contact Areno</p></button>
+                        </div></a>
+                       
+                    </div>
+                    
+                    <div class="menu-about-areno">
+                        <a href="{% url 'aboutus' %}"><button ><p class="translate" data-en="About Us" data-sw="Kutuhusu">About Us</p></button></a>
+                        <a href="{% url 'privacypolicy' %}"><button><p class="translate" data-en="Privacy Policy" data-sw="Sera za faragha">Privacy Policy</p></button></a>
+                        <a href="{% url 'refundpolicies' %}"><button><p class="translate" data-en="Refund Policy" data-sw="Sera za Marejesho">Refund Policy</p></button></a>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}"><button><p><b class="translate signup-menu-button" data-en="Log Out" data-sw="Ondoka">Log Out</b></p></button></a>
+                        {% else %}
+                        <a href="{% url 'signup' %}"><button><p><b class="translate signup-menu-button" data-en="Sign In" data-sw="Ingia">Sign In</b></p></button></a>
+                        {% endif %}
+                    </div>
+                    <div class="languagediv">
+                        <p ><b class="translate" data-en="Language" data-sw="Lugha">Language</b></p>
+                        <button class="eng" id="englishBtn">Eng</button>
+                        <button class="swahili" id="swahiliBtn">Swahili</button>
+                    </div>
+                </div>
+                <div class="callus">
+                    <a href="tel:{{ arenodetails.phonenumber_1 | default:"" }}"><div class="call">
+                        <i class="fa-solid fa-phone" style="color: white; font-size: 30px;"></i>
+                    </div></a>
+                </div>
+                <div class="below-menu">
+                    <div class="menu-trademark">
+                        <p>© 2023. Areno Company Limited. app version 1.0.0</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="darkside"></div>
+        </div>
+
+        
+        <!--hosts-->
+        <div class="storesdiv" style="margin-top: 30px;">
+            <div class="stores">
+
+                {% for host in hosts %} 
+                <div class="store">
+                    <div class="store-profileimage"> 
+                        {% if host.profileimage %}
+                        <a href="{% url 'host' host.id %}"><img src="{{ host.profileimage.url }}" alt="" loading="lazy"></a>
+                        {% else %}
+                        <a href="{% url 'host' host.id %}"><img src="{% static 'icons/icons8-male-user-100.png' %}" alt=""></a>
+                        {% endif %}
+                    </div>
+                    <a href="{% url 'host' host.id %}"><div class="store-details">
+                        <div class="store-verified">
+                            <h4>{{ host.company_name | default:""}}</h4>
+                            {% if host.is_verified %}
+                            <div class="store-verified-img">
+                                <img src="{% static 'icons/icons8-verified-64.png' %}" alt=""> 
+                            </div>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                            <p class="restloc-restpage">{{ host.head_office_location | default:""}}</p>
+                            <p><b>About: </b>{{ host.bio | safe | truncatechars:70 | default:""}} </p>
+                    </div></a>
+                </div>
+                {% empty %}
+                <div class="emptyprof">
+                    <div class="emptyprof-img">
+                        <img src="{% static 'icons/empty-booking.png' %}" alt="">
+                    </div>
+                    <p><b class="translate" data-en="No Hosts Found" data-sw="Hakuna waratibu">No Hosts Found</b></p>
+                </div>
+                {% endfor %}
+
+              
+            </div>
+        </div>
+        {% if hosts %}
+        <div class="loadmorediv">
+            <button class="loadmore" onclick="loadMoreItems()"><span class="translate" data-en="Load more" data-sw="Ona Zaidi">Load more</span></button>
+        </div>
+        {% else %}
+        {% endif %}
+         
+        
+
+        </main>
+        
+        
+         <!--new mobile below navigations-->
+         <div class="mobilenavigation">
+            <div class="navigationsbuttons">
+                <div class="rectanglenavbar">
+                    <a href="{% url 'allarenobnb' %}"><div class="mobile-nav-div">
+                        <button class="mobile-nav-icon">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </button>
+                        <p class="translate" data-en="All Posts" data-sw="Zote">All Posts</p>
+                    </div></a>
+                    <a href="{% url 'arenobnbhosts' %}"><div class="mobile-nav-div">
+                        <button class="mobile-nav-icon selectedicon">
+                            <i class="fa-solid fa-list" ></i>
+                        </button>
+                        <p class="translate" data-en="Hosts" data-sw="Waratibu">Hosts</p>
+                    </div></a>
+                </div>
+                <div class="rectanglenavbar3">
+                    <div class="mobile-nav-circle">
+                        <a href="{% url 'booking' %}"><button class="mobile-nav-icon">
+                            <img src="{% static 'icons/Home_fill_1.png' %}" alt="">
+                        </button></a>
+                    </div>
+                </div>
+                <div class="rectanglenavbar2">
+                    <a href="{% url 'arenobnbcategories' %}"><div class="mobile-nav-div">
+                        <button class="mobile-nav-icon ">
+                            <img src="{% static 'icons/Widget.png' %}" alt="">
+                        </button>
+                        <p class="translate" data-en="Categories" data-sw="Kategoria">Categories</p>
+                    </div></a>
+                    <a href="{% url 'arenobnb' %}"><div class="mobile-nav-div">
+                        <button class="mobile-nav-icon">
+                            <i class="fa-solid fa-book-bookmark"></i>
+                        </button>
+                        <p >Areno BNB</p>
+                    </div></a>
+                </div>
+            </div>
+            <div class="navbarpng">
+                <img src="{% static 'icons/mobilenav.png' %}" alt="">
+            </div>
+        </div>
+
+         <!--loader-->
+         <div class="loadingdiv" id="preloaderbg">
+            <svg class="pl"  width="240" height="240" viewBox="0 0 240 240">
+              <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+          </svg>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    </section>
+
+   
+    <script src="{% static 'js/loader.js' %}"></script>
+    <script src="{% static 'js/shoppingpage.js' %}" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="{% static 'js/shoppingspliders.js' %}" ></script>
+    <script src="{% static 'js/booking.js' %}" ></script>
+    <script src="{% static 'js/language.js' %}" ></script>
+    <script>
+      
+    </script>
+    
+    
+</body>
+</html>

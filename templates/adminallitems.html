@@ -1,0 +1,242 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Areno - Admin All Posts</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopping2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <main>
+            <div class="navtop">
+                <h2>Areno Admin</h2>
+                <div class="navtop-right">
+                    <a href="{% url 'admin' %}"><p><b>View App</b></p></a>
+                    <a href="{% url 'adminproductposts' %}"><button class="orangered">Product Posts</button></a>
+                    <a href="{% url 'adminfoodposts' %}"><button class="blue">Food Posts</button></a>
+                </div>
+            </div>
+            
+            <section>
+                <div class="admincenter">
+                    <div class="centertop">
+                        <div class="centertop-left">
+                            <h2>All <span style="color: blue;">{{ total | default:"0"}}</span> Posts</h2>
+                        </div>
+                        <div class="centertop-right">
+                            <div class="allitemsfilterbuttons">
+                                <a href="#productposts"><button type="button" title="Go to Products">Products</button></a>
+                                <a href="#foodposts"><button type="button" title="Go to Foods">Food Items</button></a>
+                            </div>
+                            <form action="">
+                                <input type="search" name="productquery" placeholder="Search Products Here.." title="Search Product">
+                                <button type="submit" title="Search Product"><i class="fa-solid fa-magnifying-glass" style="margin-right: 15px;"></i></button>
+                            </form>
+                            <form action="">
+                                <input type="search" name="foodquery" placeholder="Search Food Items Here.." title="Search Food">
+                                <button type="submit" title="Search Food"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="centerbottom">
+                        
+                    <div class="centerbottom">
+                        <div class="centerleft">
+                            <div class="buttondiv">
+                                {% if newuserforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-users"></i><a href="{% url 'admin' %}"><button><b>All Users</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newshopforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-cart-shopping" ></i><a href="{% url 'adminshopping' %}"><button><b>Online Shops</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newrestaurantforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-utensils"></i><a href="{% url 'adminrestaurants' %}"><button><b>Restaurants</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newhostforms %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-user"></i><a href="{% url 'adminhosts' %}"><button><b>Hosts</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newuserproducts or newuserfoods %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-box-open"></i><a href="{% url 'adminallitems' %}"><button class="buttondivselected"><b>Item Posts</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newuserbookingposts %}
+                                <span></span> 
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-list"></i><a href="{% url 'adminallbooking' %}"><button><b>Booking Posts</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newbnbrequests or newcarrequests %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-list"></i><a href="{% url 'adminbookingrequests' %}"><button><b>Booking Requests</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newquestions %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-list"></i><a href="{% url 'adminbookingquestions' %}"><button><b>Booking Questions</b></button></a>
+                            </div>
+                            <div class="buttondiv">
+                                {% if newusermessages %}
+                                <span></span>
+                                {% else %}{% endif %}
+                                <i class="fa-solid fa-message"></i><a href="{% url 'adminmessagepage' %}"><button><b>Messages</b></button></a>
+                            </div>
+                        </div>
+                        <div class="centerright">
+                            <div class="productsmain">
+
+                                <div class="allproductsdiv">
+                                    <!--products list-->
+                                    {% if approveditems %}
+                                    <div class="titlefilterdiv">
+                                        <h3><i class="fa-solid fa-circle-check" style="color: blue; margin-right: 10px;"></i> Product Posts</h3>
+                                        <hr>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                    <div class="productsdivlist" id="productposts">
+                                        {% for approveditem in approveditems reversed %}
+                                        <div class="product adminproduct">
+                                            <div class="productimage">
+                                                {% if approveditem.productimage %}
+                                                <img src="{{ approveditem.productimage.url | default:"" }}" alt="" loading="lazy">
+                                                {% else %}
+                                                {% endif %}
+                                            </div>
+                                            <div class="details">
+                                                <h4>{{ approveditem.productname }}</h4>
+                                                <span><h4>{{ approveditem.productcurrency | default:"Tsh" }} {{ approveditem.productprice | default:"-" }}</h4></span>
+                                                {% if approveditem.user.businesstype == 'Shopping' %}
+                                                <p><b style="margin-left: 10px; color: blue;">Product</b></p>
+                                                {% elif approveditem.user.businesstype == 'Restaurant' %}
+                                                <p><b style="margin-left: 10px; color: blue;">Food Item</b></p>
+                                                {% else %}
+                                                {% endif %}
+                                            </div>
+                                        
+                                            <div class="viewproductdetails adminproductdetails">
+                                                <form action="{% url 'itemaction' approveditem.id %}" method='POST' class="actionform">
+                                                    {% csrf_token %}
+                                                <a href="{% url 'productpage' approveditem.id %}"><button type="button" class="actionviewproduct"><b class="translate" data-en="View Product" data-sw="Ona Bidhaa">View</b></button></a>
+                                                <select name="action" id="">
+                                                    <option selected disabled>Action</option>
+                                                    <option value="Approved" style="color: green;" selected>Approved</option>
+                                                    <option value="Declined" style="color: red;">Decline</option>
+                                                </select>
+                                                <button class="actionsubmit" type="submit">save</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <!--food list-->
+                                    {% if approvedfoods %}
+                                    <div class="titlefilterdiv" style="padding-top:10px;" id="foodposts">
+                                        <h3><i class="fa-solid fa-circle-check" style="color: blue; margin-right: 10px;"></i> Food Posts</h3>
+                                        <hr>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
+                                    <div class="foodsdivlist">
+                                        {% for approvedfood in approvedfoods reversed %}
+                                        <div class="product adminproduct">
+                                            <div class="productimage">
+                                                {% if approvedfood.productimage %}
+                                                <img src="{{ approvedfood.productimage.url | default:"" }}" alt="" loading="lazy">
+                                                {% else %}
+                                                {% endif %}
+                                            </div>
+                                            <div class="details">
+                                                <h4>{{ approvedfood.productname }}</h4>
+                                                <span><h4>{{ approvedfood.productcurrency | default:"Tsh" }} {{ approvedfood.productprice | default:"-" }}</h4></span>
+                                                {% if approvedfood.user.businesstype == 'Shopping' %}
+                                                <p><b style="margin-left: 10px; color: blue;">Product</b></p>
+                                                {% elif approvedfood.user.businesstype == 'Restaurant' %}
+                                                <p><b style="margin-left: 10px; color: blue;">Food Item</b></p>
+                                                {% else %}
+                                                {% endif %}
+                                            </div>
+                                        
+                                            <div class="viewproductdetails adminproductdetails">
+                                                <form action="{% url 'itemaction' approvedfood.id %}" method='POST' class="actionform">
+                                                    {% csrf_token %}
+                                                <a href="{% url 'foodpage' approvedfood.id %}"><button type="button" class="actionviewproduct"><b class="translate" data-en="View Product" data-sw="Ona Bidhaa">View</b></button></a>
+                                                <select name="action" id="">
+                                                    <option selected disabled>Action</option>
+                                                    <option value="Approved" style="color: green;" selected>Approved</option>
+                                                    <option value="Declined" style="color: red;">Decline</option>
+                                                </select>
+                                                <button class="actionsubmit" type="submit">save</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+                        </div>
+                    </div>
+                   
+                </div>
+            </section>
+       
+        
+
+        
+        
+
+
+       
+        </main>
+        
+        
+        
+
+
+
+
+
+
+
+
+
+
+        
+
+    </section>
+    
+</body>
+</html>

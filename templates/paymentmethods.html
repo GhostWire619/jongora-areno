@@ -1,0 +1,780 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Areno - {{ pending.productname | default:"" }}</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopping2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/splide.css' %}">
+    <link rel="stylesheet" href="{% static 'css/darkmode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+    <link rel="stylesheet" href="{% static 'css/productpage.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <nav>
+            <div class="navbar">
+            <div class="nav-menu product-menu" >
+                <i class="fa-solid fa-bars" style="color: white; font-size: 25px;"></i>
+            </div>
+            <div class="right-nav">
+                <h4 onclick="goBack()" style="cursor: pointer;" class="translate" data-en="Back" data-sw="Nyuma">Back</h4>
+                <a href="{% url 'index' %}"><h4 class="translate" data-en="Home" data-sw="Nyumbani">Home</h4></a>
+                <a href="{% url 'shopping' %}"><h4 class="translate active" data-en="Shopping" data-sw="Manunuzi">Shopping</h4></a>
+                <a href="{% url 'restaurants' %}"><h4 class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</h4></a>
+                <a href="{% url 'booking' %}"><h4 class="translate" data-en="Booking" data-sw="Booking">Booking</h4></a>
+                <a href=""><h4 class="translate" data-en="Logistics" data-sw="Usafirishaji">Logistics</h4></a>
+                <a href="{% url 'contactareno' %}"><h4 class="translate" data-en="Contact Us" data-sw="Wasiliana Nasi">Contact Us</h4></a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'cart' %}"><div class="cart">
+                    {% if cartcount > 0 %}
+                    <div class="cart-circle">{{ cartcount }}</div>
+                    {% endif %}
+                    <i class="fa-solid fa-cart-arrow-down"></i>
+                </div></a>
+                <div class="notifications mobile-notification">
+                    {% if user.is_authenticated %}
+                        <div class="cart-circle">{{ notificationcount | default:"0"}}</div>
+                        {% else %}
+                        <div class="cart-circle">1</div>
+                        {% endif %}
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+                {% if profile %}
+                {% if profile.businesstype == 'Shopping' %}
+                <a href="{% url 'shopprofile' %}"><button class="menu-profile-img" style="margin-right: 20px;">
+                    {% if profile.profileimage %}
+                    <img src="{{ profile.profileimage.url }}" alt="">
+                    {% else %}
+                    <img src="{% static 'icons/icons8-male-user-100.png' %}" alt="">
+                    {% endif %}
+                </button></a>
+                {% else %}
+                <a href="{% url 'restaurantprofile' %}"><button class="menu-profile-img" style="margin-right: 20px;">
+                    {% if profile.profileimage %}
+                    <img src="{{ profile.profileimage.url }}" alt="">
+                    {% else %}
+                    <img src="{% static 'icons/icons8-male-user-100.png' %}" alt="">
+                    {% endif %}
+                </button></a>
+                {% endif %}
+                {% else %}
+                {% endif %}
+                {% else %}
+                <a href="{% url 'signup' %}"><h4 class="translate signup-top-button" data-en="Sign In" data-sw="Ingia">Sign In</h4></a>
+                {% endif %}
+            </div>
+            </div>
+        </nav>
+
+        <main>
+        <!--search bar-->
+        <div class="productpagehead">
+            <div class="product-detail-head">
+              
+                <div class="return" onclick="goBack()">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
+                <div class="product-nav-head">
+                    <h4 class="translate" data-en="Check Out" data-sw="Malipo">Check Out</h4>
+                </div>
+            </div>
+            <div class="productcart-notification">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'cart' %}"><div class="mobile-cart">
+                        {% if cartcount > 0 %}
+                        <div class="cart-circle">{{ cartcount }}</div>
+                        {% endif %}
+                        <i class="fa-solid fa-cart-arrow-down"></i>
+                    </div></a>
+                    {% else %}
+                    <a href="{% url 'cart' %}"><div class="mobile-cart">
+                        <i class="fa-solid fa-cart-arrow-down"></i>
+                    </div></a>
+                    {% endif %}
+                <div class="mobile-notification">
+                    {% if user.is_authenticated %}
+                        <div class="cart-circle">{{ notificationcount | default:"0"}}</div>
+                        {% else %}
+                        <div class="cart-circle">1</div>
+                        {% endif %}
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+            </div>
+            
+            
+        </div>
+        <div class="menu ">
+            <div class="menudiv home-menu">
+                <div>
+                    <button class="minimize-menu">
+                        <i class="fa-solid fa-x" ></i>
+                    </button>
+                    <div class="main-menu-content">
+                        <a href="{% url 'index' %}"><div class="menu-logo">
+                            <img src="{% static 'icons/Frame 304 (2).png' %}" alt="">
+                        </div></a>
+                        <a href="{% url 'shopping' %}"><div class="menu-title ">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-cart-arrow-down"></i>
+                            </button>
+                            <button><p class="translate" data-en="Shopping" data-sw="Ununuzi">Shopping</p></button>
+                        </div></a>
+                        <a href="{% url 'restaurants' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-utensils"></i>
+                            </button>
+                            <button><p class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</p></button>
+                        </div></a>
+                        <a href="{% url 'booking' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-book-bookmark"></i>
+                            </button>
+                            <button><p class="translate" data-en="Booking" data-sw="Booking">Booking</p></button>
+                        </div></a>
+                        <a href=""><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </button>
+                            <button><p class="translate" data-en="Logistics" data-sw="Usafirishaji">Logistics</p></button>
+                        </div></a>
+                        <a href="{% url 'rate' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-star"></i>
+                            </button>
+                            <button><p class="translate" data-en="Rate Us" data-sw="Kiwango cha sisi">Rate Us</p></button>
+                        </div></a>
+                        <a href="{% url 'contactareno' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </button>
+                            <button><p class="translate" data-en="Contact Areno" data-sw="Wasiliana na Areno">Contact Areno</p></button>
+                        </div></a>
+                        {% if user.is_authenticated %}
+                        {% if profile %}
+                        {% if profile.businesstype == 'Shopping' %}
+                        <a href="{% url 'shopprofile' %}"><div class="menu-title">
+                            <button class="menu-title-icon menu-profile-img">
+                                {% if profile.profileimage %}
+                                <img src="{{ profile.profileimage.url }}" alt="">
+                                {% else %}
+                                <img src="{% static 'icons/icons8-male-user-100.png' %}" alt="">
+                                {% endif %}
+                            </button>
+                            <button><p class="translate" data-en="Profile" data-sw="Wasifu">Profile</p></button>
+                        </div></a>
+                        {% else %}
+                        <a href="{% url 'restaurantprofile' %}"><div class="menu-title">
+                            <button class="menu-title-icon menu-profile-img">
+                                {% if profile.profileimage %}
+                                <img src="{{ profile.profileimage.url }}" alt="">
+                                {% else %}
+                                <img src="{% static 'icons/icons8-male-user-100.png' %}" alt="">
+                                {% endif %}
+                            </button>
+                            <button><p class="translate" data-en="Profile" data-sw="Wasifu">Profile</p></button>
+                        </div></a>
+                        {% endif %}
+                        {% else %}
+                        {% endif %}
+                        {% else %}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="menu-about-areno">
+                        <a href="aboutus.html"><button ><p class="translate" data-en="About Us" data-sw="Kutuhusu">About Us</p></button></a>
+                        <a href="privacypolicy.html"><button><p class="translate" data-en="Privacy Policy" data-sw="Sera za faragha">Privacy Policy</p></button></a>
+                        <a href="refundpolicies.html"><button><p class="translate" data-en="Refund Policy" data-sw="Sera za Marejesho">Refund Policy</p></button></a>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}"><button><p><b class="translate signup-menu-button" data-en="Log Out" data-sw="Ondoka">Log Out</b></p></button></a>
+                        {% else %}
+                        <a href="{% url 'signup' %}"><button><p><b class="translate signup-menu-button" data-en="Sign In" data-sw="Ingia">Sign In</b></p></button></a>
+                        {% endif %}
+                    </div>
+                    <div class="languagediv">
+                        <p ><b class="translate" data-en="Language" data-sw="Lugha">Language</b></p>
+                        <button class="eng" id="englishBtn">Eng</button>
+                        <button class="swahili" id="swahiliBtn">Swahili</button>
+                    </div>
+                </div>
+                <div class="callus">
+                    <a href="tel:{{ arenodetails.phonenumber_1 | default:"" }}"><div class="call">
+                        <i class="fa-solid fa-phone" style="color: white; font-size: 30px;"></i>
+                    </div></a>
+                </div>
+                <div class="below-menu">
+                    <div class="menu-trademark">
+                        <p>© 2023. Areno Company Limited. app version 1.0.0</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="darkside"></div>
+        </div>
+        <!--Notification div-->
+        <div class="notificationdiv">
+            <div class="notificationdarkside"></div>
+            <div class="notificationmenu">
+                <div class="top-noty">
+                    <button class="noty-close">
+                        <i class="fa-solid fa-arrow-left" style="font-size: 20px;"></i>
+                    </button>
+                    <h2 class="translate" data-en="Notifications" data-sw="Taarifa">Notifications</h2>
+                </div>
+                <div class="notificationlist">
+                    <!--welcome notification customer-->
+                    {% if user.is_authenticated %}
+                        {% if new_signups %}
+                        <div class="card">
+                            <div class="card-wrapper">
+                            <div class="card-icon">
+                                <div class="icon-cart-box3">
+                                    <img src="{% static 'icons\icons8-best-seller-96.png' %}" alt="">
+                                </div>
+                            </div>
+                        
+                            <div class="card-content">
+                                <div class="card-title-wrapper">
+                                <span class="card-title translate"  data-en="Welcome to ARENO!" data-sw="Karibu ARENO!">{{ new_signups.title | default:"" }}</span><span class="date-noty">{{ new_signups.date | default:"" }}</span>
+                                <form action="{% url 'delete_notification' notification_type='New Register' %}">
+                                    <button class="card-action">
+                                        <i class="fa-solid fa-x" ></i>
+                                    </button>
+                                </form>
+                                </div>
+                                <div class="product-name">
+                                    <span class="translate"  data-en="Hi! Joseph, You are Successfully Registered! Get ready to shop with us and explore what our sellers have to offer. ENJOY!" data-sw="Habari! Joseph, Umejisajili kwa Mafanikio! Jiandae kununua nasi na kuchunguza bidhaa zinazotolewa na wauzaji wetu. KARIBU!" >{{ new_signups.content | default:"" }}</span>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        {% endif %}
+                        {% else %}
+                        <div class="card">
+                            <div class="card-wrapper">
+                            <div class="card-icon">
+                                <div class="icon-cart-box3">
+                                    <img src="{% static 'icons\icons8-best-seller-96.png' %}" alt="">
+                                </div>
+                            </div>
+                        
+                            <div class="card-content">
+                                <div class="card-title-wrapper">
+                                <span class="card-title translate"  data-en="Welcome to ARENO!" data-sw="Karibu ARENO!">Welcome to ARENO!</span><span class="date-noty"></span>
+                                </div>
+                                <div class="product-name">
+                                    <span class="translate"  data-en="Hi!, Register Now! Get ready to shop with us and explore what our sellers have to offer. ENJOY!" data-sw="Habari! Jiandikishe sasa! uweze kununua nasi na kuchunguza bidhaa zinazotolewa na wauzaji wetu. KARIBU!" >Hi!, Register Now! Get ready to shop with us and explore what our sellers have to offer. ENJOY!</span>
+                                </div>
+                                <a href="{% url 'signup' %}"><button class="btn-view-cart" type="button"><span  class="translate" data-en="Sign In" data-sw="Jisajili">Sign In</span></button></a>
+                            </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <!--cart add-->
+                    {% if user.is_authenticated %}
+                    {% if cart_adds %}
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box">
+                                <span class="cart-counter-alert">{{ cartcount | default:"0"}}</span>
+                                <i class="fa-solid fa-cart-arrow-down"></i>
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate"  data-en="Added to cart!" data-sw="Imeongezwa bidhaa pendwa!">Added to cart!</span><span class="date-noty">{{ cart_adds.date | default:""}}</span>
+                              <form action="{% url 'delete_notification' notification_type='Cart' %}">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                {{ cart_adds.content | default:""}}
+                            </div>
+                            <div class="product-price">Tsh {{ cart_adds.price | default:"-"}}/=</div>
+                            <a href="{% url 'cart' %}"><button class="btn-view-cart" type="button"><span  class="translate" data-en="View Cart" data-sw="Fungua">View Cart</span></button></a>
+                          </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    <!--pending purchase product-->
+                    {% if user.is_authenticated %}
+                    {% if pending_purchases %}
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box3">
+                                <span class="cart-counter-alert3">{{ pending_counter | default:"0"}}</span>
+                                <img src="{% static 'icons\icons8-info-100.png' %}" alt="">
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate"  data-en="Pending Purchase!" data-sw="Malipo yanayosubiri!" style="color: green;">{{ pending_purchases.title | default:"" }}</span><span class="date-noty">{{ pending_purchases.date | default:"" }}</span>
+                              <form action="{% url 'delete_notification' notification_type='pending_purchase' %}">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                {{ pending_purchases.content | default:"" }}
+                            </div>
+                            <div class="product-price">Tsh {{ pending_purchases.price | default:"" }}/=</div>
+                            <a href="{% url 'pendingpurchase' %}#productitems"><button class="btn-view-cart" type="button"><span  class="translate" data-en="View All" data-sw="Ona Zaidi">View All</span></button></a>
+                          </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    <!--pending purchase food-->
+                    {% if user.is_authenticated %}
+                    {% if pending_food_purchases %}
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box3">
+                                <span class="cart-counter-alert3">{{ pending_food_counter | default:"0"}}</span>
+                                <img src="{% static 'icons\icons8-info-100.png' %}" alt="">
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate"  data-en="Pending Purchase!" data-sw="Malipo yanayosubiri!" style="color: green;">{{ pending_food_purchases.title | default:"" }}</span><span class="date-noty">{{ pending_food_purchases.date | default:"" }}</span>
+                              <form action="{% url 'delete_notification' notification_type='pending_purchase_food' %}">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                {{ pending_food_purchases.content | default:"" }}
+                            </div>
+                            <div class="product-price">Tsh {{ pending_food_purchases.price | default:"" }}/=</div>
+                            <a href="{% url 'pendingpurchase' %}#fooditems"><button class="btn-view-cart" type="button"><span  class="translate" data-en="View All" data-sw="Ona Zaidi">View All</span></button></a>
+                          </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    <!--item post accepted add-->
+                    {% if user.is_authenticated %}
+                    {% if profile %}
+                    {% if profile.businesstype == 'Shopping' %}
+                    {% if approved_products %}
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box2">
+                                <span class="cart-counter-alert2">{{ approved_products_count | default:"0" }}</span>
+                                <i class="fa-solid fa-box-open"></i>
+                            </div> 
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate" data-en="Post Item Accepted!" data-sw="Bidhaa Imekubaliwa!">{{ approved_products.title | default:"" }}</span><span class="date-noty">{{ approved_products.date | default:"" }}</span>
+                              <form action="{% url 'delete_notification' notification_type='approved_product' %}">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                {{ approved_products.content | default:"" }}
+                            </div>
+                            <div class="product-price">Tsh {{ approved_products.price | default:"" }}/=</div>
+                            <a href="{% url 'shopprofile' %}"><button class="btn-view-cart2" type="button"><span  class="translate" data-en="View Profile" data-sw="Fungua Wasifu">View Profile</span></button></a>
+                          </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% if approved_foods %}
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box2">
+                                <span class="cart-counter-alert2">{{ approved_foods_count | default:"0" }}</span>
+                                <i class="fa-solid fa-box-open"></i>
+                            </div> 
+                          </div>
+                      
+                        <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate" data-en="Post Item Accepted!" data-sw="Bidhaa Imekubaliwa!">{{ approved_foods.title | default:"" }}</span><span class="date-noty">{{ approved_foods.date | default:"" }}</span>
+                              <form action="{% url 'delete_notification' notification_type='approved_food' %}">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                {{ approved_foods.content | default:"" }}
+                            </div>
+                            <div class="product-price">Tsh {{ approved_foods.price | default:"" }}/=</div>
+                            <a href="{% url 'restaurantprofile' %}"><button class="btn-view-cart2" type="button"><span  class="translate" data-en="View Profile" data-sw="Fungua Wasifu">View Profile</span></button></a>
+                        </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    <!--item post denied-->
+                    {% if user.is_authenticated %}
+                    {% if profile %}
+                    {% if profile.businesstype == 'Shopping' %}
+                    {% if declined_products %}
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box2">
+                                <!--<span class="cart-counter-alert2">12</span>-->
+                                <i class="fa-solid fa-ban" style="color: red;"></i>
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate" data-en="Post Item Declined!" data-sw="Bidhaa Haijapitishwa!" style="color: red;">{{ declined_products.title | default:"" }}</span><span class="date-noty">{{ declined_products.date | default:"" }}</span>
+                              <form action="{% url 'delete_notification' notification_type='declined_product' %}">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                {{ declined_products.content | default:"" }}
+                            </div>
+                            <div class="product-price">Tsh {{ declined_products.price | default:"" }}/=</div>
+                          </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% if declined_foods %}
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box2">
+                                <!--<span class="cart-counter-alert2">12</span>-->
+                                <i class="fa-solid fa-ban" style="color: red;"></i>
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate" data-en="Post Item Declined!" data-sw="Bidhaa Haijapitishwa!" style="color: red;">{{ declined_foods.title | default:"" }}</span><span class="date-noty">{{ declined_foods.date | default:"" }}</span>
+                              <form action="{% url 'delete_notification' notification_type='declined_food' %}">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                {{ declined_foods.content | default:"" }}
+                            </div>
+                            <div class="product-price">Tsh {{ declined_foods.price | default:"" }}/=</div>
+                          </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    <!--admin seller notification-->
+                    {% if user.is_authenticated %}
+                    {% if profile %}
+                    {% if seller_notifications %}
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box3">
+                                <img src="{% static 'icons\icons8-male-user-100.png' %}" alt="">
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate"  data-en="{{ seller_notifications.title | default:"" }}" data-sw="{{ seller_notifications.title_swahili | default:"" }}">{{ seller_notifications.title | default:"" }}</span><span class="date-noty">{{ seller_notifications.date | default:"" }}</span>
+                              
+                            </div>
+                            <div class="product-name" >
+                                <span class="translate" data-en="{{ seller_notifications.content | safe | default:"" }}" data-sw="{{ seller_notifications.content_swahili | safe | default:"" }}">{{ seller_notifications.content | safe | default:"" }}</span>
+                            </div>
+                            {% if seller_notifications.price %}
+                            <div class="product-price">Tsh {{ seller_notifications.price | default:"" }}/=</div>
+                            {% else %}
+                            {% endif %}
+                            {% if seller_notifications.link %}
+                            <a href="{{ seller_notifications.link | default:"" }}"><button class="btn-view-cart" type="button"><span  class="translate" data-en="View" data-sw="Fungua">View</span></button></a>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    <!--admin all notification-->
+                    {% if user.is_authenticated %}
+                    {% if customer_notifications %}
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box3">
+                                <img src="{% static 'icons\icons8-male-user-100.png' %}" alt="">
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate"  data-en="{{ customer_notifications.title | default:"" }}" data-sw="{{ customer_notifications.title_swahili | default:"" }}">{{ customer_notifications.title | default:"" }}</span><span class="date-noty">{{ customer_notifications.date | default:"" }}</span>
+                              
+                            </div>
+                            <div class="product-name" >
+                                <span class="translate" data-en="{{ customer_notifications.content | safe | default:"" }}" data-sw="{{ customer_notifications.content_swahili | safe | default:"" }}">{{ customer_notifications.content | safe | default:"" }}</span>
+                            </div>
+                            {% if customer_notifications.price %}
+                            <div class="product-price">Tsh {{ customer_notifications.price | default:"" }}/=</div>
+                            {% else %}
+                            {% endif %}
+                            {% if customer_notifications.link %}
+                            <a href="{{ customer_notifications.link | default:"" }}"><button class="btn-view-cart2" type="button"><span  class="translate" data-en="View" data-sw="Fungua">View</span></button></a>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+        <!--order summary-->
+        <div class="summary-main" style="margin-bottom: 30px;">
+            
+            <div class="order-summary">
+                <h4 class="translate" data-en="Order Summary" data-sw="Muhutasari wa Bidhaa">Order Summary</h4>
+                <div class="order-summary-summary">
+                    <div class="order-row">
+                        <div class="order-row1">
+                            <p><span class="translate" data-en="Product:" data-sw="Bidhaa:">Product:</span></p> 
+                        </div>
+                        <div class="order-row2"> 
+                            <p><b>{{ pending.productname | default:"" }}</b></p>
+                        </div>
+                    </div>
+                    <div class="order-row">
+                        <div class="order-row1">
+                            <p><span class="translate" data-en="Amount/Qty:" data-sw="Kiasi:">Amount/Qty: </span></p>
+                        </div>
+                        <div class="order-row2"> 
+                            <p><b>{{ pending.quantity | default:"1" }}, {{ pending.productcolor | default:"" }} {{ pending.productweight | default:"" }}</b></p>
+                        </div>
+                    </div>
+                    <div class="taxcalculations">
+                        <div class="order-row">
+                            <div class="order-row1">
+                                <p><span class="translate" data-en="Price:" data-sw="Bei:">Price: </span></p>
+                                <p>VAT</p>
+                                <p><span class="translate" data-en="Total Price:" data-sw="Jumla ya Bei:">Total Price:</span></p>
+                            </div>
+                            <div class="order-row2">
+                                <p><b>Tsh <span id="num2">{{ pending.originalprice | default:"" }}</span>/=</b></p>
+                                <p><b>Tsh <span id="result"></span>/=</b></p>
+                                <p><b style="color: orangered;" >Tsh <span id="num1">{{ pending.productprice | default:"" }}</span>/=</b></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4 style="color: green; margin-top: 60px;" class="translate" data-en="Choose payment method" data-sw="Chagua Aina ya Malipo">Choose payment method</h4>
+                <div class="paymentmethods">
+                    <div class="paymentmethod">
+                        <p><b>M-Pesa</b></p>
+                        <div class="paymentmethodlogo">
+                            <img src="{% static 'icons/M-Pesa.JPG' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="paymentmethod">
+                        <p><b>Tigo-Pesa</b></p>
+                        <div class="paymentmethodlogo">
+                            <img src="{% static 'icons/tigo.jpg' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="paymentmethod">
+                        <p><b>Airtel Money</b></p>
+                        <div class="paymentmethodlogo">
+                            <img src="{% static 'icons/Airtellogo.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="paymentmethod">
+                        <p><b>Debit Card</b></p>
+                        <div class="paymentmethodlogo">
+                            <img src="{% static 'icons/debit.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="paymentmethod">
+                        <p><b>Cash</b></p>
+                        <div class="paymentmethodlogo">
+                            <img src="{% static 'icons/cash.png' %}" alt="">
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="agreement" style="margin-top: 20px;">
+                    <p><strong class="translate" data-en="By Checking Out, you accept Areno" data-sw="Kwa Kuendelea, unakubaliana na Areno">By Checking Out, you accept Areno</strong> <a href="{% url 'aboutus' %}"><span><i class="translate" data-en="Terms & conditions" data-sw="Sheria na Masharti">Terms & conditions</i></span></a>
+                </div>
+               
+            
+            </div>
+        </div>
+        
+        
+        
+        
+        
+
+
+
+
+
+
+
+
+       <!-- FOOTER -->
+       <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>ARENO</h4>
+                    <ul>
+                        <li><a href="{% url 'aboutus' %}" class="translate" data-en="About Us" data-sw="Kutuhusu">About us</a></li>
+                        <li><a href="{% url 'aboutus' %}" class="translate" data-en="Our Services" data-sw="Huduma Zetu">Our Services</a></li>
+                        <li><a href="{% url 'privacypolicy' %}" class="translate" data-en="Privacy policy" data-sw="Sera za Faragha">Privacy policy</a></li>
+                        <li><a href="{% url 'refundpolicies' %}" class="translate" data-en="Refund Policies" data-sw="Sera za Marejesho">Refund Policies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="translate" data-en="Useful Links" data-sw="Linki Muhimu">Useful Links</h4>
+                    <ul>
+                        <li><a href="{% url 'shopping' %}" class="translate" data-en="Shopping" data-sw="Manunuzi">Shopping</a></li>
+                        <li><a href="{% url 'restaurants' %}" class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</a></li>
+                        <li><a href="{% url 'booking' %}" class="translate" data-en="Booking" data-sw="Booking">Booking</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}" class="translate" data-en="Log Out" data-sw="Ondoka">Log Out</a></li>
+                        {% else %}
+                        <li><a href="{% url 'signup' %}" class="translate" data-en="Sign In" data-sw="Jisajili">Sign In</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="translate" data-en="SUPPORT" data-sw="MSAADA">SUPPORT</h4>
+                    <ul>
+                        <li><a href="{% url 'contactareno' %}"><span class="translate" data-en="Contact Us" data-sw="Wasiliana nasi">Contact Us</span></a></li>
+                        {% if arenodetails.phonenumber_1 %}
+                        <li><a href="tel: {{ arenodetails.phonenumber_1 | default:"" }}">{{ arenodetails.phonenumber_1 | default:"" }}</a></li>
+                        {% else %}
+                        {% endif %}
+                        {% if arenodetails.phonenumber_2 %}
+                        <li><a href="tel: {{ arenodetails.phonenumber_2 | default:"" }}">{{ arenodetails.phonenumber_2 | default:"" }}</a></li>
+                        {% else %}
+                        {% endif %}
+                        {% if arenodetails.location %}
+                        <li><a href="#"><i class="fa-solid fa-location-dot"></i> {{ arenodetails.location | default:"" }}</a></li>
+                        {% else %}
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="footer-col ">
+                    <h4 class="translate" data-en="Follow us" data-sw="Tufuatilie">Follow us</h4>
+                    <ul style="margin-bottom: 35px;">
+                        {% if arenodetails.Areno_footer_content %}
+                        <li><a href="{% url 'index' %}">{{ arenodetails.Areno_footer_content | default:"" }}</a></li>
+                        {% else %}
+                        {% endif %}
+                    </ul>
+                    <div class="social-links">
+                        {% if arenodetails.facebook_link %}
+                        <a href="{{ arenodetails.facebook_link | default:"" }}"><i class="fab fa-facebook-f"></i></a>
+                        {% else %}
+                        {% endif %}
+                        {% if arenodetails.twitter_x_link %}
+                        <a href="{{ arenodetails.twitter_x_link | default:"" }}"><i class="fab fa-x-twitter"></i></a>
+                        {% else %}
+                        {% endif %}
+                        {% if arenodetails.instagram_link %}
+                        <a href="{{ arenodetails.instagram_link | default:"" }}"><i class="fab fa-instagram"></i></a>
+                        {% else %}
+                        {% endif %}
+                        {% if arenodetails.whatsapp_link %}
+                        <a href="{{ arenodetails.whatsapp_link | default:"" }}"><i class="fab fa-whatsapp"></i></a>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="credits">
+                <div class="line"></div>
+                <p>&copy; Copyright <strong><span>Areno Ecommerce</span></strong>. All Rights Reserved 2024</p>
+            </div>
+        </div>
+    </footer>
+    
+        </main>
+
+
+
+    </section>
+
+   
+    <script src="{% static 'js/shoppingpage.js' %}" ></script>
+    <script src="{% static 'js/language.js' %}" ></script>
+    <script src="{% static 'js/checkout.js' %}" ></script>
+    
+    
+    
+</body>
+</html>

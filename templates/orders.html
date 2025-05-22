@@ -1,0 +1,969 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="translate" data-en="My Orders" data-sw="Maagizo Yangu">My Orders</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopping2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/darkmode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/rate.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <nav>
+            <div class="navbar">
+            <div class="logo">
+                <a href="#"><h4 class="translate" data-en="Orders" data-sw="Maagizo">Orders</h4></a>
+            </div>
+            <div class="right-nav">
+                <a href="{% url 'index' %}"><h4 class="translate active" data-en="Home" data-sw="Nyumbani">Home</h4></a>
+                <a href="{% url 'shopping' %}"><h4 class="translate" data-en="Shopping" data-sw="Ununuzi">Shopping</h4></a>
+                <a href="{% url 'restaurants' %}"><h4 class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</h4></a>
+                <a href=""><h4 class="translate" data-en="Booking" data-sw="Booking">Booking</h4></a>
+                <a href=""><h4 class="translate" data-en="Logistics" data-sw="Usafirishaji">Logistics</h4></a>
+                <a href="{% url 'contactareno' %}"><h4 class="translate" data-en="Contact Us" data-sw="Wasiliana Nasi">Contact Us</h4></a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'cart' %}"><div class="cart">
+                    {% if cartcount > 0 %}
+                    <div class="cart-circle">{{ cartcount }}</div>
+                    {% endif %}
+                    <i class="fa-solid fa-cart-arrow-down"></i>
+                </div></a>
+                <div class="notifications mobile-notification">
+                    {% if user.is_authenticated %}
+                        <div class="cart-circle">{{ notificationcount | default:"0"}}</div>
+                        {% else %}
+                        <div class="cart-circle">1</div>
+                        {% endif %}
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+                {% if profile %}
+                {% if profile.businesstype == 'Shopping' %}
+                <a href="{% url 'shopprofile' %}"><button class="menu-profile-img" style="margin-right: 20px;">
+                    {% if profile.profileimage %}
+                    <img src="{{ profile.profileimage.url }}" alt="">
+                    {% else %}
+                    <img src="{% static 'icons/icons8-male-user-100.png' %}" alt="">
+                    {% endif %}
+                </button></a>
+                {% else %}
+                <a href="{% url 'restaurantprofile' %}"><button class="menu-profile-img" style="margin-right: 20px;">
+                    {% if profile.profileimage %}
+                    <img src="{{ profile.profileimage.url }}" alt="">
+                    {% else %}
+                    <img src="{% static 'icons/icons8-male-user-100.png' %}" alt="">
+                    {% endif %}
+                </button></a>
+                {% endif %}
+                {% else %}
+                {% endif %}
+                {% else %}
+                <a href="{% url 'signup' %}"><h4 class="translate signup-top-button" data-en="Sign In" data-sw="Ingia">Sign In</h4></a>
+                {% endif %}
+            </div>
+            </div>
+        </nav>
+
+        <main>
+        <!--search bar-->
+        
+        <form action="" id="top">
+            <div class="mobile-nav-head">
+                <h4><span class="translate" data-en="Welcome," data-sw="Karibu,">Welcome, </span> David</h4>
+            </div>
+            <div class="searchdiv">
+                <div class="nav-menu">
+                    <i class="fa-solid fa-bars" ></i>
+                </div>
+                    <div class="search-bar">
+                        <button class="search-icon" type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <input type="search" class="search-input" placeholder="Search / Tafuta...">
+                    </div>
+                    <div class="cart-notificationsdiv">
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'cart' %}"><div class="mobile-cart">
+                            {% if cartcount > 0 %}
+                            <div class="cart-circle">{{ cartcount }}</div>
+                            {% endif %}
+                            <i class="fa-solid fa-cart-arrow-down"></i>
+                        </div></a>
+                        {% else %}
+                        <a href="{% url 'cart' %}"><div class="mobile-cart">
+                            <i class="fa-solid fa-cart-arrow-down"></i>
+                        </div></a>
+                        {% endif %}
+                        <div class="notifications mobile-notification">
+                            {% if user.is_authenticated %}
+                            <div class="cart-circle">{{ notificationcount | default:"0"}}</div>
+                            {% else %}
+                            <div class="cart-circle">1</div>
+                            {% endif %}
+                            <i class="fa-regular fa-bell"></i>
+                        </div>
+                    </div>
+            </div>
+        </form>
+       
+        <div class="menu ">
+            <div class="menudiv home-menu">
+                <div>
+                    <button class="minimize-menu">
+                        <i class="fa-solid fa-x" ></i>
+                    </button>
+                    <div class="main-menu-content">
+                        <a href="{% url 'index' %}"><div class="menu-logo">
+                            <img src="{% static 'icons/Frame 304 (2).png' %}" alt="">
+                        </div></a>
+                        <a href="{% url 'shopping' %}"><div class="menu-title ">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-cart-arrow-down"></i>
+                            </button>
+                            <button><p class="translate" data-en="Shopping" data-sw="Ununuzi">Shopping</p></button>
+                        </div></a>
+                        <a href="{% url 'restaurants' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-utensils"></i>
+                            </button>
+                            <button><p class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</p></button>
+                        </div></a>
+                        <a href=""><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-book-bookmark"></i>
+                            </button>
+                            <button><p class="translate" data-en="Booking" data-sw="Booking">Booking</p></button>
+                        </div></a>
+                        <a href=""><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </button>
+                            <button><p class="translate" data-en="Logistics" data-sw="Usafirishaji">Logistics</p></button>
+                        </div></a>
+                        <a href="{% url 'rate' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-star"></i>
+                            </button>
+                            <button><p class="translate" data-en="Rate Us" data-sw="Kiwango cha sisi">Rate Us</p></button>
+                        </div></a>
+                        <a href="{% url 'contactareno' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </button>
+                            <button><p class="translate" data-en="Contact Areno" data-sw="Wasiliana na Areno">Contact Areno</p></button>
+                        </div></a>
+                        {% if user.is_authenticated %}
+                        {% if profile %}
+                        {% if profile.businesstype == 'Shopping' %}
+                        <a href="{% url 'shopprofile' %}"><div class="menu-title">
+                            <button class="menu-title-icon menu-profile-img">
+                                {% if profile.profileimage %}
+                                <img src="{{ profile.profileimage.url }}" alt="">
+                                {% else %}
+                                <img src="{% static 'icons/icons8-male-user-100.png' %}" alt="">
+                                {% endif %}
+                            </button>
+                            <button><p class="translate" data-en="Profile" data-sw="Wasifu">Profile</p></button>
+                        </div></a>
+                        {% else %}
+                        <a href="{% url 'restaurantprofile' %}"><div class="menu-title">
+                            <button class="menu-title-icon menu-profile-img">
+                                {% if profile.profileimage %}
+                                <img src="{{ profile.profileimage.url }}" alt="">
+                                {% else %}
+                                <img src="{% static 'icons/icons8-male-user-100.png' %}" alt="">
+                                {% endif %}
+                            </button>
+                            <button><p class="translate" data-en="Profile" data-sw="Wasifu">Profile</p></button>
+                        </div></a>
+                        {% endif %}
+                        {% else %}
+                        {% endif %}
+                        {% else %}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="menu-about-areno">
+                        <a href="aboutus.html"><button ><p class="translate" data-en="About Us" data-sw="Kutuhusu">About Us</p></button></a>
+                        <a href="privacypolicy.html"><button><p class="translate" data-en="Privacy Policy" data-sw="Sera za faragha">Privacy Policy</p></button></a>
+                        <a href="refundpolicies.html"><button><p class="translate" data-en="Refund Policy" data-sw="Sera za Marejesho">Refund Policy</p></button></a>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}"><button><p><b class="translate signup-menu-button" data-en="Log Out" data-sw="Ondoka">Log Out</b></p></button></a>
+                        {% else %}
+                        <a href="{% url 'signup' %}"><button><p><b class="translate signup-menu-button" data-en="Sign In" data-sw="Ingia">Sign In</b></p></button></a>
+                        {% endif %}
+                    </div>
+                    <div class="languagediv">
+                        <p ><b class="translate" data-en="Language" data-sw="Lugha">Language</b></p>
+                        <button class="eng" id="englishBtn">Eng</button>
+                        <button class="swahili" id="swahiliBtn">Swahili</button>
+                    </div>
+                </div>
+                <div class="callus">
+                    <a href="tel:{{ arenodetails.phonenumber_1 | default:"" }}"><div class="call">
+                        <i class="fa-solid fa-phone" style="color: white; font-size: 30px;"></i>
+                    </div></a>
+                </div>
+                <div class="below-menu">
+                    <div class="menu-trademark">
+                        <p>© 2023. Areno Company Limited. app version 1.0.0</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="darkside"></div>
+        </div>
+        <!--Notification div-->
+        <div class="notificationdiv">
+            <div class="notificationdarkside"></div>
+            <div class="notificationmenu">
+                <div class="top-noty">
+                    <button class="noty-close">
+                        <i class="fa-solid fa-arrow-left" style="font-size: 20px;"></i>
+                    </button>
+                    <h2 class="translate" data-en="Notifications" data-sw="Taarifa">Notifications</h2>
+                </div>
+                <div class="notificationlist">
+                    <!--welcome notification customer-->
+                    {% if user.is_authenticated %}
+                        {% if new_signups %}
+                        <div class="card">
+                            <div class="card-wrapper">
+                            <div class="card-icon">
+                                <div class="icon-cart-box3">
+                                    <img src="{% static 'icons\icons8-best-seller-96.png' %}" alt="">
+                                </div>
+                            </div>
+                        
+                            <div class="card-content">
+                                <div class="card-title-wrapper">
+                                <span class="card-title translate"  data-en="Welcome to ARENO!" data-sw="Karibu ARENO!">{{ new_signups.title | default:"" }}</span><span class="date-noty">{{ new_signups.date | default:"" }}</span>
+                                <form action="{% url 'delete_notification' notification_type='New Register' %}">
+                                    <button class="card-action">
+                                        <i class="fa-solid fa-x" ></i>
+                                    </button>
+                                </form>
+                                </div>
+                                <div class="product-name">
+                                    <span class="translate"  data-en="Hi! Joseph, You are Successfully Registered! Get ready to shop with us and explore what our sellers have to offer. ENJOY!" data-sw="Habari! Joseph, Umejisajili kwa Mafanikio! Jiandae kununua nasi na kuchunguza bidhaa zinazotolewa na wauzaji wetu. KARIBU!" >{{ new_signups.content | default:"" }}</span>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        {% endif %}
+                        {% else %}
+                        <div class="card">
+                            <div class="card-wrapper">
+                            <div class="card-icon">
+                                <div class="icon-cart-box3">
+                                    <img src="{% static 'icons\icons8-best-seller-96.png' %}" alt="">
+                                </div>
+                            </div>
+                        
+                            <div class="card-content">
+                                <div class="card-title-wrapper">
+                                <span class="card-title translate"  data-en="Welcome to ARENO!" data-sw="Karibu ARENO!">Welcome to ARENO!</span><span class="date-noty"></span>
+                                </div>
+                                <div class="product-name">
+                                    <span class="translate"  data-en="Hi!, Register Now! Get ready to shop with us and explore what our sellers have to offer. ENJOY!" data-sw="Habari! Jiandikishe sasa! uweze kununua nasi na kuchunguza bidhaa zinazotolewa na wauzaji wetu. KARIBU!" >Hi!, Register Now! Get ready to shop with us and explore what our sellers have to offer. ENJOY!</span>
+                                </div>
+                                <a href="{% url 'signup' %}"><button class="btn-view-cart" type="button"><span  class="translate" data-en="Sign In" data-sw="Jisajili">Sign In</span></button></a>
+                            </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <!--cart add-->
+                    {% if user.is_authenticated %}
+                    {% if cart_adds %}
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box">
+                                <span class="cart-counter-alert">{{ cartcount | default:"0"}}</span>
+                                <i class="fa-solid fa-cart-arrow-down"></i>
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate"  data-en="Added to cart!" data-sw="Imeongezwa bidhaa pendwa!">Added to cart!</span><span class="date-noty">{{ cart_adds.date | default:""}}</span>
+                              <form action="{% url 'delete_notification' notification_type='Cart' %}">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                {{ cart_adds.content | default:""}}
+                            </div>
+                            <div class="product-price">Tsh {{ cart_adds.price | default:"-"}}/=</div>
+                            <a href="{% url 'cart' %}"><button class="btn-view-cart" type="button"><span  class="translate" data-en="View Cart" data-sw="Fungua">View Cart</span></button></a>
+                          </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    <!--pending purchase product-->
+                    {% if user.is_authenticated %}
+                    {% if pending_purchases %}
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box3">
+                                <span class="cart-counter-alert3">{{ pending_counter | default:"0"}}</span>
+                                <img src="{% static 'icons\icons8-info-100.png' %}" alt="">
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate"  data-en="Pending Purchase!" data-sw="Malipo yanayosubiri!" style="color: green;">{{ pending_purchases.title | default:"" }}</span><span class="date-noty">{{ pending_purchases.date | default:"" }}</span>
+                              <form action="{% url 'delete_notification' notification_type='pending_purchase' %}">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                {{ pending_purchases.content | default:"" }}
+                            </div>
+                            <div class="product-price">Tsh {{ pending_purchases.price | default:"" }}/=</div>
+                            <a href="{% url 'pendingpurchase' %}#productitems"><button class="btn-view-cart" type="button"><span  class="translate" data-en="View All" data-sw="Ona Zaidi">View All</span></button></a>
+                          </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    <!--pending purchase food-->
+                    {% if user.is_authenticated %}
+                    {% if pending_food_purchases %}
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box3">
+                                <span class="cart-counter-alert3">{{ pending_food_counter | default:"0"}}</span>
+                                <img src="{% static 'icons\icons8-info-100.png' %}" alt="">
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate"  data-en="Pending Purchase!" data-sw="Malipo yanayosubiri!" style="color: green;">{{ pending_food_purchases.title | default:"" }}</span><span class="date-noty">{{ pending_food_purchases.date | default:"" }}</span>
+                              <form action="{% url 'delete_notification' notification_type='pending_purchase_food' %}">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                {{ pending_food_purchases.content | default:"" }}
+                            </div>
+                            <div class="product-price">Tsh {{ pending_food_purchases.price | default:"" }}/=</div>
+                            <a href="{% url 'pendingpurchase' %}#fooditems"><button class="btn-view-cart" type="button"><span  class="translate" data-en="View All" data-sw="Ona Zaidi">View All</span></button></a>
+                          </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    <!--item post accepted add-->
+                    {% if user.is_authenticated %}
+                    {% if profile %}
+                    {% if profile.businesstype == 'Shopping' %}
+                    {% if approved_products %}
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box2">
+                                <span class="cart-counter-alert2">{{ approved_products_count | default:"0" }}</span>
+                                <i class="fa-solid fa-box-open"></i>
+                            </div> 
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate" data-en="Post Item Accepted!" data-sw="Bidhaa Imekubaliwa!">{{ approved_products.title | default:"" }}</span><span class="date-noty">{{ approved_products.date | default:"" }}</span>
+                              <form action="{% url 'delete_notification' notification_type='approved_product' %}">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                {{ approved_products.content | default:"" }}
+                            </div>
+                            <div class="product-price">Tsh {{ approved_products.price | default:"" }}/=</div>
+                            <a href="{% url 'shopprofile' %}"><button class="btn-view-cart2" type="button"><span  class="translate" data-en="View Profile" data-sw="Fungua Wasifu">View Profile</span></button></a>
+                          </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% if approved_foods %}
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box2">
+                                <span class="cart-counter-alert2">{{ approved_foods_count | default:"0" }}</span>
+                                <i class="fa-solid fa-box-open"></i>
+                            </div> 
+                          </div>
+                      
+                        <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate" data-en="Post Item Accepted!" data-sw="Bidhaa Imekubaliwa!">{{ approved_foods.title | default:"" }}</span><span class="date-noty">{{ approved_foods.date | default:"" }}</span>
+                              <form action="{% url 'delete_notification' notification_type='approved_food' %}">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                {{ approved_foods.content | default:"" }}
+                            </div>
+                            <div class="product-price">Tsh {{ approved_foods.price | default:"" }}/=</div>
+                            <a href="{% url 'restaurantprofile' %}"><button class="btn-view-cart2" type="button"><span  class="translate" data-en="View Profile" data-sw="Fungua Wasifu">View Profile</span></button></a>
+                        </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    <!--item post denied-->
+                    {% if user.is_authenticated %}
+                    {% if profile %}
+                    {% if profile.businesstype == 'Shopping' %}
+                    {% if declined_products %}
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box2">
+                                <!--<span class="cart-counter-alert2">12</span>-->
+                                <i class="fa-solid fa-ban" style="color: red;"></i>
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate" data-en="Post Item Declined!" data-sw="Bidhaa Haijapitishwa!" style="color: red;">{{ declined_products.title | default:"" }}</span><span class="date-noty">{{ declined_products.date | default:"" }}</span>
+                              <form action="{% url 'delete_notification' notification_type='declined_product' %}">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                {{ declined_products.content | default:"" }}
+                            </div>
+                            <div class="product-price">Tsh {{ declined_products.price | default:"" }}/=</div>
+                          </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% if declined_foods %}
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box2">
+                                <!--<span class="cart-counter-alert2">12</span>-->
+                                <i class="fa-solid fa-ban" style="color: red;"></i>
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate" data-en="Post Item Declined!" data-sw="Bidhaa Haijapitishwa!" style="color: red;">{{ declined_foods.title | default:"" }}</span><span class="date-noty">{{ declined_foods.date | default:"" }}</span>
+                              <form action="{% url 'delete_notification' notification_type='declined_food' %}">
+                                <button class="card-action">
+                                    <i class="fa-solid fa-x" ></i>
+                                </button>
+                              </form>
+                            </div>
+                            <div class="product-name">
+                                {{ declined_foods.content | default:"" }}
+                            </div>
+                            <div class="product-price">Tsh {{ declined_foods.price | default:"" }}/=</div>
+                          </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    <!--admin seller notification-->
+                    {% if user.is_authenticated %}
+                    {% if profile %}
+                    {% if seller_notifications %}
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box3">
+                                <img src="{% static 'icons\icons8-male-user-100.png' %}" alt="">
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate"  data-en="{{ seller_notifications.title | default:"" }}" data-sw="{{ seller_notifications.title_swahili | default:"" }}">{{ seller_notifications.title | default:"" }}</span><span class="date-noty">{{ seller_notifications.date | default:"" }}</span>
+                              
+                            </div>
+                            <div class="product-name" >
+                                <span class="translate" data-en="{{ seller_notifications.content | safe | default:"" }}" data-sw="{{ seller_notifications.content_swahili | safe | default:"" }}">{{ seller_notifications.content | safe | default:"" }}</span>
+                            </div>
+                            {% if seller_notifications.price %}
+                            <div class="product-price">Tsh {{ seller_notifications.price | default:"" }}/=</div>
+                            {% else %}
+                            {% endif %}
+                            {% if seller_notifications.link %}
+                            <a href="{{ seller_notifications.link | default:"" }}"><button class="btn-view-cart" type="button"><span  class="translate" data-en="View" data-sw="Fungua">View</span></button></a>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    <!--admin all notification-->
+                    {% if user.is_authenticated %}
+                    {% if customer_notifications %}
+                    <div class="card">
+                        <div class="card-wrapper">
+                          <div class="card-icon">
+                            <div class="icon-cart-box3">
+                                <img src="{% static 'icons\icons8-male-user-100.png' %}" alt="">
+                            </div>
+                          </div>
+                      
+                          <div class="card-content">
+                            <div class="card-title-wrapper">
+                              <span class="card-title translate"  data-en="{{ customer_notifications.title | default:"" }}" data-sw="{{ customer_notifications.title_swahili | default:"" }}">{{ customer_notifications.title | default:"" }}</span><span class="date-noty">{{ customer_notifications.date | default:"" }}</span>
+                              
+                            </div>
+                            <div class="product-name" >
+                                <span class="translate" data-en="{{ customer_notifications.content | safe | default:"" }}" data-sw="{{ customer_notifications.content_swahili | safe | default:"" }}">{{ customer_notifications.content | safe | default:"" }}</span>
+                            </div>
+                            {% if customer_notifications.price %}
+                            <div class="product-price">Tsh {{ customer_notifications.price | default:"" }}/=</div>
+                            {% else %}
+                            {% endif %}
+                            {% if customer_notifications.link %}
+                            <a href="{{ customer_notifications.link | default:"" }}"><button class="btn-view-cart2" type="button"><span  class="translate" data-en="View" data-sw="Fungua">View</span></button></a>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+        
+        
+         <!--personal info-->
+         
+         
+        <div class="track-headings">
+            <a href="#pending"><button ><p class="translate" data-en="Pending" data-sw="Zinazosubiri">Pending</p></button></a>
+            <a href="#onroad"><button><p class="translate" data-en="On Shipment" data-sw="Zilizo Njiani">On Shipment</p></button></a>
+            <a href="#delivered"><button><p class="translate" data-en="Delivered" data-sw="Zilizopokelewa">Delivered</p></button></a>
+            <a href="#cancelled"><button><p class="translate" data-en="Cancelled" data-sw="Zilizokatishwa">Cancelled</p></button></a>
+        </div>
+        
+        <!--orders-->
+       <div class="allorders">
+            <div class="pending" id="pending">
+                <h3 class="translate" data-en="Pending Orders" data-sw="Maagizo yanayosubiri">Pending Orders</h3>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Nike Sneakers</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>1,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="status translate" data-en="Pending" data-sw="Inasubiri">Pending</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Sports gear</b></p></a>
+                    <p class="items"><b>1</b></p>
+                    <p class="price"><b>26,000</b>/=</p>
+                    <p class="date">Nov 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="status translate" data-en="Pending" data-sw="Inasubiri">Pending</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Skin Products</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="status translate" data-en="Pending" data-sw="Inasubiri">Pending</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Air Jordan</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="status translate" data-en="Pending" data-sw="Inasubiri">Pending</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>T shirt</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="status translate" data-en="Pending" data-sw="Inasubiri">Pending</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Boxers</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="status translate" data-en="Pending" data-sw="Inasubiri">Pending</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Nike Sneakers</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="status translate" data-en="Pending" data-sw="Inasubiri">Pending</p>
+                    <button>&times;</button>
+                </div>
+            </div>
+            <div class="complete" id="onroad">
+                <h3 class="translate" data-en="On Shipment" data-sw="Bidhaa zilizo Njiani">On Shipment</h3>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Nike Sneakers</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="onroad translate" data-en="On Road" data-sw="Njiani">On Road</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Sports gear</b></p></a>
+                    <p class="items"><b>1</b></p>
+                    <p class="price"><b>26,000</b>/=</p>
+                    <p class="date">Nov 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="onroad translate" data-en="On Road" data-sw="Njiani">On Road</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Skin Products</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="onroad translate" data-en="On Road" data-sw="Njiani">On Road</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Air Jordan</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="onroad translate" data-en="On Road" data-sw="Njiani">On Road</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>T shirt</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="onroad translate" data-en="On Road" data-sw="Njiani">On Road</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Boxers</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="onroad translate" data-en="On Road" data-sw="Njiani">On Road</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Nike Sneakers</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="onroad translate" data-en="On Road" data-sw="Njiani">On Road</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Nike Sneakers</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="onroad translate" data-en="On Road" data-sw="Njiani">On Road</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Nike Sneakers</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="onroad translate" data-en="On Road" data-sw="Njiani">On Road</p>
+                    <button>&times;</button>
+                </div>
+            </div>
+            <div class="complete" id="delivered">
+                <h3 class="translate" data-en="Delivered Orders" data-sw="Maagizo yaliyokamilika">Delivered Orders</h3>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Nike Sneakers</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="completed translate" data-en="Delivered" data-sw="Imepokelewa">Delivered</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Sports gear</b></p></a>
+                    <p class="items"><b>1</b></p>
+                    <p class="price"><b>26,000</b>/=</p>
+                    <p class="date">Nov 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="completed translate" data-en="Delivered" data-sw="Imepokelewa">Delivered</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Skin Products</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="completed translate" data-en="Delivered" data-sw="Imepokelewa">Delivered</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Air Jordan</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="completed translate" data-en="Delivered" data-sw="Imepokelewa">Delivered</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>T shirt</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="completed translate" data-en="Delivered" data-sw="Imepokelewa">Delivered</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Boxers</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="completed translate" data-en="Delivered" data-sw="Imepokelewa">Delivered</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Nike Sneakers</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="completed translate" data-en="Delivered" data-sw="Imepokelewa">Delivered</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Nike Sneakers</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="completed translate" data-en="Delivered" data-sw="Imepokelewa">Delivered</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Nike Sneakers</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="completed translate" data-en="Delivered" data-sw="Imepokelewa">Delivered</p>
+                    <button>&times;</button>
+                </div>
+            </div>
+            <div class="complete" id="cancelled">
+                <h3 class="translate" data-en="Cancelled Orders" data-sw="Maagizo yaliyokatishwa">Cancelled Orders</h3>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Nike Sneakers</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="cancelled translate" data-en="Cancelled" data-sw="imekatishwa">cancelled</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Sports gear</b></p></a>
+                    <p class="items"><b>1</b></p>
+                    <p class="price"><b>26,000</b>/=</p>
+                    <p class="date">Nov 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="cancelled translate" data-en="Cancelled" data-sw="imekatishwa">cancelled</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Skin Products</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="cancelled translate" data-en="Cancelled" data-sw="imekatishwa">cancelled</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>Air Jordan</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="cancelled translate" data-en="Cancelled" data-sw="imekatishwa">cancelled</p>
+                    <button>&times;</button>
+                </div>
+                <div class="order">
+                    <a href="productpage.html"><p class="productname"><b>T shirt</b></p></a>
+                    <p class="items"><b>2</b></p>
+                    <p class="price"><b>12,000</b>/=</p>
+                    <p class="date">Oct 20, 2012</p>
+                    <p class="from">From: <b>Aziz Fashion</b></p>
+                    <p class="cancelled translate" data-en="Cancelled" data-sw="imekatishwa">cancelled</p>
+                    <button>&times;</button>
+                </div>
+            </div>
+       </div>
+         
+        </main>
+        
+
+       
+        <!--mobile below navigations-->
+        
+         <!--new mobile below navigations-->
+         <div class="mobilenavigation">
+            <div class="navigationsbuttons">
+                <div class="rectanglenavbar">
+                    <a href="{% url 'shopping' %}"><div class="mobile-nav-div">
+                        <button class="mobile-nav-icon">
+                            <i class="fa-solid fa-cart-arrow-down"></i>
+                        </button>
+                        <p class="translate" data-en="Shopping" data-sw="Manunuzi">Shopping</p>
+                    </div></a>
+                    <a href="{% url 'restaurants' %}"><div class="mobile-nav-div">
+                        <button class="mobile-nav-icon">
+                            <i class="fa-solid fa-utensils"></i>
+                        </button>
+                        <p class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</p>
+                    </div></a>
+                </div>
+                <div class="rectanglenavbar3">
+                    <div class="mobile-nav-circle">
+                        <a href="{% url 'index' %}"><button class="mobile-nav-icon selected">
+                            <img src="{% static 'icons/Home_fill_1.png' %}" alt="">
+                        </button></a>
+                    </div>
+                </div>
+                <div class="rectanglenavbar2">
+                    <a href="{% url 'booking' %}"><div class="mobile-nav-div">
+                        <button class="mobile-nav-icon">
+                            <i class="fa-solid fa-book-bookmark"></i>
+                        </button>
+                        <p>Booking</p>
+                    </div></a>
+                    <a href=""><div class="mobile-nav-div">
+                        <button class="mobile-nav-icon ">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </button>
+                        <p class="translate" data-en="Logistics" data-sw="Usafirishaji">Logistics</p>
+                    </div></a>
+                </div>
+            </div>
+            <div class="navbarpng">
+                <img src="{% static 'icons/mobilenav.png' %}" alt="">
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </section>
+
+   
+    <script src="{% static 'js/shoppingpage.js' %}" ></script>
+    <script src="{% static 'js/language.js' %}" ></script>
+    <script>
+     
+    </script>
+    
+    
+</body>
+</html>

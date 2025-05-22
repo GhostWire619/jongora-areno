@@ -1,0 +1,462 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Areno - Booking</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopping2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/splide.css' %}">
+    <link rel="stylesheet" href="{% static 'css/darkmode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/booking.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body class="event-body">
+    <section>
+        <nav>
+            <div class="navbar">
+            <div class="logo">
+                <a href="#"><h4 class="translate" data-en="Areno Booking" data-sw="Areno Booking">Areno Booking</h4></a>
+            </div>
+            <div class="right-nav">
+                <a href="{% url 'index' %}"><h4 class="translate" data-en="Home" data-sw="Nyumbani">Home</h4></a>
+                <a href="{% url 'booking' %}"><h4 class="translate active" data-en="Booking" data-sw="Booking">Booking</h4></a>
+                <a href="{% url 'bookingfavourites' %}"><h4 class="translate" data-en="Favourites" data-sw="Pendwa">Favourites</h4></a>
+                <a href="{% url 'tickets' %}"><h4 class="translate" data-en="Tickets" data-sw="Tiketi">Tickets</h4></a>
+                {% if profile %}
+                {% else %}
+                <a href="{% url 'submitactivity' %}"><h4 class="translate" data-en="Register" data-sw="Sajili">Register</h4></a>
+                {% endif %}
+                <a href="{% url 'contactareno' %}"><h4 class="translate" data-en="Contact Us" data-sw="Wasiliana Nasi">Contact Us</h4></a>
+                
+                {% if user.is_authenticated %}
+                    {% if profile %}
+                        <a href="{% url 'hostprofile' %}"><button class="menu-profile-img" style="margin-right: 20px;">
+                            {% if profile.profileimage %}
+                            <img src="{{ profile.profileimage.url }}" alt="">
+                            {% else %}
+                            <img src="{% static 'icons/icons8-male-user-100.png' %}" alt="">
+                            {% endif %}
+                        </button></a>
+                    {% else %}
+                    {% endif %}
+                {% else %}
+                <a href="{% url 'signup' %}"><h4 class="translate signup-top-button" data-en="Sign In" data-sw="Ingia">Sign In</h4></a>
+                {% endif %}
+            </div>
+            </div>
+            
+        </nav>
+        <!--search bar-->
+        
+        <main>
+            <form action="" id="top">
+                
+                <div class="searchdiv">
+                    <div class="nav-menu">
+                        <i class="fa-solid fa-bars" ></i>
+                    </div>
+                    <div class="mobile-nav-head">
+                        <h4>Areno Booking</h4>
+                    </div>
+                        <div class="cart-notificationsdiv">
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'tickets' %}"><div class="homebutton" style="display: flex; flex-direction: column; justify-content: center;">
+                                <i class="fa-solid fa-ticket"></i>
+                                <p style="margin: 2px 0px 0px 0px; font-size: 11px;" class="translate" data-en="Tickets" data-sw="Tiketi">Tickets</p>
+                            </div></a>
+                            {% else %}
+                            <a href="{% url 'submitactivity' %}"><div class="bookingregister">
+                               <button title="register" type="button" class="bookingregisterimage mobile-registericon">
+                                    <img src="{% static 'icons/icons8-edit-64.png' %}" alt="">
+                                </button></a>
+                                <p style="margin: 2px 0px 0px 0px; font-size: 11px;" class="translate" data-en="Register" data-sw="Andikisha">Register</p>
+                            </div></a>
+                            {% endif %}
+                        </div>
+                </div>
+            </form>
+            <div class="menu ">
+                <div class="menudiv home-menu">
+                    <div>
+                        <button class="minimize-menu">
+                            <i class="fa-solid fa-x" ></i>
+                        </button>
+                        <div class="main-menu-content">
+                            <a href="{% url 'index' %}"><div class="menu-logo">
+                                <img src="{% static 'icons/Frame 304 (2).png' %}" alt="">
+                            </div></a>
+                            <a href="{% url 'shopping' %}"><div class="menu-title">
+                                <button class="menu-title-icon">
+                                    <i class="fa-solid fa-cart-arrow-down"></i>
+                                </button>
+                                <button><p class="translate" data-en="Shopping" data-sw="Ununuzi">Shopping</p></button>
+                            </div></a>
+                            <a href="{% url 'restaurants' %}"><div class="menu-title">
+                                <button class="menu-title-icon">
+                                    <i class="fa-solid fa-utensils"></i>
+                                </button>
+                                <button><p class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</p></button>
+                            </div></a>
+                            <a href="{% url 'booking' %}"><div class="menu-title title-selected">
+                                <button class="menu-title-icon">
+                                    <i class="fa-solid fa-book-bookmark"></i>
+                                </button>
+                                <button><p class="translate" data-en="Booking" data-sw="Booking">Booking</p></button>
+                            </div></a>
+                            <a href=""><div class="menu-title">
+                                <button class="menu-title-icon">
+                                    <i class="fa-solid fa-truck-fast"></i>
+                                </button>
+                                <button><p class="translate" data-en="Logistics" data-sw="Usafirishaji">Logistics</p></button>
+                            </div></a>
+                            <a href="{% url 'rate' %}"><div class="menu-title">
+                                <button class="menu-title-icon">
+                                    <i class="fa-solid fa-star"></i>
+                                </button>
+                                <button><p class="translate" data-en="Rate Us" data-sw="Kiwango cha sisi">Rate Us</p></button>
+                            </div></a>
+                            <a href="{% url 'contactareno' %}"><div class="menu-title">
+                                <button class="menu-title-icon">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </button>
+                                <button><p class="translate" data-en="Contact Areno" data-sw="Wasiliana na Areno">Contact Areno</p></button>
+                            </div></a>
+                            {% if profile %}
+                            <a href="{% url 'hostprofile' %}"><div class="menu-title">
+                                <button class="menu-title-icon menu-profile-img">
+                                    {% if profile.profileimage %}
+                                    <img src="{{ profile.profileimage.url }}" alt="">
+                                    {% else %}
+                                    <img src="{% static 'icons/icons8-male-user-100.png' %}" alt="">
+                                    {% endif %}
+                                </button>
+                                <button><p class="translate" data-en="Profile" data-sw="Wasifu">Profile</p></button>
+                            </div></a>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        
+                        <div class="menu-about-areno">
+                            <a href="{% url 'aboutus' %}"><button ><p class="translate" data-en="About Us" data-sw="Kutuhusu">About Us</p></button></a>
+                            <a href="{% url 'privacypolicy' %}"><button><p class="translate" data-en="Privacy Policy" data-sw="Sera za faragha">Privacy Policy</p></button></a>
+                            <a href="{% url 'refundpolicies' %}"><button><p class="translate" data-en="Refund Policy" data-sw="Sera za Marejesho">Refund Policy</p></button></a>
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'logout' %}"><button><p><b class="translate signup-menu-button" data-en="Log Out" data-sw="Ondoka">Log Out</b></p></button></a>
+                            {% else %}
+                            <a href="{% url 'signup' %}"><button><p><b class="translate signup-menu-button" data-en="Sign In" data-sw="Ingia">Sign In</b></p></button></a>
+                            {% endif %}
+                        </div>
+                        <div class="languagediv">
+                            <p ><b class="translate" data-en="Language" data-sw="Lugha">Language</b></p>
+                            <button class="eng" id="englishBtn">Eng</button>
+                            <button class="swahili" id="swahiliBtn">Swahili</button>
+                        </div>
+                        <!--<div class="theme">
+                            <p><b class="translate" data-en="Change Theme" data-sw="Badilisha mandhari">Change Theme</b></p>
+                            <div class="toggle-switch" >
+                                <label class="switch-label">
+                                <input type="checkbox" class="checkbox" id="darkmode">
+                                <span class="slider" ></span>
+                                </label>
+                            </div> 
+                        </div>-->
+                    </div>
+                    <div class="callus">
+                        <a href="tel:{{ arenodetails.phonenumber_1 | default:"" }}"><div class="call">
+                            <i class="fa-solid fa-phone" style="color: white; font-size: 30px;"></i>
+                        </div></a>
+                    </div>
+                    <div class="below-menu">
+                        <div class="menu-trademark">
+                            <p>© 2023. Areno Company Limited. app version 1.0.0</p>
+                        </div>
+                    </div>
+                
+                </div>
+                <div class="darkside"></div>
+            </div>
+            <!--ad section-->
+            <div class="slide" style="margin-top: 20px;">
+                <div class="splide-wrapper">
+                    <div class="splide" id="categories-main-ad">
+                        <div class="splide__track">
+                            <div class="splide__list">
+                                {% for bookingad in bookingads %}
+                                <div class="splide__slide">
+                                    <div class="adslider">
+                                        {% if bookingad.image %}
+                                        <a href="{{bookingad.link | default:"" }}"><img src="{{bookingad.image.url}}" alt="{{ bookingad.title | default:"" }}"></a>
+                                        {% else %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% empty %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!--booking cats-->
+            <div>
+                <div class="bookinghead">
+                    <h3 class="translate" data-en="{{bookinghomepage.title_english | default:"" }}" data-sw="{{bookinghomepage.title_swahili | default:"" }}" >{{bookinghomepage.title_english | default:"" }}</h3>
+                    {% if bookinghomepage.main_content_english %}
+                    <p class="translate" data-en="{{bookinghomepage.main_content_english | default:"" }}" data-sw="{{bookinghomepage.main_content_swahili | default:"" }}">{{bookinghomepage.main_content_english | default:"" }}</p>
+                    {% else %}
+                    {% endif %}
+                </div>
+                <div class="bookingcategories">
+                    <!--category-->
+                    <div class="booking-category">
+                        <div class="booking-cat-image">
+                            {% if bookinghomepage.events_image %}
+                            <a href="{% url 'events' %}"><img src="{{bookinghomepage.events_image.url}}" alt=""></a>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        <div class="booking-cat-details">
+                            <a href="{% url 'events' %}"><p class="translate" data-en="Events" data-sw="Matukio">Events</p></a>
+                        </div>
+                    </div>
+                    <!--category-->
+                    <div class="booking-category">
+                        <div class="booking-cat-image">
+                            {% if bookinghomepage.sports_image %}
+                            <a href="{% url 'sports' %}"><img src="{{bookinghomepage.sports_image.url}}" alt=""></a>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        <div class="booking-cat-details">
+                            <a href="{% url 'sports' %}"><p class="translate" data-en="Sports" data-sw="Michezo">Sports</p></a>
+                        </div>
+                    </div>
+                    <!--category-->
+                    <div class="booking-category">
+                        <div class="booking-cat-image">
+                            {% if bookinghomepage.car_rentals_image %}
+                            <a href="{% url 'car_rental' %}"><img src="{{bookinghomepage.car_rentals_image.url}}" alt=""></a>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        <div class="booking-cat-details">
+                            <a href="{% url 'car_rental' %}"><p class="translate" data-en="Car Rentals" data-sw="Kukodi Usafiri">Car Rentals</p></a>
+                        </div>
+                    </div>
+                    <!--category-->
+                    <div class="booking-category">
+                        <div class="booking-cat-image">
+                            {% if bookinghomepage.areno_bnb_image %}
+                            <a href="{% url 'arenobnb' %}"><img src="{{bookinghomepage.areno_bnb_image.url}}" alt=""></a>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        <div class="booking-cat-details">
+                            <a href="{% url 'arenobnb' %}"><p class="translate" data-en="Areno BnB" data-sw="Areno BnB">Areno BnB</p></a>
+                        </div>
+                    </div>
+                    <!--category-->
+                    <div class="booking-category">
+                        <div class="booking-cat-image">
+                            {% if bookinghomepage.travel_image %}
+                            <a href="{% url 'nopage' %}"><img src="{{bookinghomepage.travel_image.url}}" alt=""></a>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        <div class="booking-cat-details">
+                            <a href="{% url 'nopage' %}"><p class="translate" data-en="Travel" data-sw="Safari">Travel</p></a>
+                        </div>
+                    </div>
+                    <!--category-->
+                    <div class="booking-category">
+                        <div class="booking-cat-image">
+                            {% if bookinghomepage.adventure_image %}
+                            <a href="{% url 'adventures' %}"><img src="{{bookinghomepage.adventure_image.url}}" alt=""></a>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        <div class="booking-cat-details">
+                            <a href="{% url 'adventures' %}"><p>Adventure</p></a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <!--footer-->
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer-col">
+                            <h4>ARENO</h4>
+                            <ul>
+                                <li><a href="{% url 'aboutus' %}" class="translate" data-en="About Us" data-sw="Kutuhusu">About us</a></li>
+                                <li><a href="{% url 'aboutus' %}" class="translate" data-en="Our Services" data-sw="Huduma Zetu">Our Services</a></li>
+                                <li><a href="{% url 'privacypolicy' %}" class="translate" data-en="Privacy policy" data-sw="Sera za Faragha">Privacy policy</a></li>
+                                <li><a href="{% url 'refundpolicies' %}" class="translate" data-en="Refund Policies" data-sw="Sera za Marejesho">Refund Policies</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h4 class="translate" data-en="Useful Links" data-sw="Linki Muhimu">Useful Links</h4>
+                            <ul>
+                                <li><a href="{% url 'shopping' %}" class="translate" data-en="Shopping" data-sw="Manunuzi">Shopping</a></li>
+                                <li><a href="{% url 'restaurants' %}" class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</a></li>
+                                <li><a href="{% url 'booking' %}" class="translate" data-en="Booking" data-sw="Booking">Booking</a></li>
+                                {% if user.is_authenticated %}
+                                <li><a href="{% url 'logout' %}" class="translate" data-en="Log Out" data-sw="Ondoka">Log Out</a></li>
+                                {% else %}
+                                <li><a href="{% url 'signup' %}" class="translate" data-en="Sign In" data-sw="Jisajili">Sign In</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div class="footer-col">
+                            <h4 class="translate" data-en="SUPPORT" data-sw="MSAADA">SUPPORT</h4>
+                            <ul>
+                                <li><a href="{% url 'contactareno' %}"><span class="translate" data-en="Contact Us" data-sw="Wasiliana nasi">Contact Us</span></a></li>
+                                {% if arenodetails.phonenumber_1 %}
+                                <li><a href="tel: {{ arenodetails.phonenumber_1 | default:"" }}">{{ arenodetails.phonenumber_1 | default:"" }}</a></li>
+                                {% else %}
+                                {% endif %}
+                                {% if arenodetails.phonenumber_2 %}
+                                <li><a href="tel: {{ arenodetails.phonenumber_2 | default:"" }}">{{ arenodetails.phonenumber_2 | default:"" }}</a></li>
+                                {% else %}
+                                {% endif %}
+                                {% if arenodetails.location %}
+                                <li><a href="#"><i class="fa-solid fa-location-dot"></i> {{ arenodetails.location | default:"" }}</a></li>
+                                {% else %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div class="footer-col ">
+                            <h4 class="translate" data-en="Follow us" data-sw="Tufuatilie">Follow us</h4>
+                            <ul style="margin-bottom: 35px;">
+                                {% if arenodetails.Areno_footer_content %}
+                                <li><a href="{% url 'index' %}">{{ arenodetails.Areno_footer_content | default:"" }}</a></li>
+                                {% else %}
+                                {% endif %}
+                            </ul>
+                            <div class="social-links">
+                                {% if arenodetails.facebook_link %}
+                                <a href="{{ arenodetails.facebook_link | default:"" }}"><i class="fab fa-facebook-f"></i></a>
+                                {% else %}
+                                {% endif %}
+                                {% if arenodetails.twitter_x_link %}
+                                <a href="{{ arenodetails.twitter_x_link | default:"" }}"><i class="fab fa-x-twitter"></i></a>
+                                {% else %}
+                                {% endif %}
+                                {% if arenodetails.instagram_link %}
+                                <a href="{{ arenodetails.instagram_link | default:"" }}"><i class="fab fa-instagram"></i></a>
+                                {% else %}
+                                {% endif %}
+                                {% if arenodetails.whatsapp_link %}
+                                <a href="{{ arenodetails.whatsapp_link | default:"" }}"><i class="fab fa-whatsapp"></i></a>
+                                {% else %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="credits">
+                        <div class="line"></div>
+                        <p>&copy; Copyright <strong><span>Areno Ecommerce</span></strong>. All Rights Reserved 2024</p>
+                    </div>
+                </div>
+            </footer>
+
+        </main>
+
+
+        
+        <!--mobile below navigations-->
+        <div class="mobilenavigation">
+            <div class="navigationsbuttons">
+                <div class="rectanglenavbar">
+                    <a href="{% url 'shopping' %}"><div class="mobile-nav-div">
+                        <button class="mobile-nav-icon">
+                            <i class="fa-solid fa-cart-arrow-down"></i>
+                        </button>
+                        <p class="translate" data-en="Shopping" data-sw="Manunuzi">Shopping</p>
+                    </div></a>
+                    <a href="{% url 'restaurants' %}"><div class="mobile-nav-div">
+                        <button class="mobile-nav-icon">
+                            <i class="fa-solid fa-utensils"></i>
+                        </button>
+                        <p class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</p>
+                    </div></a>
+                </div>
+                <div class="rectanglenavbar3">
+                    <div class="mobile-nav-circle">
+                        <a href="{% url 'index' %}"><button class="mobile-nav-icon">
+                            <img src="{% static 'icons/Home_fill_1.png' %}" alt="">
+                        </button></a>
+                    </div>
+                </div>
+                <div class="rectanglenavbar2">
+                    <a href="{% url 'booking' %}"><div class="mobile-nav-div">
+                        <button class="mobile-nav-icon  selectedicon">
+                            <i class="fa-solid fa-book-bookmark"></i>
+                        </button>
+                        <p>Booking</p>
+                    </div></a>
+                    <a href="{% url 'general' %}"><div class="mobile-nav-div">
+                        <button class="mobile-nav-icon">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </button>
+                        <p class="translate" data-en="Explore" data-sw="Gundua">Explore</p>
+                    </div></a>
+                </div>
+            </div>
+            <div class="navbarpng">
+                <img src="{% static 'icons/mobilenav.png' %}" alt="">
+            </div>
+        </div>
+
+       
+        <!--loader-->
+          <!--loader-->
+        <div class="loadingdiv" id="preloaderbg">
+            <svg class="pl"  width="240" height="240" viewBox="0 0 240 240">
+            <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+            <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+            <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+            <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+        </svg>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    </section>
+
+   
+    <script src="{% static 'js/loader.js' %}"></script>
+    <script src="{% static 'js/shoppingpage.js' %}" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="{% static 'js/shoppingspliders.js' %}" ></script>
+    <script src="{% static 'js/categories.js' %}" ></script>
+    <script src="{% static 'js/products.js' %}" ></script>
+    <script src="{% static 'js/language.js' %}" ></script>
+    <script>
+     
+    </script>
+    
+    
+</body>
+</html>

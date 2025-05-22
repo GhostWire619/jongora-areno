@@ -1,0 +1,727 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Areno - {{ profile.company_name }}</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopping2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stores.css' %}">
+    <link rel="stylesheet" href="{% static 'css/booking.css' %}">
+    <link rel="stylesheet" href="{% static 'css/submitloader.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+    <!--this is the background image display for every image PLEASE DO NOT REMOVE IT!!!-->
+    <style>
+        .bookingpostimage{
+            background-image: url({% static 'icons/areno.logo.png' %});
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat; 
+            overflow: hidden;
+        }
+    </style>
+
+</head>
+<body style="background-color: rgb(243, 240, 240);">
+    <section>
+        <nav>
+            <div class="navbar">
+            <div class="logo">
+                <a href="#"><h4>Areno</h4></a>
+            </div>
+            <div class="right-nav">
+                <a href="{% url 'index' %}"><h4 class="translate" data-en="Home" data-sw="Nyumbani">Home</h4></a>
+                <a href="{% url 'booking' %}"><h4 class="translate active" data-en="Booking" data-sw="Booking">Booking</h4></a>
+                <a href="{% url 'bookingfavourites' %}"><h4 class="translate" data-en="Favourites" data-sw="Pendwa">Favourites</h4></a>
+                <a href="{% url 'tickets' %}"><h4 class="translate" data-en="Tickets" data-sw="Tiketi">Tickets</h4></a>
+                <a href="{% url 'contactareno' %}"><h4 class="translate" data-en="Contact Us" data-sw="Wasiliana Nasi">Contact Us</h4></a>
+                {% if user.is_authenticated %}
+                {% else %}
+                <a href="{% url 'signup' %}"><h4 class="translate signup-top-button" data-en="Sign In" data-sw="Ingia">Sign In</h4></a>
+                {% endif %}
+            </div>
+            </div>
+        </nav>
+ 
+
+        <main>
+        <!--search bar-->
+        
+        <form action="" id="top">
+            <div class="mobile-nav-head"> 
+                <h4 style="color: green;">Areno</h4>
+            </div>
+            <div class="searchdiv">
+                <div class="hostreturn" onclick="goBack()">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
+                    <div class="search-bar">
+                        <button class="search-icon" type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <input type="search" class="search-input" name="query" placeholder="Search ...">
+                        
+                    </div>
+                    <div class="cart-notificationsdiv">
+                        <a href="{% url 'bookingfavourites' %}"><div class="homebutton" style="display: flex; flex-direction: column; justify-content: center;">
+                            <i class="fa-regular fa-bookmark"></i>
+                        </div></a>
+                    </div>
+            </div>
+        </form>
+        <div class="menu ">
+            <div class="menudiv home-menu">
+                <div>
+                    <button class="minimize-menu">
+                        <i class="fa-solid fa-x" ></i>
+                    </button>
+                    <div class="main-menu-content">
+                        <a href="{% url 'index' %}"><div class="menu-logo">
+                            <img src="{% static 'icons/Frame 304 (2).png' %}" alt="">
+                        </div></a>
+                        <a href="{% url 'shopping' %}"><div class="menu-title ">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-cart-arrow-down"></i>
+                            </button>
+                            <button><p class="translate" data-en="Shopping" data-sw="Ununuzi">Shopping</p></button>
+                        </div></a>
+                        <a href="{% url 'restaurants' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-utensils"></i>
+                            </button>
+                            <button><p class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</p></button>
+                        </div></a>
+                        <a href="{% url 'booking' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-book-bookmark"></i>
+                            </button>
+                            <button><p class="translate" data-en="Booking" data-sw="Booking">Booking</p></button>
+                        </div></a>
+                        <a href=""><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </button>
+                            <button><p class="translate" data-en="Logistics" data-sw="Usafirishaji">Logistics</p></button>
+                        </div></a>
+                        <a href="{% url 'rate' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-star"></i>
+                            </button>
+                            <button><p class="translate" data-en="Rate Us" data-sw="Kiwango cha sisi">Rate Us</p></button>
+                        </div></a>
+                        <a href="{% url 'contactareno' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </button>
+                            <button><p class="translate" data-en="Contact Areno" data-sw="Wasiliana na Areno">Contact Areno</p></button>
+                        </div></a>
+                    </div>
+                    
+                    <div class="menu-about-areno">
+                        <a href="{% url 'aboutus' %}"><button ><p class="translate" data-en="About Us" data-sw="Kutuhusu">About Us</p></button></a>
+                        <a href="{% url 'privacypolicy' %}"><button><p class="translate" data-en="Privacy Policy" data-sw="Sera za faragha">Privacy Policy</p></button></a>
+                        <a href="{% url 'refundpolicies' %}"><button><p class="translate" data-en="Refund Policy" data-sw="Sera za Marejesho">Refund Policy</p></button></a>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}"><button><p><b class="translate signup-menu-button" data-en="Log Out" data-sw="Ondoka">Log Out</b></p></button></a>
+                        {% else %}
+                        <a href="{% url 'signup' %}"><button><p><b class="translate signup-menu-button" data-en="Sign In" data-sw="Ingia">Sign In</b></p></button></a>
+                        {% endif %}
+                    </div>
+                    <div class="languagediv">
+                        <p ><b class="translate" data-en="Language" data-sw="Lugha">Language</b></p>
+                        <button class="eng" id="englishBtn">Eng</button>
+                        <button class="swahili" id="swahiliBtn">Swahili</button>
+                    </div>
+                </div>
+                <div class="callus">
+                    <a href="tel:{{ arenodetails.phonenumber_1 | default:"" }}"><div class="call">
+                        <i class="fa-solid fa-phone" style="color: white; font-size: 30px;"></i>
+                    </div></a>
+                </div>
+                <div class="below-menu">
+                    <div class="menu-trademark">
+                        <p>© 2023. Areno Company Limited. app version 1.0.0</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="darkside"></div>
+        </div>
+        <!--Profile-->
+        <div class="profilepage">
+            <div class="profiletop">
+                <div class="profile-profileimage">
+                    {% if profile.profileimage %}
+                    <img src="{{ profile.profileimage.url }}" alt="">
+                    {% else %}
+                    <img src="{% static 'icons/icons8-male-user-100.png' %}" alt="">
+                    {% endif %}
+                </div>
+                <div class="profilepage-details">
+                    <div class="verified">
+                        <h3>{{ profile.company_name }}</h3>
+                        {% if profile.is_verified %}
+                        <div class="verified-tick">
+                            <img src="{% static 'icons/icons8-verified-64.png' %}" alt="">
+                        </div>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                    {% if profile.category %}
+                    <div class="shop-type">
+                        <p class="retail"><b >{{ profile.category | default:"-" }}</b></p>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    <p class="locationprofile"><i class="fa-solid fa-location-dot" style="color: black;"></i> <b>{{ profile.head_office_location | default:"-" }}</b></p>
+                </div>
+            </div>
+            <div class="below-profilepage-details"> 
+                {% if profile.bio %}
+                <p class="bio">{{ profile.bio | safe | default:"" }}</p>
+                {% else %}
+                {% endif %}
+            </div>
+            <div class="postingdiv">
+                
+                <a href="#postsdiv"><button class="followerscounter">
+                    {% if profile.category == 'Events' %}
+                        <h2>{{  event_count | default:"0" }}</h2>
+                    {% elif profile.category == 'Sports' %}
+                        <h2>{{  sport_count | default:"0" }}</h2>
+                    {% elif profile.category == 'Adventure' %}
+                        <h2>{{  adventure_count | default:"0" }}</h2>
+                    {% elif profile.category == 'Car Rentals' %}
+                        <h2>{{  car_rental_count | default:"0" }}</h2>
+                    {% elif profile.category == 'Areno BNB' %}
+                        <h2>{{  arenobnb_count | default:"0" }}</h2>
+                    {% else %}
+                        <h2>{{  adventure_count | default:"0" }}</h2>
+                    {% endif %}
+                    <p class="translate" data-en="Posts" data-sw="Chapisho">Posts</p>
+                </button></a>
+                <button class="followerscounter">
+                    <h2 class="number">{{ followers_count | default:"0" }}</h2>
+                    <p class="translate" data-en="Followers" data-sw="Wafuasi">Followers</p>
+                </button>
+                <button class="followerscounter" onclick="showRateForm()">
+                    <div class="ratestar">
+                        <div class="ratestarimg">
+                            <img src="{% static 'icons/icons8-star-96.png' %}" alt="">
+                        </div>
+                        {% if rates %}
+                        <h2 id="average">0</h2>
+                        {% else %}{% endif %}
+                        <!--this code is to display and count all rates of this host and calculate average to display-->
+                        {% for rate in rates %}
+                        <span style="display: none;" class="userrate" data-value="{{ rate.rate | default:"0" }}">{{ rate.rate | default:"0" }}</span>
+                        {% endfor  %}
+                    </div>
+                </button>
+                <div class="userrateform">
+                        <div class="rateformdiv">
+                            <form action="{% url 'rateuser' %}" method="POST">
+                                {% csrf_token %}
+                                <input value="{{ profile.user }}" name="selleruser"  type="hidden">
+                                <div class="rateformtopdiv">
+                                    <button type="button"  onclick="hideRateForm()" title="close">&times;</button>
+                                </div>
+                                <div class="radioformdivs">
+                                    <div class="rating">
+                                        <input value="5" name="rate" id="star5" type="radio">
+                                        <label title="text" for="star5"></label>
+                                        <input value="4" name="rate" id="star4" type="radio">
+                                        <label title="text" for="star4"></label>
+                                        <input value="3" name="rate" id="star3" type="radio" checked="">
+                                        <label title="text" for="star3"></label>
+                                        <input value="2" name="rate" id="star2" type="radio">
+                                        <label title="text" for="star2"></label>
+                                        <input value="1" name="rate" id="star1" type="radio">
+                                        <label title="text" for="star1"></label>
+                                    </div>
+                                </div>
+                                <div class="rateformbottomdiv">
+                                    <button type="submit" title="submit"><p class="translate" data-en="Submit" data-sw="Tuma">Submit</p></button>
+                                </div>
+                            </form>
+                        </div>
+                </div>
+                {% if following_true %}
+                <form action="{% url 'unfollowuser' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="unfollowuser" value="{{ profile.user }}">
+                    <button class="unfollowuser" type="submit" title="Follow">
+                        <div class="followicon">
+                            <img src="{% static 'icons/icons8-follow-48.png' %}" alt="">
+                        </div>
+                        <p class="translate" data-en="Following" data-sw="Unamfuatilia">Following</p>
+                    </button>
+                </form>
+                {% else %}
+                <form action="{% url 'followuser' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="followuser" value="{{ profile.user }}">
+                    <input type="hidden" name="followuser_id" value="{{ profile.id }}">
+                    <button class="followuser" type="submit" title="Follow">
+                        <div class="followicon">
+                            <img src="{% static 'icons/icons8-follow-48.png' %}" alt="">
+                        </div>
+                        <p class="translate" data-en="Follow" data-sw="Mfuate">Follow</p>
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+ 
+
+        {% if profile.category == 'Events' %}
+            <div class="bookingposts" id="postsdiv">
+                {% for event in events reversed %}
+                <div class="bookingpost"> 
+                    <div class="bookingpostimage"> 
+                        {% if event.image %}
+                        <a href="{% url 'eventpage' event.id %}"><img src="{{ event.image.url }}" alt="" loading="lazy"></a>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                    <div class="bookingpostdetails">
+                        <p>{{ event.title | default:"" | truncatechars:23 }}</p>
+                        <div class="bookingpostdetailsbuttons">
+                            <a href="{% url 'eventpage' event.id %}"><button type="button" class="bookingpostbuttonview"><span class="translate" data-en="View" data-sw="Fungua">View</span></button></a>
+                            <div class="rightbookingpostbtns">
+                                <form action="{% url 'savebookingpost' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="post_id" value="{{ event.unique_id }}">
+                                    <button type="submit"  title="save"><i class="fa-regular fa-bookmark"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                {% empty %}
+                <div class="empty">
+                    <div class="empty-image">
+                        <img src="{% static 'icons/empty-booking.png' %}" alt="">
+                    </div>
+                    <p><b class="translate" data-en="Empty" data-sw="Tupu">Empty</b></p>
+                </div>
+                {% endfor %}
+
+            </div>
+            {% if events %}
+            <div class="loadmorediv">
+                <button class="loadmore" id="loadMorePostsButton" onclick="loadMorePosts()"><span class="translate" data-en="load more" data-sw="Fungua zaidi">load more</span></button>
+            </div>
+            {% else %}
+            {% endif %}
+        {% elif profile.category == 'Sports' %}
+            <div class="bookingposts" id="postsdiv">
+                {% for sport in sports reversed %}
+                <div class="bookingpost"> 
+                    <div class="bookingpostimage"> 
+                        {% if sport.image %}
+                        <a href="{% url 'sportpage' sport.id %}"><img src="{{ sport.image.url }}" alt="" loading="lazy"></a>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                    <div class="bookingpostdetails">
+                        <p>{{ sport.title | default:"" | truncatechars:23 }}</p>
+                        <div class="bookingpostdetailsbuttons">
+                            <a href="{% url 'sportpage' sport.id %}"><button type="button" class="bookingpostbuttonview"><span class="translate" data-en="View" data-sw="Fungua">View</span></button></a>
+                            <div class="rightbookingpostbtns">
+                                <form action="{% url 'savebookingpost' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="post_id" value="{{ sport.unique_id }}">
+                                    <button type="submit"  title="save"><i class="fa-regular fa-bookmark"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                {% empty %}
+                <div class="empty">
+                    <div class="empty-image">
+                        <img src="{% static 'icons/empty-booking.png' %}" alt="">
+                    </div>
+                    <p><b class="translate" data-en="Empty" data-sw="Tupu">Empty</b></p>
+                </div>
+                {% endfor %}
+
+            </div>
+
+            {% if sports %}
+            <div class="loadmorediv">
+                <button class="loadmore" id="loadMorePostsButton" onclick="loadMorePosts()"><span class="translate" data-en="load more" data-sw="Fungua zaidi">load more</span></button>
+            </div>
+            {% else %}
+            {% endif %}
+        {% elif profile.category == 'Adventure' %}
+            <div class="bookingposts" id="postsdiv">
+                {% for adventure in adventures reversed %}
+                <div class="bookingpost"> 
+                    <div class="bookingpostimage"> 
+                        {% if adventure.image %}
+                        <a href="{% url 'adventurepage' adventure.id %}"><img src="{{ adventure.image.url }}" alt="" loading="lazy"></a>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                    <div class="bookingpostdetails">
+                        <p>{{ adventure.title | default:"" | truncatechars:23 }}</p>
+                        <div class="bookingpostdetailsbuttons">
+                            <a href="{% url 'adventurepage' adventure.id %}"><button type="button" class="bookingpostbuttonview"><span class="translate" data-en="View" data-sw="Fungua">View</span></button></a>
+                            <div class="rightbookingpostbtns">
+                                <form action="{% url 'savebookingpost' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="post_id" value="{{ adventure.unique_id }}">
+                                    <button type="submit"  title="save"><i class="fa-regular fa-bookmark"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                {% empty %}
+                <div class="empty">
+                    <div class="empty-image">
+                        <img src="{% static 'icons/empty-booking.png' %}" alt="">
+                    </div>
+                    <p><b class="translate" data-en="Empty" data-sw="Tupu">Empty</b></p>
+                </div>
+                {% endfor %}
+
+            </div>
+
+            {% if adventures %}
+            <div class="loadmorediv">
+                <button class="loadmore" id="loadMorePostsButton" onclick="loadMorePosts()"><span class="translate" data-en="load more" data-sw="Fungua zaidi">load more</span></button>
+            </div>
+            {% else %}
+            {% endif %}
+        {% elif profile.category == 'Car Rentals' %}
+            <div class="bookingposts" id="postsdiv">
+                {% for car_rental in car_rentals reversed %}
+                <div class="bookingpost"> 
+                    <div class="bookingpostimage"> 
+                        {% if car_rental.image %}
+                        <a href="{% url 'car_rentalpage' car_rental.id %}"><img src="{{ car_rental.image.url }}" alt="" loading="lazy"></a>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                    <div class="bookingpostdetails">
+                        <p>{{ car_rental.name | default:"" | truncatechars:23 }}</p>
+                        <div class="bookingpostdetailsbuttons">
+                            <a href="{% url 'car_rentalpage' car_rental.id %}"><button type="button" class="bookingpostbuttonview"><span class="translate" data-en="View" data-sw="Fungua">View</span></button></a>
+                            <div class="rightbookingpostbtns">
+                                <form action="{% url 'savebookingpost' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="post_id" value="{{ car_rental.unique_id }}">
+                                    <button type="submit"  title="save"><i class="fa-regular fa-bookmark"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                {% empty %}
+                <div class="empty">
+                    <div class="empty-image">
+                        <img src="{% static 'icons/empty-booking.png' %}" alt="">
+                    </div>
+                    <p><b class="translate" data-en="Empty" data-sw="Tupu">Empty</b></p>
+                </div>
+                {% endfor %}
+
+            </div>
+
+            {% if car_rentals %}
+            <div class="loadmorediv">
+                <button class="loadmore" id="loadMorePostsButton" onclick="loadMorePosts()"><span class="translate" data-en="load more" data-sw="Fungua zaidi">load more</span></button>
+            </div>
+            {% else %}
+            {% endif %}
+        {% elif profile.category == 'Areno BNB' %}
+        <div class="bookingposts" id="postsdiv">
+            {% for arenobnb in arenobnbs reversed %}
+            <div class="bookingpost"> 
+                <div class="bookingpostimage"> 
+                    {% if arenobnb.image %}
+                    <a href="{% url 'arenobnbpage' arenobnb.id %}"><img src="{{ arenobnb.image.url }}" alt="" loading="lazy"></a>
+                    {% else %}
+                    {% endif %}
+                </div>
+                <div class="bookingpostdetails">
+                    <p>{{ arenobnb.name | default:"" | truncatechars:23 }}</p>
+                    <div class="bookingpostdetailsbuttons">
+                        <a href="{% url 'arenobnbpage' arenobnb.id %}"><button type="button" class="bookingpostbuttonview"><span class="translate" data-en="View" data-sw="Fungua">View</span></button></a>
+                        <div class="rightbookingpostbtns">
+                            <form action="{% url 'savebookingpost' %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="post_id" value="{{ arenobnb.unique_id }}">
+                                <button type="submit"  title="save"><i class="fa-regular fa-bookmark"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            {% empty %}
+            <div class="empty">
+                <div class="empty-image">
+                    <img src="{% static 'icons/empty-booking.png' %}" alt="">
+                </div>
+                <p><b class="translate" data-en="Empty" data-sw="Tupu">Empty</b></p>
+            </div>
+            {% endfor %}
+
+        </div>
+
+        {% if arenobnbs %}
+        <div class="loadmorediv">
+            <button class="loadmore" id="loadMorePostsButton" onclick="loadMorePosts()"><span class="translate" data-en="load more" data-sw="Fungua zaidi">load more</span></button>
+        </div>
+        {% else %}
+        {% endif %}
+        {% else %}
+        {% endif %}
+         <!--Posts-->
+         
+        
+         
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'success' %}
+            <div class="info-card"> 
+                <div class="card"> 
+                    <div class="header"> 
+                      <div class="image">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#000000" d="M20 7L9.00004 18L3.99994 13"></path> </g></svg>
+                       </div> 
+                        <div class="content">
+                           <span class="title translate"  data-en="successful!" data-sw="Umefanikiwa!">successful!</span> 
+                           <p class="message translate" data-en="Thank You for rating this user. Your rate has been successfully submitted." data-sw="Umefanikiwa kutuma kiwango, Asante!" >
+                            {{ message }}
+                           </p> 
+                        </div> 
+                           <div class="actions">
+                            <a href=""><button type="button" class="history"><span class="translate" data-en="Proceed" data-sw="Endelea">Proceed</span></button></a>
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            {% endif %} 
+            {% endfor %}
+            {% endif %}
+
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'info' %}
+            <div class="info-card"> 
+                <div class="card"> 
+                    <div class="header"> 
+                      <div class="image">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><g stroke-width="0" id="SVGRepo_bgCarrier"></g><g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"> <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#000000" d="M20 7L9.00004 18L3.99994 13"></path> </g></svg>
+                       </div> 
+                        <div class="content">
+                           <span class="title translate"  data-en="successful!" data-sw="Umefanikiwa!">successful!</span> 
+                           <p class="message translate" data-en="Post successfully added to favourites." data-sw="Umefanikiwa kuongeza kwenye hapisho pendwa.">
+                            {{ message }}
+                           </p> 
+                        </div> 
+                           <div class="actions">
+                            <a href=""><button type="button" class="history"><span class="translate" data-en="Proceed" data-sw="Endelea">Proceed</span></button></a>
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <div class="info-card"> 
+                <div class="card"> 
+                    <div class="header"> 
+                    <div class="image">
+                            <img src="{% static 'icons/icons8-error-100.png' %}" alt="">
+                    </div> 
+                        <div class="content">
+                        <span class="title translate"  data-en="Error!" data-sw="Hujafanikiwa!">Error!</span> 
+                        <p class="message translate" data-en="Your rate has already been submitted. Thank You!" data-sw="Tayari umeshatuma kiwango, Asante.">
+                            {{ message }}
+                        </p> 
+                        </div> 
+                        <div class="actions">
+                            <a href=""><button type="button" class="history" style="background-color: red;"><span class="translate" data-en="Try Again" data-sw="Jaribu Tena">Try Again</span></button></a>
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col">
+                        <h4>ARENO</h4>
+                        <ul>
+                            <li><a href="{% url 'aboutus' %}" class="translate" data-en="About Us" data-sw="Kutuhusu">About us</a></li>
+                            <li><a href="{% url 'aboutus' %}" class="translate" data-en="Our Services" data-sw="Huduma Zetu">Our Services</a></li>
+                            <li><a href="{% url 'privacypolicy' %}" class="translate" data-en="Privacy policy" data-sw="Sera za Faragha">Privacy policy</a></li>
+                            <li><a href="{% url 'refundpolicies' %}" class="translate" data-en="Refund Policies" data-sw="Sera za Marejesho">Refund Policies</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4 class="translate" data-en="Useful Links" data-sw="Linki Muhimu">Useful Links</h4>
+                        <ul>
+                            <li><a href="{% url 'shopping' %}" class="translate" data-en="Shopping" data-sw="Manunuzi">Shopping</a></li>
+                            <li><a href="{% url 'restaurants' %}" class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</a></li>
+                            <li><a href="{% url 'booking' %}" class="translate" data-en="Booking" data-sw="Booking">Booking</a></li>
+                            {% if user.is_authenticated %}
+                            <li><a href="{% url 'logout' %}" class="translate" data-en="Log Out" data-sw="Ondoka">Log Out</a></li>
+                            {% else %}
+                            <li><a href="{% url 'signup' %}" class="translate" data-en="Sign In" data-sw="Jisajili">Sign In</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4 class="translate" data-en="SUPPORT" data-sw="MSAADA">SUPPORT</h4>
+                        <ul>
+                            <li><a href="{% url 'contactareno' %}"><span class="translate" data-en="Contact Us" data-sw="Wasiliana nasi">Contact Us</span></a></li>
+                            {% if arenodetails.phonenumber_1 %}
+                            <li><a href="tel: {{ arenodetails.phonenumber_1 | default:"" }}">{{ arenodetails.phonenumber_1 | default:"" }}</a></li>
+                            {% else %}
+                            {% endif %}
+                            {% if arenodetails.phonenumber_2 %}
+                            <li><a href="tel: {{ arenodetails.phonenumber_2 | default:"" }}">{{ arenodetails.phonenumber_2 | default:"" }}</a></li>
+                            {% else %}
+                            {% endif %}
+                            {% if arenodetails.location %}
+                            <li><a href="#"><i class="fa-solid fa-location-dot"></i> {{ arenodetails.location | default:"" }}</a></li>
+                            {% else %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="footer-col ">
+                        <h4 class="translate" data-en="Follow us" data-sw="Tufuatilie">Follow us</h4>
+                        <ul style="margin-bottom: 35px;">
+                            {% if arenodetails.Areno_footer_content %}
+                            <li><a href="{% url 'index' %}">{{ arenodetails.Areno_footer_content | default:"" }}</a></li>
+                            {% else %}
+                            {% endif %}
+                        </ul>
+                        <div class="social-links">
+                            {% if arenodetails.facebook_link %}
+                            <a href="{{ arenodetails.facebook_link | default:"" }}"><i class="fab fa-facebook-f"></i></a>
+                            {% else %}
+                            {% endif %}
+                            {% if arenodetails.twitter_x_link %}
+                            <a href="{{ arenodetails.twitter_x_link | default:"" }}"><i class="fab fa-x-twitter"></i></a>
+                            {% else %}
+                            {% endif %}
+                            {% if arenodetails.instagram_link %}
+                            <a href="{{ arenodetails.instagram_link | default:"" }}"><i class="fab fa-instagram"></i></a>
+                            {% else %}
+                            {% endif %}
+                            {% if arenodetails.whatsapp_link %}
+                            <a href="{{ arenodetails.whatsapp_link | default:"" }}"><i class="fab fa-whatsapp"></i></a>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="credits">
+                    <div class="line"></div>
+                    <p>&copy; Copyright <strong><span>Areno Ecommerce</span></strong>. All Rights Reserved 2024</p>
+                </div>
+            </div>
+        </footer>
+         
+
+        </main>
+
+
+         <!--mobile below navigations--> 
+    
+         <div class="mobilenavigation">
+            <div class="navigationsbuttons">
+                <div class="rectanglenavbar">
+                    <a href="{% url 'general' %}"><div class="mobile-nav-div">
+                        <button class="mobile-nav-icon">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </button>
+                        <p class="translate" data-en="Explore" data-sw="Gundua">Explore</p>
+                    </div></a>
+                </div>
+                <div class="rectanglenavbar3">
+                    <div class="mobile-nav-circle">
+                        <a href="{% url 'index' %}"><button class="mobile-nav-icon selected">
+                            <img src="{% static 'icons/Home_fill_1.png' %}" alt="">
+                        </button></a>
+                    </div>
+                </div>
+                <div class="rectanglenavbar2">
+                    <a href="{% url 'booking' %}"><div class="mobile-nav-div">
+                        <button class="mobile-nav-icon">
+                            <i class="fa-solid fa-book-bookmark"></i>
+                        </button>
+                        <p>Booking</p>
+                    </div></a>
+                </div>
+            </div>
+            <div class="navbarpng">
+                <img src="{% static 'icons/mobilenav.png' %}" alt="">
+            </div>
+        </div>
+
+        <!--loader-->
+        <div class="loadingdiv" id="preloaderbg">
+            <svg class="pl"  width="240" height="240" viewBox="0 0 240 240">
+              <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+              <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+          </svg>
+          <h3>ARENO</h3>
+        </div>
+ 
+        
+
+
+  
+
+
+
+
+
+
+    </section>
+
+   
+    <script src="{% static 'js/shoppingpage.js' %}" ></script>
+    <script src="{% static 'js/language.js' %}" ></script>
+    <script src="{% static 'js/profilepage.js' %}" ></script>
+    <script src="{% static 'js/profilepage2.js' %}" ></script>
+    <script src="{% static 'js/bookingprofile.js' %}" ></script>
+    <script>
+       
+    </script>
+    
+    
+</body>
+</html>

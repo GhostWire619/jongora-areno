@@ -1,0 +1,280 @@
+
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >Areno - {{ event.title | default:"" }}</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopping2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/eventpayment.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body class="event-body">
+    <section>
+        
+        <main>
+
+        <div class="menu ">
+            <div class="menudiv home-menu">
+                <div>
+                    <button class="minimize-menu">
+                        <i class="fa-solid fa-x" ></i>
+                    </button>
+                    <div class="main-menu-content">
+                        <a href="{% url 'index' %}"><div class="menu-logo">
+                            <img src="{% static 'icons/Frame 304 (2).png' %}" alt="">
+                        </div></a>
+                        <a href="{% url 'shopping' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-cart-arrow-down"></i>
+                            </button>
+                            <button><p class="translate" data-en="Shopping" data-sw="Ununuzi">Shopping</p></button>
+                        </div></a>
+                        <a href="{% url 'restaurants' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-utensils"></i>
+                            </button>
+                            <button><p class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</p></button>
+                        </div></a>
+                        <a href="{% url 'booking' %}"><div class="menu-title title-selected">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-book-bookmark"></i>
+                            </button>
+                            <button><p class="translate" data-en="Booking" data-sw="Booking">Booking</p></button>
+                        </div></a>
+                        <a href=""><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </button>
+                            <button><p class="translate" data-en="Logistics" data-sw="Usafirishaji">Logistics</p></button>
+                        </div></a>
+                        <a href="{% url 'rate' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-star"></i>
+                            </button>
+                            <button><p class="translate" data-en="Rate Us" data-sw="Kiwango cha sisi">Rate Us</p></button>
+                        </div></a>
+                        <a href="{% url 'contactareno' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </button>
+                            <button><p class="translate" data-en="Contact Areno" data-sw="Wasiliana na Areno">Contact Areno</p></button>
+                        </div></a>
+                        {% if user.is_authenticated %}
+                        {% if profile %}
+                        {% if profile.businesstype == 'Shopping' %}
+                        <a href="{% url 'shopprofile' %}"><div class="menu-title">
+                            <button class="menu-title-icon menu-profile-img">
+                                {% if profile.profileimage %}
+                                <img src="{{ profile.profileimage.url }}" alt="">
+                                {% else %}
+                                <img src="{% static 'icons/icons8-male-user-100.png' %}" alt="">
+                                {% endif %}
+                            </button>
+                            <button><p class="translate" data-en="Profile" data-sw="Wasifu">Profile</p></button>
+                        </div></a>
+                        {% else %}
+                        <a href="{% url 'restaurantprofile' %}"><div class="menu-title">
+                            <button class="menu-title-icon menu-profile-img">
+                                {% if profile.profileimage %}
+                                <img src="{{ profile.profileimage.url }}" alt="">
+                                {% else %}
+                                <img src="{% static 'icons/icons8-male-user-100.png' %}" alt="">
+                                {% endif %}
+                            </button>
+                            <button><p class="translate" data-en="Profile" data-sw="Wasifu">Profile</p></button>
+                        </div></a>
+                        {% endif %}
+                        {% else %}
+                        {% endif %}
+                        {% else %}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="menu-about-areno">
+                        <a href="{% url 'aboutus' %}"><button ><p class="translate" data-en="About Us" data-sw="Kutuhusu">About Us</p></button></a>
+                        <a href="{% url 'privacypolicy' %}"><button><p class="translate" data-en="Privacy Policy" data-sw="Sera za faragha">Privacy Policy</p></button></a>
+                        <a href="{% url 'refundpolicies' %}"><button><p class="translate" data-en="Refund Policy" data-sw="Sera za Marejesho">Refund Policy</p></button></a>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}"><button><p><b class="translate signup-menu-button" data-en="Log Out" data-sw="Ondoka">Log Out</b></p></button></a>
+                        {% else %}
+                        <a href="{% url 'signup' %}"><button><p><b class="translate signup-menu-button" data-en="Sign In" data-sw="Ingia">Sign In</b></p></button></a>
+                        {% endif %}
+                    </div>
+                    <div class="languagediv">
+                        <p ><b class="translate" data-en="Language" data-sw="Lugha">Language</b></p>
+                        <button class="eng" id="englishBtn">Eng</button>
+                        <button class="swahili" id="swahiliBtn">Swahili</button>
+                    </div>
+                    <!--<div class="theme">
+                        <p><b class="translate" data-en="Change Theme" data-sw="Badilisha mandhari">Change Theme</b></p>
+                        <div class="toggle-switch" >
+                            <label class="switch-label">
+                              <input type="checkbox" class="checkbox" id="darkmode">
+                              <span class="slider" ></span>
+                            </label>
+                          </div> 
+                    </div>-->
+                </div>
+                <div class="callus">
+                    <a href="tel:{{ arenodetails.phonenumber_1 | default:"" }}"><div class="call">
+                        <i class="fa-solid fa-phone" style="color: white; font-size: 30px;"></i>
+                    </div></a>
+                </div>
+                <div class="below-menu">
+                    <div class="menu-trademark">
+                        <p>© 2023. Areno Company Limited. app version 1.0.0</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="darkside"></div>
+        </div>
+        
+        <div class="eventpaymentdiv">
+            <div class="eventpayment">
+                <form action="">
+                    <div class="eventhead">
+                        <button type="button" title="return" class="goback" onclick="goBack()">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </button>
+                        <div class="eventheaddetails">
+                            <h2>{{ event.title | default:"" }}</h2>
+                            <p><span>{{ event.date | default:"" }}</span> | {{ event.venue | default:"" }}, {{ event.location | default:"" }}</p>
+                        </div>
+                    </div>
+                    <div class="regularticket set">
+                        <div class="price">
+                            <h3>TSH <b><span class="staticNumber">{{ event.regular_price | default:"" }}</span>/=</b></h3>
+                            <input type="hidden" class="amount" name="regularprice" id="a" value="0">
+                            <p data-en="Regular" data-sw="Kawaida">Regular</p>
+                          </div>
+                          <div class="pricecounter">
+                            <h3 class="ticketcounter dynamicNumber">0</h3>
+                            <div class="counter">
+                              <button type="button" class="ticketminus">-</button>
+                              <button type="button" class="ticketplus">+</button>
+                            </div>
+                          </div>
+                    </div>
+                    <hr>
+                    {% if event.vip_price %}
+                    <div class="vipticket set">
+                        <div class="price">
+                            <h3>TSH <b><span class="staticNumber">{{ event.vip_price | default:"0" }}</span>/=</b></h3>
+                            <input type="hidden" class="amount" name="vipprice" id="b" value="0">
+                            <P>VIP</P>
+                        </div>
+                        <div class="pricecounter">
+                            <h3 class="ticketcounter dynamicNumber">0</h3>
+                            <div class="counter">
+                                <button type="button" class="ticketminus">-</button>
+                                <button type="button" class="ticketplus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    {% else %}
+                    <!--this code is a dummy code to keep the js running dont remove it-->
+                    <div class="vipticket set" style="display: none;">
+                        <div class="price">
+                            <h3>TSH <b><span class="staticNumber">{{ event.vip_price | default:"" }}</span>/=</b></h3>
+                            <input type="hidden" class="amount" name="vipprice" id="b" value="0">
+                            <P>VIP</P>
+                        </div>
+                        <div class="pricecounter">
+                            <h3 class="ticketcounter dynamicNumber">0</h3>
+                            <div class="counter">
+                                <button type="button" class="ticketminus">-</button>
+                                <button type="button" class="ticketplus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if event.vvip_price %}
+                    <div class="vipticket set">
+                        <div class="price">
+                            <h3>TSH <b><span class="staticNumber">{{ event.vvip_price | default:"" }}</span>/=</b></h3>
+                            <input type="hidden" class="amount" name="vvipprice" id="c" value="0">
+                            <P>VVIP</P>
+                        </div>`
+                        <div class="pricecounter">
+                            <h3 class="ticketcounter dynamicNumber">0</h3>
+                            <div class="counter">
+                                <button type="button" class="ticketminus">-</button>
+                                <button type="button" class="ticketplus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    {% else %}
+                    <!--this code is a dummy code to keep the js running dont remove it-->
+                    <div class="vipticket set" style="display: none;">
+                        <div class="price">
+                            <h3>TSH <b><span class="staticNumber">{{ event.vvip_price | default:"" }}</span>/=</b></h3>
+                            <input type="hidden" class="amount" name="vvipprice" id="c" value="0">
+                            <P>VVIP</P>
+                        </div>`
+                        <div class="pricecounter">
+                            <h3 class="ticketcounter dynamicNumber">0</h3>
+                            <div class="counter">
+                                <button type="button" class="ticketminus">-</button>
+                                <button type="button" class="ticketplus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="totaldiv">
+                        <div class="price">
+                            <h3 class="translate" data-en="TOTAL" data-sw="JUMLA">TOTAL</h3>
+                        </div>
+                        <div class="pricecounter">
+                            <span>TSH </span> <output name="result" id="result" for="a b c">0</output>/=
+                        </div>
+                    </div>
+                    <button class="but-ticket" type="submit" title="Buy Ticket"><span class="translate" data-en="Buy Ticket" data-sw="Nunua Tiketi">Buy Ticket</span></button>
+                </form>
+            </div>
+        </div>
+        
+        </main>
+        
+        
+        
+        
+           
+        
+
+
+        
+
+
+
+
+
+
+
+
+
+
+    </section>
+
+   
+    <script src="{% static 'js/shoppingpage.js' %}" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="{% static 'js/productpage.js' %}" ></script>
+    <script src="{% static 'js/language.js' %}" ></script>
+    <script src="{% static 'js/ticketpagepayment.js' %}"></script>
+    
+    
+    
+</body>
+</html>

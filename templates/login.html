@@ -1,0 +1,377 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="translate" data-en="Log In" data-sw="Ingia">Log In</title>
+
+    <link rel="stylesheet" href="{% static 'css/shopping.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shopping2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/darkmode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/productpage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/submitloader.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section>
+        <nav>
+            <div class="navbar">
+            <div class="nav-menu product-menu" >
+                <i class="fa-solid fa-bars" style="color: white; font-size: 25px;"></i>
+            </div>
+            <div class="right-nav">
+                <a href="{% url 'index' %}"><h4 class="translate active" data-en="Home" data-sw="Nyumbani">Home</h4></a>
+                <a href="{% url 'shopping' %}"><h4 class="translate" data-en="Shopping" data-sw="Ununuzi">Shopping</h4></a>
+                <a href="{% url 'restaurants' %}"><h4 class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</h4></a>
+                <a href="{% url 'booking' %}"><h4 class="translate" data-en="Booking" data-sw="Booking">Booking</h4></a>
+                <a href=""><h4 class="translate" data-en="Logistics" data-sw="Usafirishaji">Logistics</h4></a>
+                <a href="{% url 'contactareno' %}"><h4 class="translate" data-en="Contact Us" data-sw="Wasiliana Nasi">Contact Us</h4></a>
+                {% if user.is_authenticated %}
+                {% else %}
+                <a href="{% url 'signup' %}"><h4 class="translate signup-top-button" data-en="Sign In" data-sw="Ingia">Sign In</h4></a>
+                {% endif %}
+            </div>
+            </div>
+        </nav>
+
+        <main>
+        <!--search bar-->
+        <div class="productpagehead loginhead">
+            <div class="product-detail-head">
+               
+                <div class="return" onclick="goBack()">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
+                <div class="product-nav-head">
+                    <h4 style="color: black;" class="translate" data-en="Log In" data-sw="Ingia">Log In</h4>
+                </div>
+            </div>
+           
+            
+            
+        </div>
+        <div class="menu ">
+            <div class="menudiv home-menu">
+                <div>
+                    <button class="minimize-menu">
+                        <i class="fa-solid fa-x" ></i>
+                    </button>
+                    <div class="main-menu-content">
+                        <a href="{% url 'index' %}"><div class="menu-logo">
+                            <img src="{% static 'icons/Frame 304 (2).png' %}" alt="">
+                        </div></a>
+                        <a href="{% url 'shopping' %}"><div class="menu-title ">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-cart-arrow-down"></i>
+                            </button>
+                            <button><p class="translate" data-en="Shopping" data-sw="Ununuzi">Shopping</p></button>
+                        </div></a>
+                        <a href="{% url 'restaurants' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-utensils"></i>
+                            </button>
+                            <button><p class="translate" data-en="Restaurants" data-sw="Migahawa">Restaurants</p></button>
+                        </div></a>
+                        <a href="{% url 'booking' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-book-bookmark"></i>
+                            </button>
+                            <button><p class="translate" data-en="Booking" data-sw="Booking">Booking</p></button>
+                        </div></a>
+                        <a href=""><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-truck-fast"></i>
+                            </button>
+                            <button><p class="translate" data-en="Logistics" data-sw="Usafirishaji">Logistics</p></button>
+                        </div></a>
+                        <a href="{% url 'rate' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-star"></i>
+                            </button>
+                            <button><p class="translate" data-en="Rate Us" data-sw="Kiwango cha sisi">Rate Us</p></button>
+                        </div></a>
+                        <a href="{% url 'contactareno' %}"><div class="menu-title">
+                            <button class="menu-title-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </button>
+                            <button><p class="translate" data-en="Contact Areno" data-sw="Wasiliana na Areno">Contact Areno</p></button>
+                        </div></a>
+                    </div>
+                    
+                    <div class="menu-about-areno">
+                        <a href="{% url 'aboutus' %}"><button ><p class="translate" data-en="About Us" data-sw="Kutuhusu">About Us</p></button></a>
+                        <a href="{% url 'privacypolicy' %}"><button><p class="translate" data-en="Privacy Policy" data-sw="Sera za faragha">Privacy Policy</p></button></a>
+                        <a href="{% url 'refundpolicies' %}"><button><p class="translate" data-en="Refund Policy" data-sw="Sera za Marejesho">Refund Policy</p></button></a>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}"><button><p><b class="translate signup-menu-button" data-en="Log Out" data-sw="Ondoka">Log Out</b></p></button></a>
+                        {% else %}
+                        <a href="{% url 'signup' %}"><button><p><b class="translate signup-menu-button" data-en="Sign In" data-sw="Ingia">Sign In</b></p></button></a>
+                        {% endif %}
+                    </div>
+                    <div class="languagediv">
+                        <p ><b class="translate" data-en="Language" data-sw="Lugha">Language</b></p>
+                        <button class="eng" id="englishBtn">Eng</button>
+                        <button class="swahili" id="swahiliBtn">Swahili</button>
+                    </div>
+                </div>
+                <div class="callus">
+                    <a href="tel:{{ arenodetails.phonenumber_1 | default:"" }}"><div class="call">
+                        <i class="fa-solid fa-phone" style="color: white; font-size: 30px;"></i>
+                    </div></a>
+                </div>
+                <div class="below-menu">
+                    <div class="menu-trademark">
+                        <p>© 2023. Areno Company Limited. app version 1.0.0</p>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="darkside"></div>
+        </div>
+        <!--Notification div-->
+        <div class="notificationdiv">
+            <div class="notificationdarkside"></div>
+            <div class="notificationmenu">
+                <div class="top-noty">
+                    <button class="noty-close">
+                        <i class="fa-solid fa-arrow-left" style="font-size: 20px;"></i>
+                    </button>
+                    <h2 class="translate" data-en="Notifications" data-sw="Taarifa">Notifications</h2>
+                </div>
+            </div>
+        </div>
+        
+         <!--register form main-->
+            
+         <div class="register-main" style="height: 88vh; ustify-content: center; align-items: center;">
+            <div class="login-form">
+                    <form class="form_container" action="{% url 'login' %}" method="POST" onsubmit="return submitForm()">
+                        {% csrf_token %}
+                        <div class="title_container">
+                          <p class="title translate" data-en="Welcome Back!" data-sw="Karibu Tena!">Welcome Back!</p>
+                          <span class="subtitle translate" data-en="Get started now!, explore more, shop with ease and convenience and enjoy the experience." data-sw="Anza sasa!, chunguza zaidi, nunua kwa urahisi na ufurahie bidhaa zenye ubora.">Get started now!, explore more, shop with ease and convenience and enjoy the experience.</span>
+                        </div>
+                        {% if messages %}
+                        {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                        <div class="log-error">
+                            <div class="log-error-bar"></div>
+                            <div class="log-error-contents">
+                                <p class="translate" data-en="Wrong Credentials! please try Again" data-sw="Tarifa zimekosewa! Tafadhari jaribu tena!">{{ message }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                        <div class="input_container">
+                          <label class="input_label translate" for="email" data-en="Email" data-sw="Barua Pepe">Email</label>
+                          <input placeholder="@email.com" title="Input email" name="email" type="email" class="input_field" id="email_field" required>
+                        </div>
+                        <div class="input_container">
+                          <label class="input_label translate" for="password_field" data-en="Password" data-sw="Neno siri">Password</label>
+                          <input placeholder="" title="Input password" name="password" id="loginpassword" type="password" class="input_field" required>
+                        </div>
+                        <div class="seepassword">
+                            <button type="button" style="color: blue;"><p class="forgot-password translate" data-en="forgot password?" data-sw="Umesahau Neno siri?">forgot password?</p></button>
+                            <button type="button" id="viewcode"><p style="margin: 0px;" class="translate" data-en="See Password" data-sw="Ona">See Password</p></button>
+                            <button type="button" id="hidecode"><p style="margin: 0px;" class="translate" data-en="Hide Password" data-sw="Ficha">Hide Password</p></button>
+                        </div>
+                        <button title="Sign In" type="submit" class="sign-in_btn" id="submitBtn">
+                          <span class="translate" data-en="Sign In" data-sw="Ingia">Sign In</span>
+                        </button>
+                        <p class="signin-link"><span class="translate" data-en="You don't have an acount ?" data-sw="Hauna unaakaunti?">You don't have an acount ?</span> <a href="{% url 'signup' %}" class="translate" data-en="Sign up" data-sw="Jisajili">Sign up</a> </p>
+                        
+                        <a href="{% url 'aboutus' %}"><p class="note translate" data-en="Terms and conditions &amp; Privacy policies" data-sw="Masharti na Hali za Matumizi &amp; Sera za faragha">Terms and conditions &amp; Privacy policies</p></a>
+                      </form>
+
+                      <!-- submit loader-->
+                        <div id="loader">
+                            <svg class="pl"  width="240" height="240" viewBox="0 0 240 240">
+                                <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+                                <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+                                <circle class="pl__ring pl__ring--c" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+                                <circle class="pl__ring pl__ring--d" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+                            </svg>
+                            <span><b class="translate" data-en="Signing In." data-sw="Unaunganishwa.">Signing In.</b> <br> <span><p class="translate" data-en="Please wait..." data-sw="Tafadhari subiri..">Please wait...</p></span></span>
+                        </div>
+
+                    
+            </div>
+            
+         </div>
+
+        <!--email confirmation-->
+        <div class="emailconfirmdiv">
+            <div class="card">
+                <button class="confirmclose">
+                    <i class="fa-solid fa-x" ></i>
+                </button>
+                <div class="confirmemailimageicon">
+                    <img src="{% static 'icons/icons8-info-100.png' %}" alt="">
+                </div>
+                <span class="card__title translate"  data-en="Confirm Your Email!" data-sw="Hakiki Barua pepe!">Confirm Your Email!</span>
+                <p class="card__content translate" data-en="A Link to reset your password will be sent to your email and as an sms via your phone number registered." data-sw="Utatumiwa ujumbe wa kubadilisha nenosiri kwa kupitia email yako na namba ya simu uliyosajili.">
+                    A Link to reset your password will be sent to your email and as an sms via your phone number registered.
+                </p>
+                <form action="{% url 'emailconfirmation' %}" method="POST">
+                    {% csrf_token %}
+                <div class="card__form">
+                    <input name="email" placeholder="@email.com" type="email" required>
+                    <button class="sign-up" type="submit"><span class="translate" data-en="Confirm" data-sw="Hakiki">Confirm</span></button>
+                </div>
+                </form>
+            </div>
+        </div>
+
+
+
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags == 'info' %}
+    <div class="info-card"> 
+        <div class="card"> 
+            <div class="header"> 
+              <div class="image">
+                    <img src="{% static 'icons/icons8-error-100.png' %}" alt="">
+               </div> 
+                <div class="content">
+                   <span class="title translate"  data-en="Unsuccessful!" data-sw="Haijafanikiwa!">Unsuccessful!</span> 
+                   <p class="message translate" data-en="Passwords Do not match!" data-sw="Nenosiri hazifanani!">
+                    {{ message }}
+                   </p> 
+                </div> 
+                   <div class="actions">
+                    <a href=""><button type="button" class="history" style="background-color: red;"><span class="translate" data-en="Try Again" data-sw="Jaribu Tena">Try Again</span></button></a>
+                    </div> 
+                </div> 
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <div class="info-card"> 
+            <div class="card"> 
+                <div class="header"> 
+                  <div class="image">
+                        <img src="{% static 'icons/icons8-success-500.png' %}" alt="">
+                   </div> 
+                    <div class="content">
+                       <span class="title translate"  data-en="successful!" data-sw="Umefanikiwa!">successful!</span> 
+                       <p class="message translate" data-en="A reset link has been sent to your email and phone number!." data-sw="Umetumiwa linki kwenye namba yako ya simu na email, ifuate uweze kubadili nenosiri!">
+                        {{ message }}
+                       </p> 
+                    </div> 
+                       <div class="actions">
+                        <a href=""><button type="button" class="history"><span class="translate" data-en="Proceed" data-sw="Endelea">Proceed</span></button></a>
+                        </div> 
+                    </div> 
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'warning' %}
+        <div class="info-card"> 
+            <div class="card"> 
+                <div class="header"> 
+                  <div class="image">
+                        <img src="{% static 'icons/icons8-error-100.png' %}" alt="">
+                   </div> 
+                    <div class="content">
+                       <span class="title translate"  data-en="Unsuccessful!" data-sw="Haijafanikiwa!">Unsuccessful!</span> 
+                       <p class="message translate" data-en="User does not exist, Please try again!." data-sw="Mtumiaji hayupo, Tafadhari jaribu tena!.">
+                        {{ message }}
+                       </p> 
+                    </div> 
+                       <div class="actions">
+                        <a href=""><button type="button" class="history" style="background-color: red;"><span class="translate" data-en="Try Again" data-sw="Jaribu Tena">Try Again</span></button></a>
+                        </div> 
+                    </div> 
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+
+        </main>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </section>
+
+    <script>
+        const loginpassword = document.getElementById('loginpassword');
+        const viewcode = document.getElementById('viewcode');
+        const hidecode = document.getElementById('hidecode');
+
+        viewcode.addEventListener("click", ()=>{
+            loginpassword.type = 'text';
+            viewcode.style.display = 'none'
+            hidecode.style.display = 'flex'
+        })
+        hidecode.addEventListener("click", ()=>{
+            loginpassword.type = 'password';
+            viewcode.style.display = 'flex'
+            hidecode.style.display = 'none'
+        })
+
+        
+        const showemailconfirm = document.querySelector('.forgot-password');
+        const emailconfirmdiv = document.querySelector('.emailconfirmdiv');
+        const hideemailconfirm = document.querySelector('.confirmclose');
+        
+
+        showemailconfirm.addEventListener("click", ()=>{
+            emailconfirmdiv.style.display = 'flex'
+        })
+        hideemailconfirm.addEventListener("click", ()=>{
+            emailconfirmdiv.style.display = 'none'
+        })
+
+
+        function submitForm() {
+            var loader = document.getElementById("loader");
+            loader.style.display = "flex"; 
+            return true; // Prevent the form from submitting automatically
+        }
+
+
+
+    </script>
+    <script src="{% static 'js/shoppingpage.js' %}" ></script>
+    <script src="{% static 'js/language.js' %}" ></script>
+    
+    
+</body>
+</html>
