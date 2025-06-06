@@ -1,0 +1,161 @@
+/* implementing dark mode
+:root {
+    --text-color-light: black;
+    --text-color-orange: orangered;
+    --text-color-productbackground: rgba(0, 0, 0, 0);
+    --bg-color-light: white;
+    --bg-color-filter: rgba(128, 128, 128, 0.226);
+    --bg-color-filterbutton: rgba(128, 128, 128, 0.226);
+    --bg-color-filterbuttonborder: rgba(0, 0, 0, 0.349);
+    --text-color-dark: white;
+    --bg-color-dark: #333;
+  }
+  
+body {
+    color: var(--text-color-light);
+    background-color: var(--bg-color-light) ;
+    transition: color 0.3s, background-color 0.3s;
+  }
+
+.menudiv, .menu-about-areno p, .register p, .main-menu-content p, .category p, .categories h3{
+    color: var(--text-color-light);
+    background-color: var(--bg-color-light);
+    transition: color 0.3s, background-color 0.3s;
+}
+.mobile-nav-head h4, .seemore h3{
+    color: var(--text-color-orange);
+    transition: color 0.3s, background-color 0.3s;
+}
+.product{
+    background-color: var(--text-color-productbackground);
+    transition: color 0.3s, background-color 0.3s;
+}
+.product-productpage{
+    background-color: var(--text-color-productbackground);
+    transition: color 0.3s, background-color 0.3s;
+}
+.viewproduct, .track-headings button{
+    color: var(--text-color-light);
+    transition: color 0.3s, background-color 0.3s;
+}
+.filtermenudiv, .abouthead h2, .orders p, .myorders h3, .subinfo button, .notificationmenu, .alert, .modal-content{
+    color: var(--text-color-light);
+    background-color: var(--bg-color-light);
+    transition: color 0.3s, background-color 0.3s;
+}
+.profilemenu{
+    color: var(--text-color-light);
+    background-color: var(--bg-color-light) !important;
+    transition: color 0.3s, background-color 0.3s;
+}
+.filterbuttons button{
+    color: var(--text-color-light);
+    background-color: var(--bg-color-filter);
+    transition: color 0.3s, background-color 0.3s;
+}
+.filterbutton button:hover, .filterbuttons button:hover,.nameemail input{
+    color: var(--text-color-light);
+    border-color: var(--bg-color-filterbuttonborder);
+    transition: color 0.3s, background-color 0.3s;
+}
+.filtercategories button:hover, .filterbuttons input, .filterbutton button{
+    color: var(--text-color-light);
+    background-color: var(--bg-color-filterbutton);
+    transition: color 0.3s, background-color 0.3s;
+}
+.menu-title-icon i{
+    color: var(--text-color-light);
+}
+.register-button1:hover{
+    width: auto;
+    padding: 3px 22px 3px 22px;
+    border-radius: 10px;
+    border: 1px solid ;
+    border-color: var(--bg-color-filterbuttonborder);
+    background-color: rgba(255, 68, 0, 0);
+    color: var(--text-color-light);
+    transition: 300ms;
+    cursor: pointer;
+}
+.add-cart2:hover, .contactinput input, .login-form input{
+    color: var(--text-color-light) !important;
+    border-color: var(--bg-color-filterbuttonborder) !important;
+}
+.register-button2{
+    color: var(--text-color-light);
+    border-color: var(--bg-color-filterbuttonborder);
+    transition: color 0.3s, background-color 0.3s;
+}
+.register-button2:hover{
+    border-color: var(--bg-color-filterbuttonborder);
+    transition: color 0.3s, background-color 0.3s;
+}.product-profile b{
+    color: var(--text-color-light);
+}
+.delivery-info input, textarea, .login-form input{
+    color: var(--text-color-light);
+}
+.inputdiv input{
+    transition: color 0.3s, background-color 0.3s;
+    color: var(--text-color-light);
+}
+
+
+.social i, .minimize-menu i, .seemorearrow i, .homebutton i, .mobile-cart i{
+    color: var(--text-color-light);
+}
+.nav-menu i{
+    font-size: 35px;
+    color: var(--text-color-light);
+}
+.return i{
+    color: var(--text-color-light) !important;
+}
+.fillform, .category2, .posting, .profilemenu {
+    color: var(--text-color-light);
+}
+
+  
+
+
+
+
+
+
+.dark-mode {
+    --text-color-light: white;
+    --text-color-orange: white;
+    --text-color-productbackground: rgba(0, 0, 0, 0.76);
+    --bg-color-filter: rgba(128, 125, 125, 0.801);
+    --bg-color-filterbutton: rgba(128, 125, 125, 0.801);
+    --bg-color-filterbuttonborder: rgba(228, 228, 228, 0.5);
+    --bg-color-light: #333;
+    --text-color-dark: black;
+    --bg-color-dark: white;
+  }
+
+
+@media screen and (max-width: 764px) {
+    .menudiv{
+        color: var(--text-color-light);
+        background-color: var(--bg-color-light);
+        transition: color 0.3s, background-color 0.3s;
+    }
+    .mobile-headings p{
+        color: var(--text-color-light);
+        background-color: var(--bg-color-light);
+        transition: color 0.3s, background-color 0.3s;
+    }
+
+
+}
+
+@media screen and (max-width: 1064px) {
+
+    .menudiv{
+        color: var(--text-color-light);
+        background-color: var(--bg-color-light);
+        transition: color 0.3s, background-color 0.3s;
+    }
+    
+}*/

@@ -1,0 +1,133 @@
+/* Custom Swagger UI Styling */
+
+.swagger-ui .topbar {
+    background-color: #1a1a1a;
+    padding: 10px 0;
+}
+
+.swagger-ui .topbar .download-url-wrapper .select-label {
+    color: white;
+}
+
+.swagger-ui .info .title {
+    color: #3b4151;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.swagger-ui .opblock-tag {
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.swagger-ui .opblock {
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.swagger-ui .opblock .opblock-summary {
+    padding: 10px;
+}
+
+.swagger-ui .opblock-tag:hover,
+.swagger-ui .opblock .opblock-summary-operation:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Method colors */
+.swagger-ui .opblock-get {
+    border-color: #61affe;
+    background: rgba(97, 175, 254, 0.1);
+}
+
+.swagger-ui .opblock-post {
+    border-color: #49cc90;
+    background: rgba(73, 204, 144, 0.1);
+}
+
+.swagger-ui .opblock-put {
+    border-color: #fca130;
+    background: rgba(252, 161, 48, 0.1);
+}
+
+.swagger-ui .opblock-delete {
+    border-color: #f93e3e;
+    background: rgba(249, 62, 62, 0.1);
+}
+
+.swagger-ui .opblock-patch {
+    border-color: #50e3c2;
+    background: rgba(80, 227, 194, 0.1);
+}
+
+/* Buttons */
+.swagger-ui .btn {
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.swagger-ui .btn.execute {
+    background-color: #4990e2;
+    border-color: #4990e2;
+    transition: background-color 0.2s;
+}
+
+.swagger-ui .btn.execute:hover {
+    background-color: #3c7dcf;
+}
+
+/* Responses */
+.swagger-ui .responses-table {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.swagger-ui .response-col_status {
+    font-weight: bold;
+}
+
+/* Models */
+.swagger-ui section.models {
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
+.swagger-ui section.models .model-container {
+    margin-bottom: 10px;
+}
+
+/* JSON Schema Form */
+.swagger-ui .json-schema-form input,
+.swagger-ui .json-schema-form textarea {
+    border-radius: 4px;
+    border: 1px solid #d8dde3;
+    padding: 8px 10px;
+}
+
+.swagger-ui .json-schema-form input:focus,
+.swagger-ui .json-schema-form textarea:focus {
+    border-color: #4990e2;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(73, 144, 226, 0.3);
+}
+
+/* Authorization */
+.swagger-ui .auth-wrapper {
+    margin-bottom: 20px;
+}
+
+.swagger-ui .auth-container {
+    border-radius: 5px;
+}
+
+/* Make the Swagger UI more responsive */
+@media (max-width: 768px) {
+    .swagger-ui .opblock-summary-path {
+        max-width: 150px;
+    }
+    
+    .swagger-ui .opblock-summary-description {
+        display: none;
+    }
+} 

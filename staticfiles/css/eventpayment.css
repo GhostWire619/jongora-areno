@@ -1,0 +1,236 @@
+.event-body{
+    background-color: rgba(218, 213, 213, 0.336);
+}
+.eventpaymentdiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 30px;
+}
+
+.eventpayment{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+}
+.eventpayment form{
+    width: 100%;
+}
+.eventhead{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    height: 80px;
+    line-height: 30px;
+    background-color: rgba(190, 46, 46, 0);
+    border-radius: 15px;
+}
+.goback{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    height: 20px;
+    width: 20px;
+    min-width: 20px;
+    border-radius: 50%;
+    color: black;
+    background-color: rgba(0, 0, 255, 0);
+}
+.goback:hover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    transition: 200ms;
+    cursor: pointer;
+    color: white;
+    background-color: rgba(0, 128, 0, 0.247);
+}
+.goback i{
+    font-size: 17px;
+    color: black;
+}
+.eventheaddetails{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+    padding: 10px;
+    height: 80px;
+    line-height: 30px;
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 15px;
+}
+.regularticket{
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 15px 0px 0px 0px;
+    line-height: 30px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px 10px 0px 0px;
+}
+.vipticket{
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 0px;
+    line-height: 30px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0px;
+}
+.totaldiv{
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 0px;
+    line-height: 30px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0px 0px 10px 10px;
+}
+.pricecounter{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.counter{
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    margin-left: 30px;
+}
+.counter button{
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(128, 128, 128, 0.671);
+    border-radius: 5px;
+    margin-left: 10px ;
+    color: black;
+    font-size: 25px;
+    background-color: white;
+}
+.counter button:nth-child(2){
+    background-color: rgba(0, 128, 0, 0.226);
+    color: black;
+    border: none;
+}
+.counter button:hover{
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(128, 128, 128, 0.671);
+    border-radius: 5px;
+    margin-left: 10px ;
+    color: black;
+    font-size: 25px;
+    background-color: rgba(0, 128, 0, 0.404);
+    transition: 200ms;
+    cursor: pointer;
+    border: none;
+}
+.price h3 b, .totalamount{
+    color: orangered;
+}
+.eventpayment hr{
+    height: 2px;
+    border: none;
+}
+.but-ticket{
+    height: 50px;
+    width: 100%;
+    margin: 20px 0px 10px 0px;
+    border: none;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 6px;
+    background-color: rgba(0, 128, 0, 0.226);
+}
+.but-ticket:hover{
+    background-color: rgba(0, 128, 0, 0.418);
+    transition: 200ms;
+    cursor: pointer;
+}
+.but-ticket span{
+    color: black;
+}
+.eventhead h2{
+    color: orangered;
+}
+.pricecounter output{
+    color: green;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 764px){
+    .eventpaymentdiv{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 10px;
+    }
+    .eventhead h2{
+        color: orangered;
+        font-size: 18px;
+        margin: 0px;
+    }
+    .eventheaddetails{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+        width: 100%;
+        padding: 10px;
+        height: 80px;
+        line-height: 22px;
+        background-color: rgba(255, 255, 255, 0);
+        border-radius: 15px;
+    }
+}
+@media screen and (max-width: 1064px){
+    .eventpaymentdiv{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 15px;
+    }
+}
+
+
+
+

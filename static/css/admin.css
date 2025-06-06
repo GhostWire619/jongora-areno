@@ -1,0 +1,1030 @@
+
+*{
+    scroll-behavior: smooth;
+}
+main{
+    min-width: 1150px !important;
+}
+.navtop{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 30px 0px 30px;
+    height: 60px;
+    width: 100%;
+}
+.navtop h2{
+    color: orangered;
+}
+.navtop-right{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.navtop-right button{
+    height: 45px;
+    width: 140px;
+    font-size: 16px;
+    margin-left: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.admincenter{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 90vh;
+}
+.centertop{
+    height: 5.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 30px 0px 30px;
+    background-color: rgb(255, 255, 255);
+}
+.centertop-left{
+    font-size: 20px;
+}
+.centertop-right{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.centertop-right form{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    min-width: 300px;
+}
+.centertop-right input{
+    width: 90%;
+    height: 40px;
+    padding: 0px 10px 0px 10px;
+    outline: none;
+    border: none;
+    font-weight: bold;
+    background-color: rgb(228, 228, 228);
+    border-radius: 4px;
+}
+.centertop-right button{
+    font-size: 30px;
+    margin-left: 5px;
+    border: none;
+    color: blue;
+    background-color: transparent;
+    cursor: pointer;
+}
+.centertop-right button:hover{
+    font-size: 30px;
+    margin-left: 5px;
+    border: none;
+    color: orangered;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 200ms;
+}
+.centerbottom{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+.centerleft{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 8px;
+    width: 15rem;
+    min-width: 15rem;
+    height: 100%;
+}
+.centerright{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 77vh;
+    border-radius: 3px;
+    margin-left: 3px;
+    margin-right: 30px;
+    background-color: rgba(224, 230, 224, 0.507);
+}
+.centermain{
+    height: 100%;
+    overflow-y: scroll;
+}
+.productsmain{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 100%;
+    overflow-y: scroll;
+}
+.allproductsdiv{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+.productsdivlist{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.foodsdivlist{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.buttondiv{
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 2rem;
+    width: 180px;
+    margin-bottom: 15px;
+}
+.buttondiv span{
+    display: flex;
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    border: none;
+    background-color: red;
+    z-index: 2;
+    top: 0;
+    left: -10px;
+}
+.buttondiv i{
+    font-size: 20px;
+    color: black;
+}
+.buttondiv button{
+    width: 140px;
+    font-size: 14px;
+    height: 2rem;
+    background-color: transparent;
+    border: 1px solid green;
+    color: black;
+    border-radius: 4px;
+}
+.buttondiv button:hover{
+    width: 140px;
+    font-size: 14px;
+    background-color: rgba(0, 128, 0, 0.205);
+    border: 1px solid green;
+    border-radius: 4px;
+    transition: 200ms;
+}
+.buttondivselected{
+    background-color: rgba(0, 128, 0, 0.205) !important;
+    border: 1px solid green !important;
+}
+.buttondivselected b{
+    color: black;
+}
+.headerlist{ 
+    color: black !important;
+    background-color: transparent !important;
+}
+.userlist{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 4px;
+    height: 30px;
+    min-height: 30px;
+    margin: 5px 5px 0px 5px;
+    font-size: 14px;
+    background-color: rgb(255, 255, 255);
+}
+.userlist:hover{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 4px;
+    margin: 5px 5px 0px 5px;
+    height: 30px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: rgba(0, 128, 0, 0.267);
+}
+.username{
+    width: 300px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0px 4px 0px 8px;
+}
+.useremail{
+    width: 350px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0px 4px 0px 8px;
+}
+.type{
+    width: 120px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0px 4px 0px 8px;
+}
+.status{
+    display: flex;
+    justify-content: center;
+    width: 120px;
+    color: green;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0px 4px 0px 8px;
+}
+.denied{
+    display: flex;
+    justify-content: center;
+    width: 120px;
+    color: red;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0px 4px 0px 8px;
+}
+.pending{
+    display: flex;
+    justify-content: center;
+    width: 120px;
+    color: blue;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0px 4px 0px 8px;
+}
+.reg-date{
+    display: flex;
+    justify-content: center;
+    width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0px 4px 0px 8px;
+}
+.adminproduct{
+    margin: 5px 15px 5px 5px;
+    height: 310px;
+    min-height: 310px;
+    width: 24%;
+    min-width: 200px;
+    background-color: white;
+}
+.adminproductdetails{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+.actionviewproduct{
+    height: 30px;
+    width: 60px;
+    border: none;
+    border-radius: 8px;
+    color: orangered;
+    background-color: rgba(0, 255, 13, 0.384);
+}
+.actionviewproduct:hover{
+    height: 30px;
+    width: 60px;
+    border: none;
+    border-radius: 8px;
+    color: rgb(255, 255, 255);
+    background-color: orangered;
+    transition: 200ms;
+    cursor: pointer;
+}
+.actionform{
+    display: flex;
+    width: 100% !important;
+    flex-direction: row;
+}
+.adminproduct select{
+    height: 30px;
+    width: 60%;
+    margin: 0px 0px 0px 3px;
+    border: 1px solid orangered;
+    border-radius: 5px;
+    color: black;
+    font-weight: bold;
+}
+.actionsubmit{
+    height: 30px;
+    width: auto;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin: 0px 0px 0px 3px;
+    border-radius: 5px;
+    border: none;
+    background-color: orangered;
+    color: white;
+    font-weight: bold;
+}
+.actionsubmit:hover{
+    background-color: green;
+    transition: 200ms;
+    cursor: pointer;
+}
+.userdetail{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+.userpersonalinfo{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 200px;
+    min-width: 200px;
+}
+.userdetail p{
+    margin-bottom: 10px;
+}
+.registerbuttons{
+    display: flex;
+    flex-direction: row;
+}
+.registerbuttons button{
+    height: 45px;
+    width: 160px;
+    font-size: 16px;
+    margin-left: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.registerbuttons form{
+    width: 160px;
+}
+.green{
+    background-color: rgba(0, 128, 0, 0.26);
+    color: black;
+    border: 1px solid rgba(0, 128, 0, 0.562);
+    border-radius: 4px;
+}
+.green:hover{
+    background-color: rgba(0, 128, 0, 0.562);
+    color: white;
+    border: none;
+    transition: 200ms;
+    border-radius: 4px;
+}
+.blue{
+    background-color: rgba(0, 0, 255, 0.26);
+    border: 1px solid rgba(0, 0, 255, 0.616);
+    color: black;
+    border-radius: 4px;
+}
+.blue:hover{
+    background-color: rgb(0, 0, 255);
+    border: 1px solid rgba(0, 0, 255, 0.616);
+    color: white;
+    transition: 200ms;
+    border-radius: 4px;
+}
+.blue:hover .blue p{
+    color: white;
+}
+.orangered{
+    background-color: rgba(255, 68, 0, 0.274);
+    border: 1px solid rgba(255, 68, 0, 0.644);
+    color: black;
+    border-radius: 4px;
+}
+.orangered:hover{
+    background-color: rgb(255, 68, 0);
+    border: 1px solid rgba(255, 68, 0, 0.644);
+    color: white;
+    transition: 200ms;
+    border-radius: 4px;
+}
+ /* Styling for the form container */
+   /* Styling for the form container */
+   .registerformdiv{
+    display: none;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.445);
+   }
+   .form-container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1000;
+    width: 50%; /* Adjust width as needed */
+    max-width: 80%; /* Maximum width of the form container */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+    font-family: Arial, sans-serif; /* Use a common font family */
+  }
+  
+  /* Styling for the close button */
+  .form-container h3{
+    margin: 0px 0px 10px 5px;
+  }
+  .form-container .close-btn {
+    position: absolute;
+    top: 5px;
+    font-size: 30px;
+    right: 5px;
+    cursor: pointer;
+    color: #000000; /* Close button color */
+  }
+  .form-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .row{
+    display: flex;
+    flex-direction: column;
+    margin: 5px ;
+    max-width: 300px;
+  }
+  .mini-row-div{
+    display: flex;
+    flex-direction: row;
+    margin: 5px ;
+  }
+  .min-row{
+    width: 46%;
+    margin-left: 13px;
+  }
+  /* Style for form labels */
+  .form-container label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  /* Style for form inputs */
+  .form-container input[type="text"],
+  .form-container select{
+    width: 100%;
+    padding: 8px;
+    height: 35px;
+    background-color: white;
+    border: 1px solid #00000057;
+    border-radius: 2px;
+  }
+ 
+  
+  /* Style for submit button */
+  .form-container button[type="submit"] {
+    background-color: #009105;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    margin: 10px 5px 0px 5px;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Style for submit button on hover */
+  .form-container button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+
+  .adminmediaquery{
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    z-index: 1000;
+}
+.allitemsfilterbuttons{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.allitemsfilterbuttons button{
+    font-size: 14px;
+    width: 100px;
+    height: 100%;
+    min-width: 100px;
+    font-weight: bold;
+    color: blue;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    background-color: rgba(128, 128, 128, 0.199);
+    margin-right: 10px;
+}
+.allitemsfilterbuttons button:hover{
+    font-size: 14px;
+    width: 100px;
+    height: 100%;
+    min-width: 100px;
+    font-weight: bold;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    background-color: blue;
+    transition: 200ms;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.titlefilterdiv{
+    margin: 10px;
+    color: orangered;
+}
+
+.activityitem{
+    display: flex;
+    flex-direction: column;
+    height: 30px;
+    margin: 10px;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: 200ms;
+    background-color: white;
+}
+.activityright{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 2px;
+    height: 30px;
+    min-height: 30px;
+    font-size: 14px;
+}
+.activityright:hover{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 2px;
+    height: 30px;
+    min-height: 30px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: rgba(0, 128, 0, 0.267) !important;
+}
+.activitydetails{
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    padding: 10px 0px 10px 7px;
+}
+.activitydetailsimage{
+    height:auto;
+    width: 200px;
+    min-width: 200px;
+    border-radius: 7px;
+    overflow: hidden;
+}
+.activitydetailsimage img{
+    height:100%;
+    width: 100%;
+    border-radius: 7px;
+    object-fit: cover;
+}
+.activitydetailsright{
+    display: flex;
+    flex-direction: column;
+}
+.activitydetail{ 
+    display: flex;
+    padding-left: 10px;
+    margin-bottom: 5px;
+    flex-direction: row;
+}
+.activitydetail p{
+    font-size: 14px;
+}
+.activitydetail p:nth-child(1){
+    width: 100px;
+    min-width: 100px;
+    font-weight: bold;
+    overflow: hidden;
+}
+.activitydetail select{
+    height: 30px;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 128, 0, 0.534);
+}
+.activityactionsubmit{
+    height: 30px;
+    border-radius: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid rgba(0, 128, 0, 0.534);
+    background-color: rgba(0, 128, 0, 0.308);
+}
+.activityactionsubmit:hover{
+    height: 30px;
+    border-radius: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+    border: 1px solid rgba(0, 128, 0, 0.534);
+    background-color: rgba(0, 128, 0, 0.637);
+}
+.activityactiondelete i{
+    color: black;
+}
+.activityactiondelete{
+    height: 30px;
+    border-radius: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 5px;
+    border: 1px solid rgba(0, 128, 0, 0);
+    background-color: rgba(0, 128, 0, 0);
+}
+.activityactiondelete:hover{
+    height: 30px;
+    border-radius: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 5px;
+    transition: 200ms;
+    cursor: pointer;
+    border: 1px solid rgba(128, 0, 0, 0.534);
+    background-color: rgba(128, 0, 0, 0.308);
+}
+.downloaduserfilebutton{
+    padding: 6px 10px 6px 10px;
+    border-radius: 3px;
+    font-weight: bold;
+    border: 1px solid green;
+    cursor: pointer;
+    background-color: rgba(3, 143, 14, 0.13);
+}
+.downloaduserfilebutton:hover{
+    padding: 6px 10px 6px 10px;
+    border-radius: 3px;
+    font-weight: bold;
+    border: 1px solid green;
+    cursor: pointer;
+    color: white;
+    transition: 200ms;
+    background-color: rgb(3, 143, 15);
+}
+.requestsubmitmsgform{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: start;
+}
+.carrequestmsg{
+    border: 1px solid rgba(0, 128, 0, 0);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: 100%;
+    background-color: rgba(0, 128, 0, 0.158);
+}
+.viewdetailspage{
+    width: 20px;
+    border: none;
+    background-color: rgba(0, 128, 0, 0);
+    border-radius: 3px;
+    margin-left: 10px;
+}
+.viewdetailspage i{
+    color: orangered;
+}
+
+.centertop-right select{
+    height: 40px;
+    border: 1px solid rgba(0, 0, 255, 0);
+    border-radius: 4px;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: blue;
+    margin-right: 10px;
+    font-weight: bold;
+}
+.hostproficon{
+    height: 20px;
+    width: auto;
+    margin-left: 10px;
+    overflow: hidden;
+}
+.hostproficon img{
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+}
+.usersendmsg{
+    display: flex;
+    margin: 3px 10px 10px 10px;
+    flex-direction: column;
+}
+.usersendmsgreply {
+    display: flex;
+    margin-bottom: 10px;
+    flex-direction: row;
+}
+.usersendmsgreply p:nth-child(1){
+    width: 200px;
+    min-width: 200px;
+    white-space: nowrap;
+}
+.usersendmsgdiv{
+    display: flex;
+    flex-direction: column;
+}
+.usersendmsgreply textarea{
+    border: 1px solid transparent;
+    background-color: rgba(0, 128, 0, 0.178);
+    border-radius: 5px;
+}
+.usersendmsgdiv button{
+    margin-top: 10px;
+    width: 70px;
+    height: 40px;
+    border-radius: 4px;
+    border: 1px solid green;
+    background-color: rgba(0, 128, 0, 0.171);
+}
+.usersendmsgdiv button:hover{
+    background-color: rgba(0, 128, 0, 0.356);
+    cursor: pointer;
+    transition: 200ms;
+}
+
+/*css for sending message div in admin message page*/
+/*question form css*/
+.questionformcont{
+    display: none;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.418);
+}
+.questionformcont .input textarea{
+    margin-top: 5px;
+    border-radius: 4px;
+    max-width: 470px;
+    max-height: 150px;
+    border: none;
+    background-color: rgba(0, 128, 0, 0.212);
+}
+.bookingformcont .input textarea{
+    margin-top: 5px;
+    border-radius: 4px;
+    max-width: 470px;
+    max-height: 150px;
+    border: none;
+    background-color: rgba(0, 128, 0, 0.212);
+}
+
+/*booking form css*/
+.bookingformcont{
+    display: none;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.418);
+}
+
+
+.formcontainer{
+    width: 90%;
+    max-width: 500px;
+}
+.formcontainer .button {
+    font: inherit;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+.formcontainer  .container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  
+.formcontainer  .modal {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 15px 30px 0 rgba(0, 125, 171, 0.15);
+    border-radius: 10px;
+  }
+  
+.formcontainer  .modal__header {
+    padding: 10px 10px 5px 15px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+.formcontainer  .modal__body {
+    padding: 1rem 1rem;
+  }
+  
+.formcontainer  .modal__footer {
+    padding: 0px 10px 10px 15px;
+  }
+  
+.formcontainer  .modal__title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+  .questionformcont  .modal__title span{
+    margin-right: 10px;
+  }
+  
+.formcontainer  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.15s ease;
+  }
+  
+.formcontainer  .button--icon {
+    width: 2rem;
+    height: 2rem;
+    font-size: 25px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+.formcontainer  .button--icon:focus, .formcontainer.button--icon:hover {
+    background-color: #ededed;
+  }
+  
+.formcontainer  .button--primary {
+    background-color:  rgba(0, 168, 0, 0.801);
+    color: #FFF;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+  }
+.button--primary span{
+    color: white;
+}
+.formcontainer  .button--primary:hover {
+    background-color:  rgba(3, 128, 3, 0.87);
+  }
+  
+.formcontainer  .input {
+    display: flex;
+    margin-bottom: 10px;
+    flex-direction: column;
+  }
+  
+.formcontainer  .input + .formcontainer.input {
+    margin-top: 1.75rem;
+  }
+  
+.formcontainer  .input__label {
+    font-weight: bold;
+    font-size: 13px;
+  }
+  
+.formcontainer  .input__field {
+    display: block;
+    margin-top: 0.3rem;
+    border: 1px solid #DDD;
+    border-radius: 0.25rem;
+    height: 40px;
+    padding: 0.75rem 0.75rem;
+    transition: 0.15s ease;
+  }
+  
+
+.formcontainer  .input__field--textarea {
+    min-height: 100px;
+    max-width: 100%;
+  }
+  
+.formcontainer  .input__description {
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    color: #8d8d8d;
+  }
+.asqiconimg{
+    height: 28px;
+    width: 28px;
+    min-width: 28px;
+    margin-right: 5px;
+    overflow: hidden;
+}
+.asqiconimg img{
+    height: 100%;
+    width: 100%;
+    min-width: 100%;
+    object-fit: cover;
+}
+.sendmessage{
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    right: 50px;
+    bottom: 20px;
+    height: 70px;
+    width: auto;
+    background-color: rgba(0, 128, 0, 0);
+    border: none;
+    cursor: pointer;
+    
+}
+.sendmessage img{
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width:764px){
+    main{
+        min-width: 1350px !important;
+    }
+    .adminmediaquery{
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: black;
+        z-index: 1000;
+    }
+    .mediaquery{
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        width: 80%;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+    }
+    .mediaquery i{
+        font-size: 40px;
+        margin-bottom: 20px;
+    }
+}
+
+
+

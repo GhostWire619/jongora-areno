@@ -1,0 +1,1250 @@
+
+.register-main{
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0px;
+    background-color: rgba(128, 128, 128, 0);
+    padding: 0px 30px 10px 30px;
+
+}
+.form-svg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 40%;
+    margin: 30px;
+    background-color: rgba(255, 162, 162, 0);
+    overflow: hidden;
+    color: rgba(0, 255, 0, 0.397);
+}
+.form-svg img{
+    height: 420px;
+    z-index: 2;
+    object-fit: cover;
+}
+.register-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    width: 48%;
+    height: auto;
+}
+.login-button{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 50px;
+    border-radius: 7px;
+    width: 300px;
+    border: 1px solid rgba(255, 68, 0, 0);
+    background-color: orangered;
+}
+.login-button p{
+    color: white;
+}
+.login-button:hover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    color: rgb(0, 0, 0);
+    border-radius: 7px;
+    border: none;
+    transition: 200ms;
+    width: 300px;
+    background-color: green;
+    cursor: pointer;
+}
+.register-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    color: black;
+    border-radius: 7px;
+    width: 300px;
+    margin-top: 20px;
+    border: 1px solid green;
+    background-color: white;
+}
+.register-button:hover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    color: white;
+    border-radius: 7px;
+    border: 1px solid rgba(255, 68, 0, 0);
+    transition: 200ms;
+    width: 300px;
+    margin-top: 20px;
+    background-color: rgba(0, 128, 0, 0.329);
+    cursor: pointer;
+}
+.google-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    color: black;
+    border-radius: 7px;
+    width: 300px;
+    margin-top: 0px;
+    border: 1px solid grey;
+    background-color: white;
+}
+.google-button:hover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    color: white;
+    border-radius: 7px;
+    border: 1px solid rgba(255, 68, 0, 0);
+    transition: 200ms;
+    width: 300px;
+    margin-top: 0px;
+    background-color: black;
+    cursor: pointer;
+}
+.or-login{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    width: auto;
+}
+.or-login p{
+    font-size: 13px;
+    margin: 0px 10px 0px 10px;
+}
+.leftline{
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.541);
+    width: 90px;
+}
+.rightline{
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.541);
+    width: 90px;
+}
+.google-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 40px;
+    max-width: 40px;
+    overflow: hidden;
+    background-color: rgba(255, 217, 0, 0);
+
+}
+.google-icon{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    
+}
+
+.circle{
+    display: none;
+    position: absolute;
+    z-index: 1;
+    height: 800px;
+    width: 800px;
+    transform: translate(-80%,15%);
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: orangered;
+}
+.login-form{
+    display: flex;
+    width: 80%;
+    background-color: rgba(162, 255, 190, 0);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/*sign up customer form*/
+
+  .signup-form{
+    margin-top: 40px;
+  }
+  
+  
+  .form_container {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 100%;
+    max-width: 500px;
+    padding: 10px 40px 10px 40px;
+    background-color: #ffffff;
+    box-shadow: 0px 10px 42px rgba(0, 0, 0, 0.192);
+    border-radius: 11px;
+    font-family: "Inter", sans-serif;
+  }
+  
+  .logo_container {
+    box-sizing: border-box;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(180deg, rgba(248, 248, 248, 0) 50%, #F8F8F888 100%);
+    border: 1px solid #F7F7F8;
+    filter: drop-shadow(0px 0.5px 0.5px #EFEFEF) drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+    border-radius: 11px;
+  }
+  
+  .title_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 100%;
+  }
+  
+  .title_container .title {
+    margin: 0;
+    font-size: 1.25rem !important;
+    font-weight: 700;
+    color: #212121;
+  }
+  
+  .subtitle {
+    font-size: 0.725rem;
+    max-width: 80%;
+    text-align: center;
+    line-height: 1.1rem;
+    color: #8B8E98
+  }
+  
+  .input_container {
+    width: 100%;
+    height: fit-content;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+  }
+  
+  .icon {
+    width: 20px;
+    position: absolute;
+    z-index: 99;
+    left: 12px;
+    bottom: 9px;
+  }
+  
+  .input_label {
+    font-size: 0.75rem;
+    color: #505050;
+    font-weight: 600;
+  }
+  
+  .input_field {
+    width: auto;
+    height: 40px;
+    padding: 0 0 0 40px;
+    border-radius: 7px;
+    outline: none;
+    border: 1px solid #e5e5e5;
+    filter: drop-shadow(0px 1px 0px #efefef)
+      drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+    transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+  }
+  
+  .input_field:focus {
+    border: 1px solid transparent;
+    box-shadow: 0px 0px 0px 2px #242424;
+    background-color: transparent;
+  }
+  
+  .sign-in_btn {
+    width: 100%;
+    height: 40px;
+    border: 0;
+    background: #115DFC;
+    border-radius: 7px;
+    outline: none;
+    color: #ffffff;
+    cursor: pointer;
+  }
+  
+  .sign-in_ggl {
+    width: 100%;
+    min-width: 400px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #ffffff;
+    border-radius: 7px;
+    outline: none;
+    color: #242424;
+    border: 1px solid #e5e5e5;
+    filter: drop-shadow(0px 1px 0px #efefef)
+      drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+    cursor: pointer;
+  }
+  
+  .sign-in_apl {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #212121;
+    border-radius: 7px;
+    outline: none;
+    color: #ffffff;
+    border: 1px solid #e5e5e5;
+    filter: drop-shadow(0px 1px 0px #efefef)
+      drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+    cursor: pointer;
+  }
+  
+  .separator {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    color: #8B8E98;
+  }
+  
+  .separator .line {
+    display: block;
+    width: 100%;
+    height: 1px;
+    border: 0;
+    background-color: #e8e8e8;
+  }
+  
+  .note {
+    font-size: 0.75rem;
+    color: #8B8E98;
+    margin: 0px !important;
+    text-decoration: underline;
+  }
+  
+  
+
+
+
+.log-error{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: rgba(255, 0, 0, 0.185);
+}
+.log-error-bar{
+    width: 5px;
+    height: 100%;
+    margin: 0px 20px 0px 0px;
+    background-color: rgb(255, 0, 0);
+}
+.log-error-contents{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.log-error-contents p{
+    color: rgb(104, 0, 0);
+    margin: 0px !important;
+    font-weight: bold;
+}
+
+
+.login-form label{
+    font-size: 14px;
+    align-self: start;
+    font-weight: bold;
+    margin: 10px 0px 3px 0px;
+}
+.login-form p{
+    font-size: 13px;
+    margin: 15px 0px 6px 0px;
+}
+.forgot-password:hover{
+    font-size: 13px;
+    margin: 15px 0px 6px 0px;
+    color: rgb(76, 76, 250);
+    cursor: pointer;
+}
+.login-form input{
+    height: 40px;
+    width: auto;
+    max-width: 500px;
+    border: 1px solid rgba(0, 0, 0, 0.349);
+    outline: none;
+    border-radius: 4px;
+    padding: 0px 6px 0px 6px;
+    background-color: rgba(128, 128, 128, 0);
+}
+.signin-link{
+    font-size: 16px !important;
+}
+.signin-link a{
+    color: blue;
+    font-weight: bold;
+}
+.login-new-button p{
+    margin: 0px;
+}
+.login-new-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    color: white;
+    border-radius: 7px;
+    width: auto;
+    max-width: 400px;
+    border: 1px solid rgba(255, 68, 0, 0);
+    background-color: green;
+}
+.login-new-button:hover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    color: white;
+    border-radius: 7px;
+    border: 1px solid rgba(255, 68, 0, 0);
+    transition: 200ms;
+    width: auto;
+    max-width: 400px;
+    background-color: rgb(4, 175, 4);
+    cursor: pointer;
+}
+
+.loginhead{
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 7px;
+    z-index: 2;
+    padding: 5px 10px 5px 10px;
+}
+.googlebtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    color: black;
+    border-radius: 7px;
+    width: auto;
+    margin-top: 0px;
+    border: 1px solid grey;
+    background-color: white;
+}
+.googlebtn:hover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    color: white;
+    border-radius: 7px;
+    border: 1px solid rgba(255, 68, 0, 0);
+    transition: 200ms;
+    width: auto;
+    margin-top: 0px;
+    background-color: black;
+    cursor: pointer;
+}
+.googlebtn p{
+    margin: 0px;
+}
+.emailconfirmdiv{
+    display: none;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100000;
+    background-color: rgba(0, 0, 0, 0.541);
+}
+.emailconfirmdiv .card {
+    width: 40%;
+    max-width: 400px;
+    height: auto;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    background: #fff;
+    border-radius: 20px;
+  }
+  .emailconfirmdiv .confirmclose{
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 12px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+  }
+  .emailconfirmdiv .confirmclose i{
+    color: black;
+  }
+  
+  @media screen and (max-width: 764px){
+    .login-form{
+        display: flex;
+        width: 90%;
+        background-color: rgba(162, 255, 190, 0);
+        flex-direction: column;
+        justify-content: center;
+    }
+    .signup-form{
+        margin-top: 40px;
+    }
+    .emailconfirmdiv .card {
+        width: 80%;
+        height: 254px;
+        height: auto;
+        padding: 20px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 12px;
+        background: #fff;
+        border-radius: 20px;
+      }
+  }
+  .emailconfirmdiv .card > * {
+    margin: 0;
+  }
+  
+  .emailconfirmdiv .card__title {
+    font-size: 23px;
+    font-weight: 900;
+    color: #333;
+  }
+  
+  .emailconfirmdiv .card__content {
+    font-size: 14px;
+    line-height: 18px;
+    color: #333;
+  }
+  .emailconfirmdiv form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .emailconfirmdiv .card__form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+    height: 100px;
+  }
+  
+  .emailconfirmdiv .card__form input {
+    margin-top: 10px;
+    outline: 0;
+    background: rgb(255, 255, 255);
+    box-shadow: transparent 0px 0px 0px 1px inset;
+    padding: 0.8em;
+    border-radius: 14px;
+    border: 1px solid #333;
+    color: black;
+  }
+  
+  .emailconfirmdiv .card__form button {
+    border: 0;
+    background: #111;
+    color: #fff;
+    padding: 0.8em;
+    border-radius: 14px;
+    font-weight: bold;
+  }
+  
+  .emailconfirmdiv .sign-up:hover {
+    background-color: green;
+    opacity: 0.8;
+  } 
+  .confirmemailimageicon{
+    height: 50px;
+    width: 50px;
+    margin: 10px;
+    overflow: hidden;
+  }
+  .confirmemailimageicon img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+
+
+/*register form*/
+.registerform{
+    margin: 0px 30px 0px 30px;
+}
+.registerform h3{
+    color: orangered;
+}
+.registering-form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin-top: 0px;
+    background-color: rgba(182, 180, 180, 0);
+
+}
+.registerhead{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px 10px 0px 10px;
+}
+.registerhead-img{
+    height: 30px;
+    width: 40px;
+    margin-right: 15px;
+    overflow: hidden;
+    background-color: rgba(128, 128, 128, 0);
+}
+.registerhead p{
+    margin: 0px;
+}
+.registerhead-img img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.inputdiv{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    width: 23%;
+}
+.inputdiv-textarea{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    width: 100%;
+}
+.radiodivregister{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 40px;
+}
+.businessradio{
+    display: flex;
+    position: relative; 
+    justify-content: center;
+    align-items: center;
+    width: 47%;
+    background-color: rgba(0, 128, 0, 0.26);
+}
+.businessradio:hover{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 47%;
+    background-color: rgba(0, 128, 0, 0.438);
+}
+.businessradio input[type="radio"]{
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 1;
+}
+.businessradio p{
+    position: absolute;
+    color: black;
+    font-weight: bold;
+}
+#shoppingcat{
+    display: none;
+}
+#restaurantcat{
+    display: none;
+}
+.register-submit-div{
+    width: 290px;
+    margin: 10px 0px 20px 10px;
+}
+.register-submit-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    color: white;
+    border-radius: 7px;
+    width: auto;
+    width: 100%;
+    border: 1px solid rgba(255, 68, 0, 0);
+    background-color: green;
+}
+.register-submit-button:hover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    color: white;
+    border-radius: 7px;
+    width: auto;
+    width: 100%;
+    border: 1px solid rgba(255, 68, 0, 0);
+    background-color: orangered;
+    transition: 300ms;
+}
+
+@media screen and (max-width: 1100px){
+    .inputdiv{
+        display: flex;
+        flex-direction: column;
+        margin-right: 20px;
+        width: 31%;
+    }
+    .inputdiv-textarea{
+        display: flex;
+        flex-direction: column;
+        margin-right: 20px;
+        width: 31%;
+    }
+}
+@media screen and (max-width: 940px){
+    .inputdiv{
+        display: flex;
+        flex-direction: column;
+        margin-right: 20px;
+        width: 45%;
+    }
+    .inputdiv-textarea{
+        display: flex;
+        flex-direction: column;
+        margin-right: 20px;
+        width: 100%;
+    }
+}
+
+.inputdiv input{
+    height: 40px;
+    outline: none;
+    padding: 0px 5px 0px 5px;
+    border-radius: 3px;
+    width: auto;
+    font-weight: bold;
+    background-color: rgba(128, 128, 128, 0);
+    border: 1px solid rgba(0, 128, 0, 0.411);
+}
+.inputdiv select{
+    height: 40px;
+    outline: none;
+    padding: 0px 5px 0px 5px;
+    border-radius: 3px;
+    width: auto;
+    font-weight: bold;
+    color: orangered;
+    background-color: rgba(128, 128, 128, 0);
+    border: 1px solid rgba(0, 128, 0, 0.411);
+}
+.radiodiv input[type="radio"]{
+    height: 20px;
+}
+.inputdiv-textarea textarea{
+    width: 100%;
+    border: 1px solid rgba(0, 128, 0, 0.411);
+    border-radius: 5px;
+}
+.registering-form label{
+    font-size: 13px;
+    margin: 10px 0px 5px 0px;
+}
+.radiodiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.radiodiv p{
+    margin: 0px 0px 0px 10px;
+    font-size: 13px;
+
+}
+.radiodiv label{
+    margin: 0px 0px 0px 10px;
+
+}
+.seepassword{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 5px;
+    justify-content: space-between;
+}
+.seepassword p{
+    margin: 0px !important;
+}
+
+.seepassword button{
+    display: flex;
+    align-items: end;
+    justify-content: flex-end;
+    border: none;
+    background-color: rgba(255, 255, 255, 0);
+    padding: 0px;
+    margin: 0px;
+    bottom: 0px;
+    height: 20px;
+}
+.seepassword button:hover{
+    display: flex;
+    align-items: end;
+    justify-content: flex-end;
+    border: none;
+    color: rgb(71, 71, 255);
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0);
+    padding: 0px;
+    margin: 0px;
+    bottom: 0px;
+    height: 20px;
+}
+#hidecode{
+    display: none;
+}
+
+/*contact aren0*/
+
+
+.contactareno{
+    display: flex;
+    flex-direction: column;
+    margin: 30px 35px 20px 35px;
+}
+.name-email{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.contactinput{
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+    margin: 5px 20px 10px 0px;
+}
+.contactinput label{
+    font-size: 15px;
+    margin: 5px 0px 6px 0px;
+}
+.contactinput input[type="text"], .contactinput input[type="email"], .contactinput input[type="number"]{
+    height: 40px;
+    outline: none;
+    padding-left: 5px;
+    width: 100%;
+    background-color: transparent;
+    border: 1px rgba(0, 0, 0, 0.514) solid;
+    border-radius: 4px;
+}
+.contactareno button{
+    margin: 20px 0px 20px 0px;
+    height: 40px;
+    width: 33%;
+    color: white;
+    border-radius: 5px;
+    background-color: rgb(68, 68, 255);
+    border: none;
+}
+.contactareno button:hover{
+    margin: 20px 0px 20px 0px;
+    height: 40px;
+    width: 33%;
+    color: white;
+    border-radius: 5px;
+    background-color: rgb(0, 180, 0);
+    border: none;
+    transition: 200ms;
+    cursor: pointer;
+}
+.contactareno textarea{
+    margin: 20px 0px 10px 0px;
+    border-radius: 8px;
+}
+
+.bookingimagesbtn{
+    min-height: 40px;
+    border-radius: 3px;
+    border: none;
+    background-color: rgba(0, 128, 0, 0.274);
+    cursor: pointer;
+}
+.bookingimagesbtn i{
+    color: black;
+    font-size: 23px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 764px){
+
+    .register-main{
+        display: flex;
+        position: relative;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 50px;
+        padding: 10px 10px 10px 10px;
+    
+    }
+    
+    .contactareno{
+        display: flex;
+        flex-direction: column;
+        margin: 10px 10px 20px 10px;
+    }
+    .form-svg{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        width: 100%;
+
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background-color: rgba(128, 128, 128, 0);
+        overflow: hidden;
+    }
+    .circle{
+        display: flex;
+        position: absolute;
+        z-index: 1;
+        height: 800px;
+        width: 800px;
+        transform: translate(-10%,-35%);
+        border-radius: 50%;
+        background-color: orangered;
+    }
+    .form-svg img{
+        height: 300px;
+        object-fit: cover;
+    }
+    .register-form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 98%;
+        height: auto;
+    }
+    .login-new-button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 45px;
+        color: white;
+        border-radius: 7px;
+        width: auto;
+        max-width: 800px;
+        border: 1px solid rgba(255, 68, 0, 0);
+        background-color: green;
+    }
+    .login-new-button:hover{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 45px;
+        color: white;
+        border-radius: 7px;
+        border: 1px solid rgba(255, 68, 0, 0);
+        transition: 200ms;
+        width: auto;
+        max-width: 800px;
+        background-color: rgb(11, 160, 11);
+        cursor: pointer;
+    }
+    .login-form input{
+        height: 40px;
+        width: auto;
+        max-width: 800px;
+        border: 1px solid rgba(0, 0, 0, 0.349);
+        outline: none;
+        border-radius: 50px;
+        padding: 0px 13px 0px 13px;
+        background-color: rgba(128, 128, 128, 0);
+    }
+    .log-error{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 40px;
+        width: 100%;
+        max-width: 800px;
+        border-radius: 5px;
+        overflow: hidden;
+        background-color: rgba(255, 0, 0, 0.185);
+    }
+    .seepassword{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        max-width: 800px;
+        margin-top: 5px;
+        justify-content: space-between;
+    }
+    .googlebtn{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
+        color: black;
+        border-radius: 7px;
+        width: auto;
+        margin-top: 0px;
+        border: 1px solid grey;
+        background-color: white;
+    }
+    .googlebtn:hover{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
+        color: white;
+        border-radius: 7px;
+        border: 1px solid rgba(255, 68, 0, 0);
+        transition: 200ms;
+        width: auto;
+        margin-top: 0px;
+        background-color: black;
+        cursor: pointer;
+    }
+    .googlebtn p{
+        margin: 0px;
+    }
+    .inputdiv{
+        display: flex;
+        flex-direction: column;
+        margin-right: 0px;
+        width: 46%;
+    }
+    .inputdiv-textarea{
+        display: flex;
+        flex-direction: column;
+        margin-right: 0px;
+    }
+    .registering-form{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 10px;
+        margin-top: 0px;
+        background-color: rgba(128, 128, 128, 0);
+    
+    }
+    .registerform{
+        margin: 0px 10px 0px 10px;
+    }
+    .fillform{
+        color: orangered;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .register-submit-div{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin: 10px 0px 20px 0px;
+    }
+    .register-submit-button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 45px;
+        color: white;
+        border-radius: 7px;
+        width: 97%;
+        border: 1px solid rgba(255, 68, 0, 0);
+        background-color: green;
+    }
+    .register-submit-button:hover{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 45px;
+        color: white;
+        border-radius: 7px;
+        width: 97%;
+        border: 1px solid rgba(255, 68, 0, 0);
+        background-color: orangered;
+        transition: 300ms;
+    }
+    .form-svg img{
+        height: 270px;
+        object-fit: cover;
+    }
+    .circle{
+        display: flex;
+        position: absolute;
+        z-index: 1;
+        height: 800px;
+        width: 800px;
+        transform: translate(-10%,-35%);
+        border-radius: 50%;
+        background-color: orangered;
+    }
+    .login-form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        background-color: rgba(0, 0, 255, 0);
+    }
+    .login-new-button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 45px;
+        color: white;
+        border-radius: 7px;
+        width: 100%;
+        border: 1px solid rgba(255, 68, 0, 0);
+        background-color: green;
+    }
+    .login-new-button:hover{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 45px;
+        color: white;
+        border-radius: 7px;
+        border: 1px solid rgba(255, 68, 0, 0);
+        transition: 200ms;
+        width:  100%;
+        background-color: rgb(10, 160, 10);
+        cursor: pointer;
+    }
+    .login-form input{
+        height: 40px;
+        width: auto;
+        border: 1px solid rgba(0, 0, 0, 0.349);
+        outline: none;
+        border-radius: 4px;
+        padding: 0px 6px 0px 6px;
+        background-color: rgba(128, 128, 128, 0);
+    }
+    .inputdiv{
+        display: flex;
+        flex-direction: column;
+        margin-right: 0px;
+        width: 100%;
+    }
+    .name-email{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .contactinput{
+        display: flex;
+        flex-direction: column;
+        width: 98%;
+        margin: 5px 20px 10px 0px;
+    }
+    .contactareno button{
+        margin: 20px 0px 20px 0px;
+        height: 40px;
+        width: 100%;
+        color: white;
+        border-radius: 5px;
+        background-color: rgb(68, 68, 255);
+        border: none;
+    }
+    .contactareno button:hover{
+        margin: 20px 0px 20px 0px;
+        height: 40px;
+        width: 100%;
+        color: white;
+        border-radius: 5px;
+        background-color: rgb(0, 180, 0);
+        border: none;
+        transition: 200ms;
+        cursor: pointer;
+    }
+    
+}
+
+
+@media screen and (max-width: 1064px) and (min-width: 764px){
+    .registering-form{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 10px;
+        margin-top: 0px;
+        background-color: rgba(128, 128, 128, 0);
+    
+    }
+    .registerform{
+        margin: 0px 15px 0px 15px;
+    }
+    .contactareno{
+        display: flex;
+        flex-direction: column;
+        margin: 30px 15px 20px 15px;
+    }
+}

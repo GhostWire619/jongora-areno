@@ -1,0 +1,116 @@
+
+.slide{
+    display: grid;
+    place-items: center;
+    width: 100%;
+    cursor: grab;
+    margin-bottom: 0px;
+}
+.reviewsslide{
+    display: grid;
+    place-items: center;
+    width: 100%;
+    cursor: grab;
+    margin-bottom: 0px;
+}
+.reasonslide{
+    display: grid;
+    place-items: center;
+    width: auto;
+    cursor: grab;
+}
+.reasonslide .splide__slide, .reviewsslide .splide__slide{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    place-items: center;
+    margin-bottom: 30px;
+}
+.reasonslide .splide__pagination__page, .reviewsslide .splide__pagination__page{
+    background-color: orangered;
+    bottom: 0px;
+    cursor: pointer;
+}
+.reasonslide .splide__pagination__page.is-active, .reviewsslide .splide__pagination__page.is-active{
+    background-color: black;
+    bottom: 0px;
+    cursor: pointer;
+}
+.slide .splide__pagination__page{
+    background-color: orangered;
+    bottom: 0px;
+}
+.slide .splide__pagination__page.is-active{
+    background-color: black;
+    bottom: 0px;
+} 
+
+
+
+.splide__slide{
+    cursor: grab;
+    margin: 0px;
+}
+.productsdiv .splide__slide{
+    cursor: grab;
+    margin: 0px;
+}
+
+.splide-wrapper{
+    display: inline-flex;
+    position: relative;
+    place-items: center;
+    width: 100%;
+    overflow: hidden;
+}
+.splide{
+    width: 100%;
+    object-fit: cover;
+}
+
+.splide__arrow--prev{
+    filter: opacity(80%);
+    margin-left: 0px;
+}
+.splide__arrow--next{
+    filter: opacity(80%);
+    margin-left: 0px;
+}
+.splide__arrow--prev:hover{
+    filter: opacity(50%);
+    margin-left: 0px;
+    background-color: orangered;
+}
+.splide__arrow--next:hover{
+    filter: opacity(50%);
+    margin-left: 0px;
+    background-color: orangered;
+}
+.reviewsslide .splide__arrow--next, .reviewsslide .splide__arrow--prev{
+    background-color: transparent;
+}
+.reviewsslide .splide__arrow--next svg, .reviewsslide .splide__arrow--prev svg{
+    display: none;
+}
+
+
+@media screen and (max-width: 764px) {
+.splide__arrow--prev{
+    filter: opacity(80%);
+    margin-left: 0px;
+}
+.splide__arrow--next{
+    filter: opacity(80%);
+    margin-left: 0px;
+}
+.splide__arrow--prev:hover{
+    filter: opacity(80%);
+    margin-left: 0px;
+    background-color: orangered;
+}
+.splide__arrow--next:hover{
+    filter: opacity(80%);
+    margin-left: 0px;
+    background-color: orangered;
+}
+}
