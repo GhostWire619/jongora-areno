@@ -1384,6 +1384,7 @@ class Following(models.Model):
 class GeneralPost(models.Model):
     Post_Id = models.CharField(max_length=100, blank=False, null=True, editable=False)
     Type = models.CharField(max_length=50, blank=True, null=True, editable=False)
+    status = models.CharField(max_length=50, blank=True, null=True, default='Pending')
 
     class Meta:
         verbose_name_plural = "General Posts"

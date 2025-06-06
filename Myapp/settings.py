@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-$v&nra$#f9##_al-kwojwv76$kif40v1n^(#4o!f7g*dy(7*(n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['86.48.5.127']
 #ALLOWED_HOSTS = ['www.app.areno.co.tz', 'app.areno.co.tz', 'mail.app.areno.co.tz']
 
 
